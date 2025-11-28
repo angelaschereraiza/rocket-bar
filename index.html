@@ -1,76 +1,130 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rocket Bar</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <img src="images/logo.jpg" alt="Rocket Bar Logo" class="logo" />
-      <nav>
-        <a href="#about">Über uns</a>
-        <a href="#drinks">Getränke</a>
-        <a href="#pictures">Bilder</a>
-        <a href="#contact">Kontakt</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rocket Bar</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <img src="images/logo.jpg" alt="Rocket Bar Logo" class="logo" />
+    <nav class="desktop-nav">
+      <a href="#about" data-key="nav-about"></a>
+      <a href="#pictures" data-key="nav-pictures"></a>
+      <a href="#drinks" data-key="nav-drinks"></a>
+    </nav>
+
+    <div class="language-selector-container">
+      <div class="language-selector">
+        <div class="selected" id="selected-language">Deutsch</div>
+        <ul class="options">
+          <li data-value="de">Deutsch</li>
+          <li data-value="fr">Français</li>
+          <li data-value="en">English</li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="hamburger" aria-label="Menü öffnen" aria-controls="mobile-menu" aria-expanded="false">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+
+    <div id="mobile-menu" class="mobile-menu" hidden>
+      <nav class="mobile-nav">
+        <a href="#about" data-key="nav-about"></a>
+        <a href="#pictures" data-key="nav-pictures"></a>
+        <a href="#drinks" data-key="nav-drinks"></a>
       </nav>
-    </header>
-
-    <section id="about">
-        <h2>Über uns</h2>
-        <p>
-        Willkommen in der <strong>Rocket Bar</strong>, wo Metal, Rock und gute
-        Drinks verschmelzen. Inmitten der Berner Altstadt bieten wir eine
-        Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier
-        und heissen Riffs.
-        </p>
-    </section>
-
-    <section id="drinks">
-      <h2>Unsere Drinks</h2>
-      <div class="drink-grid">
-        <div class="drink-card">
-          <h3>Rocket Mule</h3>
-          <p>Wodka • Limette • Ginger Beer</p>
-        </div>
-        <div class="drink-card">
-          <h3>Whisky Sour</h3>
-          <p>Whisky • Zitronensaft • Zuckersirup</p>
-        </div>
-        <div class="drink-card">
-          <h3>Hausbier</h3>
-          <p>Bern's Finest Craft Brew</p>
-        </div>
+      <div class="language-selector language-selector">
+        <div class="selected">Deutsch</div>
+        <ul class="options">
+          <li data-value="de">Deutsch</li>
+          <li data-value="fr">Français</li>
+          <li data-value="en">English</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <section id="pictures">
-      <h2>Bilder</h2>
-      <img src="images/bild_1.jpg" class="img"/>
-      <img src="images/bild_2.jpg" class="img"/>
-      <img src="images/bild_3.jpg" class="img"/>
-      <img src="images/bild_4.jpg" class="img"/>      
-    </section>
+  <section id="about">
+    <h2 data-key="about-title"></h2>
+    <p class="about-text"></p>
 
-    <section id="contact">
-      <h2>Kontakt</h2>
-      <p>Genfergasse 10, 3011 Bern</p>
-      <p>Tel: 031 558 09 88</p>
-      <p>Mail: <a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a></p>
-      <p><strong>Öffnungszeiten:</strong></p>
-      <p>Mo-Do: 17:00-00:30<br>Fr: 17:00-03:30<br>Sa: 18:00-03:30</p>
-      <div class="socials">
-        <a href="https://www.facebook.com/p/Rocket-Bar-61578631981520/" target="_blank">Facebook</a>
-        <a href="https://www.instagram.com/rocket_bar_bern/" target="_blank">Instagram</a>
+    <div class="contact-container">      
+      <div class="contact-item">
+        <h3></h3>
+        <p>Rocket Bar</p>
+        <p>Genfergasse 10</p>
+        <p>3011 Bern</p>
       </div>
-    </section>
+      <div class="contact-item">
+        <h3></h3>
+        <p>Mo-Do: 17:00-00:30</p>
+        <p>Fr: 17:00-03:30</p>
+        <p>Sa: 18:00-03:30</p>
+      </div>
+      <div class="contact-item">
+        <h3></h3>
+        <p><a href="tel:+41315580988">+41 31 558 09 88</a></p>
+        <p><a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a></p>
+      </div>
+      <div class="contact-item social-links">
+        <h3></h3>
+        <a href="https://www.facebook.com/p/Rocket-Bar-61578631981520/" target="_blank" aria-label="Facebook">
+          <img src="images/facebook.svg" alt="Facebook" class="social-icon">
+        </a>
+        <a href="https://www.instagram.com/rocket_bar_bern/" target="_blank" aria-label="Instagram">
+          <img src="images/instagram.svg" alt="Instagram" class="social-icon">
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <p>©<span id="year"></span> Rocket Bar</p>
-    </footer>
+  <section id="pictures">
+    <h2 data-key="pictures-title"></h2>
+    <div class="carousel-container">
+      <span class="prev">&#10094;</span>
+      <div class="carousel-track" id="carousel-track"></div>
+      <span class="next">&#10095;</span>
+    </div>
+    <div id="lightbox" class="lightbox">
+      <span class="close">&times;</span>
+      <img class="lightbox-img" src="" alt="Bild">
+    </div>
+  </section>
 
-    <script src="script.js"></script>
-  </body>
+  <section id="drinks">
+    <h2 data-key="drinks-title"></h2>
+    <div class="shots-video">
+      <video controls autoplay muted loop>
+        <source src="images/shot.mp4" type="video/mp4">
+        Dein Browser unterstützt das Video-Tag nicht.
+      </video>
+    </div>
+    <div class="drink-grid">
+      <div class="drink-card">
+        <h3></h3>
+        <p></p>
+      </div>
+      <div class="drink-card">
+        <h3></h3>
+        <p></p>
+      </div>
+      <div class="drink-card">
+        <h3></h3>
+        <p></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>©<span id="year"></span> Rocket Rock & Metal Bar</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
