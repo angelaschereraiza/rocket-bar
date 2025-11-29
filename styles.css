@@ -1,3 +1,7 @@
+/* ===========================
+   Global
+=========================== */
+
 :root {
   --bg: #0a0a0a;
   --bg-alt: #121212;
@@ -7,7 +11,9 @@
   --font-body: 'Montserrat', sans-serif;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -16,6 +22,10 @@ body {
   background-color: var(--bg);
   scroll-behavior: smooth;
 }
+
+/* ===========================
+   Header & Logo
+=========================== */
 
 header {
   display: flex;
@@ -26,27 +36,32 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 16px 32px;
+  padding: 1rem 2rem;
   flex-wrap: nowrap;
 }
 
 .logo {
   margin-bottom: 0;
-  width: 200px;
+  width: 12.5rem;
+  max-width: 40vw;
 }
+
+/* ===========================
+   Navigation (Desktop)
+=========================== */
 
 nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  gap: 1rem;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 1rem;
 }
 
 nav a {
   color: var(--text);
-  margin-left: 24px;
+  margin-left: 1.5rem;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 500;
@@ -56,26 +71,30 @@ nav a {
 nav a::after {
   content: '';
   display: block;
-  height: 2px;
+  height: 0.125rem;
   background: var(--accent);
   width: 0;
   transition: width 0.3s;
 }
 
-nav a:hover::after { 
-  width: 100%; 
+nav a:hover::after {
+  width: 100%;
 }
+
+/* ===========================
+   Language Selector
+=========================== */
 
 .language-selector-container {
   display: flex;
   justify-content: flex-end;
-  width: 200px;
-  margin-top: 16px;
+  width: 12.5rem;
+  margin-top: 1rem;
 }
 
 .language-selector {
   position: relative;
-  width: 125px;
+  width: 7.8125rem;
   user-select: none;
   cursor: pointer;
   text-align: center;
@@ -83,17 +102,17 @@ nav a:hover::after {
 
 .language-selector .selected {
   color: var(--text);
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
   transition: 0.3s;
   position: relative;
   cursor: pointer;
 }
 
 .language-selector .selected::after {
-  content: "▼"; 
+  content: "▼";
   position: absolute;
-  right: 12px;
+  right: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.7em;
@@ -115,17 +134,17 @@ nav a:hover::after {
   left: 0;
   width: 100%;
   background: var(--bg);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   overflow: hidden;
   list-style: none;
   margin: 0;
   padding: 0;
   z-index: 10;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.3);
 }
 
 .language-selector .options li {
-  padding: 8px;
+  padding: 0.5rem;
   transition: 0.3s, color 0.3s;
 }
 
@@ -138,191 +157,27 @@ nav a:hover::after {
   display: block;
 }
 
-section { 
-  padding: 32px; 
-  max-width: 1000px; 
-  margin: auto; 
-  scroll-margin-top: 120px; 
-}
-
-section h2 {
-  font-family: var(--font-head);
-  font-size: 32px;
-  color: var(--accent);
-  text-align: center;
-  margin-bottom: 32px;
-  text-transform: uppercase;
-}
-
-.drink-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 32px;
-}
-
-.drink-card {
-  background: var(--bg-alt);
-  border: 1px solid #222;
-  padding: 24px;
-  border-radius: 12px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-#pictures { 
-  text-align: center; 
-  position: relative; 
-}
-
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-
-.carousel-track {
-  display: flex;
-  gap: 16px;   
-}
-
-.carousel-img {
-  flex: 0 0 calc(25% - 12px); 
-  width: 100%;         
-  height: 220px;    
-  object-fit: cover;       
-  border-radius: 12px;
-  cursor: pointer;
-  display: block;            
-}
-
-.carousel-img:hover { 
-  transform: scale(1.05); 
-}
-
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;  
-  line-height: 1;    
-  color: var(--accent);
-  cursor: pointer;
-  z-index: 10;
-  padding: 0;          
-}
-
-.prev { left: 4px; }
-.next { right: 4px; }
-
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-  justify-content: center;
-  align-items: center;
-}
-
-.lightbox-img { 
-  max-width: 90%; 
-  max-height: 80%; 
-  border-radius: 12px; 
-}
-
-.lightbox .close {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  cursor: pointer;
-}
-
-#about { color: var(--text); }
-
-.about-text { text-align: center; }
-
-#about .contact-container {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
-  text-align: center;
-}
-
-#about .contact-item h3 { 
-  font-family: var(--font-head); 
-  color: var(--accent); 
-  margin-bottom: 8px; 
-  font-size: 19px; 
-}
-
-#about .contact-item a {
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-#about .contact-item a:hover { 
-  color: var(--accent); 
-}
-
-.social-links a {
-  display: inline-block;
-  margin: 8px;
-  color: var(--text);
-  transition: transform 0.3s, color 0.3s, filter 0.3s;
-}
-
-.social-links a:hover {
-  transform: scale(1.2);
-  color: var(--accent);
-  filter: drop-shadow(0 0 6px var(--accent));
-}
-
-.social-links svg.social-icon {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
-}
-
-footer {
-  text-align: center;
-  padding: 32px;
-  background: #0a0a0a;
-  border-top: 1px solid #222;
-  font-size: 14px;
-}
+/* ===========================
+   Hamburger / Mobile-Menü
+=========================== */
 
 .hamburger {
   display: none;
   background: transparent;
   border: none;
-  padding: 8px;
+  padding: 0.5rem;
   cursor: pointer;
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   position: relative;
   z-index: 110;
 }
 
 .hamburger-box {
-  margin-top: 12px;
+  margin-top: 0.75rem;
   display: inline-block;
-  width: 30px;
-  height: 20px;
+  width: 1.875rem;
+  height: 1.25rem;
   position: relative;
 }
 
@@ -331,35 +186,39 @@ footer {
 .hamburger-inner::after {
   display: block;
   position: absolute;
-  height: 2px;
+  height: 0.125rem;
   width: 100%;
   background: var(--text);
-  border-radius: 2px;
+  border-radius: 0.125rem;
   transition: transform 0.3s ease, opacity 0.3s ease;
   left: 0;
 }
 
 .hamburger-inner {
-  top: 9px;
+  top: 0.5625rem;
 }
+
 .hamburger-inner::before {
   content: "";
-  top: -8px;
+  top: -0.5rem;
 }
+
 .hamburger-inner::after {
   content: "";
-  top: 8px;
+  top: 0.5rem;
 }
 
 .hamburger[aria-expanded="true"] .hamburger-inner {
   transform: rotate(45deg);
 }
+
 .hamburger[aria-expanded="true"] .hamburger-inner::before {
-  transform: rotate(-90deg) translateX(-8px);
+  transform: rotate(-90deg) translateX(-0.5rem);
   opacity: 0;
 }
+
 .hamburger[aria-expanded="true"] .hamburger-inner::after {
-  transform: rotate(-90deg) translateX(8px);
+  transform: rotate(-90deg) translateX(0.5rem);
 }
 
 .mobile-menu {
@@ -370,7 +229,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 22px 24px;
+  padding: 1.375rem 1.5rem;
   transform: translateY(-10%);
   opacity: 0;
   pointer-events: none;
@@ -385,9 +244,9 @@ footer {
 
 .mobile-close {
   position: absolute;
-  right: 16px;
-  top: 12px;
-  font-size: 36px;
+  right: 1rem;
+  top: 0.75rem;
+  font-size: 2.25rem;
   background: transparent;
   border: none;
   color: var(--text);
@@ -397,52 +256,305 @@ footer {
 .mobile-nav {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-top: 8px;
+  gap: 1.125rem;
+  margin-top: 0.5rem;
   text-align: center;
 }
 
 .mobile-nav a {
   font-family: var(--font-head);
-  font-size: 22px;
+  font-size: 1.375rem;
   text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
 }
 
 .mobile-nav a:hover {
   color: var(--accent);
 }
 
-.mobile-language-selector {
-  margin-top: 28px;
-  width: 220px;
+/* ===========================
+   Sections
+=========================== */
+
+section {
+  padding: 2rem;
+  max-width: 62.5rem;
+  margin: auto;
+  scroll-margin-top: 7.5rem;
 }
+
+section h2 {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+/* ===========================
+   About
+=========================== */
+
+#about {
+  color: var(--text);
+}
+
+.about-text {
+  text-align: center;
+}
+
+#about .contact-container {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+#about .contact-item h3 {
+  font-family: var(--font-head);
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-size: 1.1875rem;
+}
+
+#about .contact-item a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+#about .contact-item a:hover {
+  color: var(--accent);
+}
+
+.social-links a {
+  display: inline-block;
+  margin: 0.5rem;
+  color: var(--text);
+  transition: transform 0.3s, color 0.3s, filter 0.3s;
+}
+
+.social-links a:hover {
+  transform: scale(1.2);
+  color: var(--accent);
+  filter: drop-shadow(0 0 0.375rem var(--accent));
+}
+
+.social-links svg.social-icon {
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+/* ===========================
+   Pictures / Carousel
+=========================== */
+
+#pictures {
+  text-align: center;
+  position: relative;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+}
+
+.carousel-img {
+  flex: 0 0 calc(25% - 0.75rem);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.carousel-img:hover {
+  transform: scale(1.05);
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--accent);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev {
+  left: 0.25rem;
+}
+
+.next {
+  right: 0.25rem;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background-color: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 0.75rem;
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 1.25rem;
+  right: 2.1875rem;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* ===========================
+   Drinks
+=========================== */
 
 .shots-video {
   width: 50%;
-  margin: 0 auto 30px;
+  margin: 0 auto 1.875rem;
 }
 
 .shots-video video {
-  display: block; 
+  display: block;
   width: 100%;
   height: auto;
 }
 
+.drink-grid {
+  display: grid;
+  grid-template-columns: 1fr; 
+  gap: 2rem;
+}
+
+.drink-card {
+  background: var(--bg-alt);
+  border: 1px solid #222;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: left;
+  transition: all 0.3s;
+}
+
+.drink-category {
+  font-family: var(--font-head);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.125rem;
+  margin: 0 0 0.75rem;
+}
+
+.drink-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.drink-list li {
+  margin-bottom: 0.625rem;
+}
+
+.drink-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.drink-name {
+  font-weight: 500;
+}
+
+.drink-price {
+  font-family: var(--font-head);
+  color: var(--accent);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.drink-desc {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin-top: 0.125rem;
+}
+
+.softdrink-note {
+  font-size: 0.75rem;
+  text-align: right;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+}
+
+.drink-note {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #0a0a0a;
+  border-top: 1px solid #222;
+  font-size: 0.875rem;
+}
+
+/* ===========================
+   Media Queries
+=========================== */
+
 @media (max-width: 900px) {
-  .desktop-nav, .language-selector-container {
+  .desktop-nav,
+  .language-selector-container {
     display: none;
   }
 
-  section { 
-    scroll-margin-top: 80px; 
+  section {
+    scroll-margin-top: 5rem;
   }
 
   .language-selector {
-    margin-top: 24px;
-    margin-right: 12px;
+    margin-top: 1.5rem;
+    margin-right: 0.75rem;
   }
 
   .hamburger {
@@ -455,12 +567,12 @@ footer {
   }
 
   .mobile-nav a {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-left: 0;
   }
 
   .logo {
-    width: 150px;
+    width: 9.375rem;
   }
 }
 
@@ -472,19 +584,19 @@ footer {
 
 @media (max-width: 610px) {
   header {
-    padding: 16px 8px;
+    padding: 1rem 0.5rem;
   }
 
   section {
-    padding: 16px;
+    padding: 1rem;
   }
 
   section h2 {
-    font-size: 28px;
+    font-size: 1.75rem;
   }
 
   .drink-grid {
-    gap: 16px;
+    gap: 1rem;
   }
 
   #about .contact-container {
@@ -492,10 +604,16 @@ footer {
   }
 
   .logo {
-    width: 130px;
+    width: 8.125rem;
   }
-  
+
   .shots-video {
     width: 100%;
+  }
+}
+
+@media (min-width: 800px) {
+  .drink-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

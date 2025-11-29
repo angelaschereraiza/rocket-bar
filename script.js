@@ -1,423 +1,730 @@
-/* ===========================
-   Rocket Bar - script.js
-=========================== */
+'use strict';
 
-const track            = document.querySelector('.carousel-track');
-const prevButton       = document.querySelector('.prev');
-const nextButton       = document.querySelector('.next');
-const lightbox         = document.getElementById('lightbox');
-const lightboxImg      = document.querySelector('.lightbox-img');
-const closeBtn         = document.querySelector('.lightbox .close');
+/* ==========================================
+   GLOBAL CONSTANTS (DOM, CONFIG, DATA)
+========================================== */
 
-const sectionTitles     = document.querySelectorAll('h2[data-key]');
-const aboutText         = document.querySelector('.about-text');
-const contactItems      = document.querySelectorAll('.contact-item h3');
-const drinkCards        = document.querySelectorAll('.drink-card');
-const languageSelectors = document.querySelectorAll('.language-selector');
+/* --- DOM Elements --- */
+const CAROUSEL_CONTAINER = document.querySelector('.carousel-container');
+const TRACK              = document.querySelector('.carousel-track');
+const PREV_BUTTON        = document.querySelector('.prev');
+const NEXT_BUTTON        = document.querySelector('.next');
+const TOTAL_IMG          = 7;
 
-const userLang = navigator.language ? navigator.language.slice(0,2) : 'de';
-const supported = ['de','fr','en'];
+const LIGHTBOX           = document.getElementById('lightbox');
+const LIGHTBOX_IMG       = document.querySelector('.lightbox-img');
+const CLOSE_BTN          = document.querySelector('.lightbox .close');
 
-/* -------- Carousel state -------- */
-const totalImages = 7;    
-let srcList = [];          
-let visibleSlides = 1;      
-let gapPx = 0;              
-let slideWidth = 0;       
-let stepPx = 0;           
-let cloneCount = 0;         
-let internalIndex = 0;      
+const SECTION_TITLES     = document.querySelectorAll('h2[data-key]');
+const ABOUT_TEXT         = document.querySelector('.about-text');
+const CONTACT_ITEMS      = document.querySelectorAll('.contact-item h3');
+const DRINK_CARDS        = document.querySelectorAll('.drink-card');
+const LANGUAGE_SELECTORS = document.querySelectorAll('.language-selector');
+const DRINKS_CONTAINER   = document.getElementById('drinks-menu');
+const DRINK_NOTE         = document.getElementById('drink-note');
+
+const HAMBURGER          = document.querySelector('.hamburger');
+const MOBILE_MENU        = document.getElementById('mobile-menu');
+const MOBILE_CLOSE       = document.querySelector('.mobile-close');
+
+/* --- App Config --- */
+const USER_LANG       = navigator.language ? navigator.language.slice(0, 2) : 'de';
+const SUPPORTED_LANGS = ['de', 'fr', 'en'];
+
+/* --- Translations --- */
+const TRANSLATIONS = {
+  de: {
+    nav: ['Über uns', 'Bilder', 'Getränke'],
+    titles: { about: 'Über uns', pictures: 'Bilder', drinks: 'Unsere Drinks' },
+    about: "Willkommen in der <strong>Rocket Bar</strong>, wo Metal, Rock und gute Drinks verschmelzen. Inmitten der Berner Altstadt bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
+    contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
+    drink_note: "Alle Preise in CHF inkl. 8.1% MWST",
+    drinks: [
+      {
+        category: 'Cocktails',
+        items: [
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Zuckersirup', price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet&Sour', price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
+          { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue', price: '17.00' },
+          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet&Sour', price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet&Sour',    price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet&Sour',      price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',    price: '17.00' }
+        ]
+      },
+      {
+        category: 'Longdrinks',
+        items: [
+          { name: 'Lemmy',          desc: "Jack Daniel's | Pepsi",          price: '15.00' },
+          { name: 'Cuba Libre',     desc: 'Rum | Pepsi',                    price: '14.00' },
+          { name: 'Gin Tonic',      desc: 'Gin | Tonic',                    price: '14.00' },
+          { name: 'Gin Lemon',      desc: 'Gin | Bitter Lemon Soda',        price: '14.00' },
+          { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull',               price: '15.00' },
+          { name: 'Turbo Mate',     desc: 'Vodka | El Tony Mate',           price: '14.00' }
+        ]
+      },
+      {
+        category: 'Spritz',
+        items: [
+          { name: 'Aperol Spritz',  desc: 'Aperol | Prosecco',   price: '12.00' },
+          { name: 'Campari Spritz', desc: 'Campari | Prosecco',  price: '12.00' },
+          { name: 'Ingwer Spritz',  desc: 'Ingwerer | Prosecco', price: '12.00' }
+        ]
+      },
+      {
+        category: 'Mules',
+        items: [
+          { name: 'Moscow Mule', desc: 'Vodka | Ginger Bier | Limette',     price: '15.00' },
+          { name: 'London Mule', desc: 'Gin | Ginger Bier | Limette',       price: '15.00' },
+          { name: 'Berner Mule', desc: 'Ingwerer | Ginger Bier | Limette',  price: '15.00' }
+        ]
+      },
+      {
+        category: 'Spirituosen',
+        items: [
+          { name: 'Bunnahabhain 18y', desc: '46.3%', price: '24.00' },
+          { name: 'Ardbeg 14y',       desc: '46%',   price: '24.00' },
+          { name: 'Bowmore 15y',      desc: '43%',   price: '23.00' },
+          { name: 'Macallen 12y',     desc: '40%',   price: '19.00' },
+          { name: 'Oban 14y',         desc: '43%',   price: '17.00' },
+          { name: 'Yamazaki',         desc: '43%',   price: '22.00' },
+          { name: 'Absinth',          desc: '53%',   price: '17.00' },
+          { name: 'Bumbu Rum',        desc: '40%',   price: '18.00' }
+        ]
+      },
+      {
+        category: 'Softdrinks',
+        note: '3 dl / 5 dl',
+        items: [
+          { name: 'Eistee',                desc: 'Lemon-Lemongrass',      price: '4.00 / 7.00' },
+          { name: 'Valser',                desc: 'Classic | Silence',     price: '4.00 / 7.00' },
+          { name: 'Pepsi',                 desc: 'Classic | Zero',        price: '4.00 / 7.00' },
+          { name: 'Zitro | Fanta',         desc: '',                      price: '4.00 / 7.00' },
+          { name: 'Orangensaft',           desc: '',                      price: '4.00 / 7.00' },
+          { name: 'Cranberrysaft',         desc: '',                      price: '4.00 / 7.00' },
+          { name: 'Café Crème / Espresso', desc: '',                      price: '4.00' }
+        ]
+      }
+    ]
+  },
+
+  fr: {
+    nav: ['À propos', 'Images', 'Boissons'],
+    titles: { about: 'À propos', pictures: 'Images', drinks: 'Nos Boissons' },
+    about: "Bienvenue au <strong>Rocket Bar</strong>, où le Metal, le Rock et de bons drinks se rencontrent. Au cœur de la vieille ville de Berne, nous offrons une atmosphère où vous vous sentirez chez vous, avec de la musique forte, de la bière fraîche et des riffs brûlants.",
+    contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
+    drink_note: "Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse",
+    drinks: [
+      {
+        category: 'Cocktails',
+        items: [
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sirop de sucre', price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | myrtille | Basilic | Sweet&Sour', price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',   price: '16.00' },
+          { name: 'Nebula',           desc: 'Berentzen | Rhum | Cointreau | Bols Blue', price: '17.00' },
+          { name: 'Basil Smash',      desc: 'Gin | Basilic | Sweet&Sour',      price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet&Sour',           price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet&Sour',             price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',           price: '17.00' }
+        ]
+      },
+      {
+        category: 'Longdrinks',
+        items: [
+          { name: 'Lemmy',          desc: "Jack Daniel's | Pepsi",   price: '15.00' },
+          { name: 'Cuba Libre',     desc: 'Rhum | Pepsi',            price: '14.00' },
+          { name: 'Gin Tonic',      desc: 'Gin | Tonic',             price: '14.00' },
+          { name: 'Gin Lemon',      desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
+          { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull',        price: '15.00' },
+          { name: 'Turbo Mate',     desc: 'Vodka | El Tony Mate',    price: '14.00' }
+        ]
+      },
+      {
+        category: 'Spritz',
+        items: [
+          { name: 'Aperol Spritz',       desc: 'Aperol | Prosecco',   price: '12.00' },
+          { name: 'Campari Spritz',      desc: 'Campari | Prosecco',  price: '12.00' },
+          { name: 'Spritz au gingembre', desc: 'Ingwerer | Prosecco', price: '12.00' }
+        ]
+      },
+      {
+        category: 'Mules',
+        items: [
+          { name: 'Moscow Mule', desc: 'Vodka | Ginger Beer | Lime',     price: '15.00' },
+          { name: 'London Mule', desc: 'Gin | Ginger Beer | Lime',       price: '15.00' },
+          { name: 'Berner Mule', desc: 'Ingwerer | Ginger Beer | Lime',  price: '15.00' }
+        ]
+      },
+      {
+        category: 'Spiritueux',
+        items: [
+          { name: 'Bunnahabhain 18y', desc: '46.3%', price: '24.00' },
+          { name: 'Ardbeg 14y',       desc: '46%',   price: '24.00' },
+          { name: 'Bowmore 15y',      desc: '43%',   price: '23.00' },
+          { name: 'Macallen 12y',     desc: '40%',   price: '19.00' },
+          { name: 'Oban 14y',         desc: '43%',   price: '17.00' },
+          { name: 'Yamazaki',         desc: '43%',   price: '22.00' },
+          { name: 'Absinthe',         desc: '53%',   price: '17.00' },
+          { name: 'Bumbu Rum',        desc: '40%',   price: '18.00' }
+        ]
+      },
+      {
+        category: 'Boissons sans alcool',
+        note: '3 dl / 5 dl',
+        items: [
+          { name: 'Thé froid',              desc: 'Lemon-Lemongrass',   price: '4.00 / 7.00' },
+          { name: 'Valser',                 desc: 'Classic | Silence',  price: '4.00 / 7.00' },
+          { name: 'Pepsi',                  desc: 'Classic | Zero',     price: '4.00 / 7.00' },
+          { name: 'Zitro | Fanta',          desc: '',                   price: '4.00 / 7.00' },
+          { name: 'Jus d´orange',           desc: '',                   price: '4.00 / 7.00' },
+          { name: 'Jus de canneberge',      desc: '',                   price: '4.00 / 7.00' },
+          { name: 'Café crème / Espresso',  desc: '',                   price: '4.00' }
+        ]
+      }
+    ]
+  },
+
+  en: {
+    nav: ['About', 'Pictures', 'Drinks'],
+    titles: { about: 'About', pictures: 'Pictures', drinks: 'Our Drinks' },
+    about: "Welcome to <strong>Rocket Bar</strong>, where Metal, Rock, and great drinks come together. In the heart of Bern's Old Town, we offer an atmosphere where you feel at home, with loud music, cold beer, and hot riffs.",
+    contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
+    drink_note: "All prices in CHF incl. 8.1% VAT",
+    drinks: [
+      {
+        category: 'Cocktails',
+        items: [
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup', price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet&Sour', price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
+          { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue',               price: '17.00' },
+          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet&Sour',                              price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet&Sour',                                 price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet&Sour',                                   price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',                                 price: '17.00' }
+        ]
+      },
+      {
+        category: 'Longdrinks',
+        items: [
+          { name: 'Lemmy',          desc: "Jack Daniel's | Pepsi",    price: '15.00' },
+          { name: 'Cuba Libre',     desc: 'Rum | Pepsi',              price: '14.00' },
+          { name: 'Gin Tonic',      desc: 'Gin | Tonic',              price: '14.00' },
+          { name: 'Gin Lemon',      desc: 'Gin | Bitter Lemon Soda',  price: '14.00' },
+          { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull',         price: '15.00' },
+          { name: 'Turbo Mate',     desc: 'Vodka | El Tony Mate',     price: '14.00' }
+        ]
+      },
+      {
+        category: 'Spritz',
+        items: [
+          { name: 'Aperol Spritz',  desc: 'Aperol | Prosecco',   price: '12.00' },
+          { name: 'Campari Spritz', desc: 'Campari | Prosecco',  price: '12.00' },
+          { name: 'Ginger Spritz',  desc: 'Ingwerer | Prosecco', price: '12.00' }
+        ]
+      },
+      {
+        category: 'Mules',
+        items: [
+          { name: 'Moscow Mule', desc: 'Vodka | Ginger Beer | Lime',     price: '15.00' },
+          { name: 'London Mule', desc: 'Gin | Ginger Beer | Lime',       price: '15.00' },
+          { name: 'Berner Mule', desc: 'Ingwerer | Ginger Beer | Lime',  price: '15.00' }
+        ]
+      },
+      {
+        category: 'Spirits',
+        items: [
+          { name: 'Bunnahabhain 18y', desc: '46.3%', price: '24.00' },
+          { name: 'Ardbeg 14y',       desc: '46%',   price: '24.00' },
+          { name: 'Bowmore 15y',      desc: '43%',   price: '23.00' },
+          { name: 'Macallen 12y',     desc: '40%',   price: '19.00' },
+          { name: 'Oban 14y',         desc: '43%',   price: '17.00' },
+          { name: 'Yamazaki',         desc: '43%',   price: '22.00' },
+          { name: 'Absinthe',         desc: '53%',   price: '17.00' },
+          { name: 'Bumbu Rum',        desc: '40%',   price: '18.00' }
+        ]
+      },
+      {
+        category: 'Soft drinks',
+        note: '3 dl / 5 dl',
+        items: [
+          { name: 'Iced Tea',              desc: 'Lemon-Lemongrass',  price: '4.00 / 7.00' },
+          { name: 'Valser',                desc: 'Classic | Silence', price: '4.00 / 7.00' },
+          { name: 'Pepsi',                 desc: 'Classic | Zero',    price: '4.00 / 7.00' },
+          { name: 'Zitro | Fanta',         desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Orange juice',          desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Cranberry juice',       desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Café crème / Espresso', desc: '',                  price: '4.00' }
+        ]
+      }
+    ]
+  }
+};
+
+/* Language / misc */
+let initialLang = null;
+
+/* ==========================================
+   CAROUSEL (INFINITE, OHNE SPRUNG)
+========================================== */
+
+/* Carousel state */
+let srcList        = [];
+let visibleSlides  = 1;
+let gapPx          = 0;
+let slideWidth     = 0;
+let stepPx         = 0;
+let cloneCount     = 0;
+let internalIndex  = 0;   // aktueller Index im Track (inkl. Klone)
 let isTransitioning = false;
+let resizeTimeout  = null;
 
 function getTrackGap() {
-    if (!track) return 0;
-    const cs = getComputedStyle(track);
-    const gap = cs.gap || cs.columnGap || cs.rowGap || '16px';
-    return parseFloat(gap) || 0;
+  if (!TRACK) return 0;
+  const cs  = getComputedStyle(TRACK);
+  const gap = cs.gap || cs.columnGap || cs.rowGap || '16px';
+  return parseFloat(gap) || 0;
 }
 
 function computeMeasurements() {
-    if (!track) return;
-    gapPx = getTrackGap();
-    const first = track.querySelector('img');
-    if (!first) return;
-    slideWidth = Math.round(first.getBoundingClientRect().width);
-    stepPx = Math.round(slideWidth + gapPx);
-    visibleSlides = Math.max(1, Math.floor(track.clientWidth / (slideWidth + 0.0001)));
-    cloneCount = visibleSlides; 
+  if (!TRACK || !CAROUSEL_CONTAINER) return;
+
+  gapPx = getTrackGap();
+  const first = TRACK.querySelector('img');
+  if (!first) return;
+
+  const rect = first.getBoundingClientRect();
+  slideWidth = rect.width;
+  stepPx     = slideWidth + gapPx;
+
+  // WICHTIG: sichtbare Breite = Breite der Container-Box, NICHT des Tracks
+  const containerWidth = CAROUSEL_CONTAINER.getBoundingClientRect().width || slideWidth;
+
+  // Wie viele Slides passen wirklich in den Viewport?
+  visibleSlides = Math.max(
+    1,
+    Math.min(srcList.length, Math.round(containerWidth / stepPx))
+  );
+
+  // Nicht mehr Klone anlegen als es Originalbilder gibt
+  cloneCount = visibleSlides;
 }
 
-/* -------- Build / rebuild carousel -------- */
+/* Build/rebuild carousel mit Klonen */
 function buildCarousel() {
-    if (!track) return;
+  if (!TRACK) return;
 
-    srcList = [];
-    for (let i = 1; i <= totalImages; i++) {
-        srcList.push(`images/bild_${i}.jpg`);
-    }
+  TRACK.innerHTML = '';
 
-    track.innerHTML = '';
+  // Originalbilder einfügen
+  srcList.forEach(src => {
+    const img = document.createElement('img');
+    img.className = 'carousel-img';
+    img.src       = src;
+    img.alt       = '';
+    img.loading   = 'lazy';
+    TRACK.appendChild(img);
+  });
 
-    srcList.forEach(src => {
-        const img = document.createElement('img');
-        img.className = 'carousel-img';
-        img.src = src;
-        img.alt = '';
-        img.loading = 'lazy';
-        track.appendChild(img);
-    });
+  // Erst jetzt messen (damit Breite stimmt)
+  computeMeasurements();
 
-    requestAnimationFrame(() => {
-        computeMeasurements();
+  const originals = Array.from(TRACK.children);
+  const n         = originals.length;
+  const cc        = Math.min(cloneCount, n);
 
-        const originals = Array.from(track.children).slice(0, srcList.length);
-        const cc = Math.min(cloneCount, srcList.length);
-        const lastItems = originals.slice(-cc);
-        lastItems.forEach(node => {
-            const clone = node.cloneNode(true);
-            clone.classList.add('clone');
-            track.insertBefore(clone, track.firstChild);
-        });
+  // Sicherheit: ohne Bilder abbrechen
+  if (!n || !cc) return;
 
-        const firstItems = originals.slice(0, cc);
-        firstItems.forEach(node => {
-            const clone = node.cloneNode(true);
-            clone.classList.add('clone');
-            track.appendChild(clone);
-        });
+  // Klone hinten → an den Anfang (für links unendlich)
+  const lastItems = originals.slice(-cc);
+  lastItems.forEach(node => {
+    const clone = node.cloneNode(true);
+    clone.classList.add('clone');
+    TRACK.insertBefore(clone, TRACK.firstChild);
+  });
 
-        internalIndex = cc;
+  // Klone vorne → ans Ende (für rechts unendlich)
+  const firstItems = originals.slice(0, cc);
+  firstItems.forEach(node => {
+    const clone = node.cloneNode(true);
+    clone.classList.add('clone');
+    TRACK.appendChild(clone);
+  });
 
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+  // Start-Index = erstes Original (nach den vorderen Klonen)
+  internalIndex = cc;
 
-        setTimeout(() => {
-            track.style.transition = '';
-            attachSlideClickListeners(); 
-            attachTransitionEnd();        
-        }, 20);
-    });
+  // Ohne Animation an Startposition springen, dann Transition wieder aktivieren
+  TRACK.style.transition = 'none';
+  TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+  TRACK.getBoundingClientRect(); // Reflow
+  TRACK.style.transition = 'transform 0.45s ease';
+
+  attachSlideClickListeners();
+  attachTransitionEnd();
 }
 
-/* -------- Slide click -> Lightbox -------- */
+/* Bild klick → Lightbox */
 function attachSlideClickListeners() {
-    const imgs = track.querySelectorAll('img');
-    imgs.forEach(img => {
-        img.onclick = () => {
-            if (!lightbox || !lightboxImg) return;
-            lightbox.style.display = 'flex';
-            lightboxImg.src = img.src;
-            document.body.style.overflow = 'hidden';
-        };
-    });
+  if (!TRACK || !LIGHTBOX || !LIGHTBOX_IMG) return;
+
+  TRACK.querySelectorAll('img').forEach(img => {
+    img.onclick = () => {
+      LIGHTBOX.style.display = 'flex';
+      LIGHTBOX_IMG.src       = img.src;
+      document.body.style.overflow = 'hidden';
+    };
+  });
 }
 
-/* -------- transitionend handler (fix Jump when hitting clones) -------- */
-function attachTransitionEnd() {
-    track.removeEventListener('transitionend', onTransitionEnd);
-    track.addEventListener('transitionend', onTransitionEnd);
-}
-
+/* transitionend handler – korrektes Wrappen mit Klonen */
 function onTransitionEnd() {
-    isTransitioning = false;
-    const n = srcList.length;
+  isTransitioning = false;
+  const n = srcList.length;
+  if (!TRACK || !n) return;
 
-    if (internalIndex < 0) {
-        internalIndex = n - 1;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-        track.offsetHeight;
-        track.style.transition = '';
-    }
+  // Struktur im Track:
+  // [cloneCount Klone vorne] [n Originale] [cloneCount Klone hinten]
+  const originalsStart = cloneCount;
+  const originalsEnd   = cloneCount + n; // exklusiv
 
-    if (internalIndex >= n) {
-        internalIndex = 0;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-        track.offsetHeight;
-        track.style.transition = '';
-    }
+  // Zu weit nach links → gleichen „Block“ am rechten Ende anspringen
+  if (internalIndex < originalsStart) {
+    internalIndex += n;
+    TRACK.style.transition = 'none';
+    TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+    TRACK.getBoundingClientRect();
+    TRACK.style.transition = 'transform 0.45s ease';
+  }
+  // Zu weit nach rechts → gleichen „Block“ am linken Ende anspringen
+  else if (internalIndex >= originalsEnd) {
+    internalIndex -= n;
+    TRACK.style.transition = 'none';
+    TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+    TRACK.getBoundingClientRect();
+    TRACK.style.transition = 'transform 0.45s ease';
+  }
 }
 
-/* -------- Buttons: Prev / Next -------- */
+function attachTransitionEnd() {
+  if (!TRACK) return;
+  TRACK.removeEventListener('transitionend', onTransitionEnd);
+  TRACK.addEventListener('transitionend', onTransitionEnd);
+}
+
+/* Buttons: Prev / Next */
 function prevClick() {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    internalIndex--;
-    track.style.transition = 'transform 0.45s ease';
-    track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+  if (isTransitioning || !TRACK) return;
+  isTransitioning = true;
+  internalIndex--;
+  TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
 }
 
 function nextClick() {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    internalIndex++;
-    track.style.transition = 'transform 0.45s ease';
-    track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+  if (isTransitioning || !TRACK) return;
+  isTransitioning = true;
+  internalIndex++;
+  TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
 }
 
-/* -------- Attach button listeners -------- */
 function attachButtonListeners() {
-    if (prevButton) {
-        prevButton.removeEventListener('click', prevClick);
-        prevButton.addEventListener('click', prevClick);
-    }
-    if (nextButton) {
-        nextButton.removeEventListener('click', nextClick);
-        nextButton.addEventListener('click', nextClick);
-    }
+  if (PREV_BUTTON) {
+    PREV_BUTTON.removeEventListener('click', prevClick);
+    PREV_BUTTON.addEventListener('click', prevClick);
+  }
+  if (NEXT_BUTTON) {
+    NEXT_BUTTON.removeEventListener('click', nextClick);
+    NEXT_BUTTON.addEventListener('click', nextClick);
+  }
 }
 
-/* -------- Rebuild on resize -------- */
-let resizeTimeout = null;
+/* Rebuild on resize (weil sich sichtbare Slides ändern) */
 function handleResize() {
-    if (!track) return;
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        const oldVisible = cloneCount;
-        computeMeasurements();
-        const newVisible = Math.min(visibleSlides, srcList.length);
-        if (newVisible !== oldVisible) {
-            buildCarousel();
-            attachButtonListeners();
-        } else {
-            track.style.transition = 'none';
-            track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-            track.offsetHeight;
-            track.style.transition = '';
-        }
-    }, 150);
+  if (!TRACK) return;
+  if (resizeTimeout) clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(() => {
+    buildCarousel();        // Track + Klone neu aufbauen
+    attachButtonListeners();
+  }, 150);
 }
 
-/* -------- Add images to track initially and wait for load, then build carousel -------- */
-function initImagesAndCarousel() {
-    if (!track) return;
+/* Init: Bilder-Liste + Preload, dann Carousel bauen */
+function initCarousel() {
+  if (!TRACK) return;
 
-    srcList = [];
-    for (let i = 1; i <= totalImages; i++) {
-        srcList.push(`images/bild_${i}.jpg`);
+  srcList = [];
+  for (let i = 1; i <= TOTAL_IMG; i++) {
+    srcList.push(`images/bild_${i}.jpg`);
+  }
+
+  TRACK.innerHTML = '';
+  const imgs = [];
+
+  srcList.forEach(src => {
+    const img = document.createElement('img');
+    img.className = 'carousel-img';
+    img.src       = src;
+    img.alt       = '';
+    img.loading   = 'lazy';
+    TRACK.appendChild(img);
+    imgs.push(img);
+  });
+
+  let done = 0;
+  function oneDone() {
+    done++;
+    if (done >= imgs.length) {
+      setTimeout(() => {
+        buildCarousel();
+        attachButtonListeners();
+        window.addEventListener('resize', handleResize);
+      }, 30);
     }
+  }
 
-    track.innerHTML = '';
-    const imgs = [];
-    srcList.forEach(src => {
-        const img = document.createElement('img');
-        img.className = 'carousel-img';
-        img.src = src;
-        img.alt = '';
-        img.loading = 'lazy';
-        track.appendChild(img);
-        imgs.push(img);
-    });
-
-    // Wait until all images either loaded or error
-    let done = 0;
-    function oneDone() {
-        done++;
-        if (done >= imgs.length) {
-            setTimeout(() => {
-                computeMeasurements();
-                buildCarousel();
-                attachButtonListeners();
-                window.addEventListener('resize', handleResize);
-            }, 30);
-        }
+  imgs.forEach(img => {
+    if (img.complete) {
+      oneDone();
+    } else {
+      img.addEventListener('load', oneDone,  { once: true });
+      img.addEventListener('error', oneDone, { once: true });
     }
-    imgs.forEach(img => {
-        if (img.complete) {
-            oneDone();
-        } else {
-            img.addEventListener('load', oneDone, { once: true });
-            img.addEventListener('error', oneDone, { once: true });
-        }
-    });
+  });
 }
 
-/* -------- Lightbox close handling -------- */
-if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-        if (!lightbox) return;
-        lightbox.style.display = 'none';
-        document.body.style.overflow = '';
-    });
-}
-if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    });
+initCarousel();
+
+/* ==========================================
+   LIGHTBOX
+========================================== */
+
+if (CLOSE_BTN) {
+  CLOSE_BTN.addEventListener('click', () => {
+    if (!LIGHTBOX) return;
+    LIGHTBOX.style.display = 'none';
+    document.body.style.overflow = '';
+  });
 }
 
-/* -------- Start everything -------- */
-initImagesAndCarousel();
-/* -------- Translations -------- */
-const translations = {
-    de: {
-        nav: ['Über uns', 'Bilder', 'Getränke'],
-        titles: { about: 'Über uns', pictures: 'Bilder', drinks: 'Unsere Drinks' },
-        about: "Willkommen in der <strong>Rocket Bar</strong>, wo Metal, Rock und gute Drinks verschmelzen. Inmitten der Berner Altstadt bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
-        contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
-        drinks: [
-            { name: 'Rocket Mule', desc: 'Wodka • Limette • Ginger Beer' },
-            { name: 'Whisky Sour', desc: 'Whisky • Zitronensaft • Zuckersirup' },
-            { name: 'Hausbier', desc: "Bern's Finest Craft Brew" }
-        ]
-    },
-    fr: {
-        nav: ['À propos', 'Images', 'Boissons'],
-        titles: { about: 'À propos', pictures: 'Images', drinks: 'Nos Boissons' },
-        about: "Bienvenue au <strong>Rocket Bar</strong>, où le Metal, le Rock et de bons drinks se rencontrent. Au cœur de la vieille ville de Berne, nous offrons une atmosphère où vous vous sentirez chez vous, avec de la musique forte, de la bière fraîche et des riffs brûlants.",
-        contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
-        drinks: [
-            { name: 'Rocket Mule', desc: 'Vodka • Citron vert • Ginger Beer' },
-            { name: 'Whisky Sour', desc: 'Whisky • Jus de citron • Sirop de sucre' },
-            { name: 'Bière maison', desc: 'Meilleure bière artisanale de Berne' }
-        ]
-    },
-    en: {
-        nav: ['About', 'Pictures', 'Drinks'],
-        titles: { about: 'About', pictures: 'Pictures', drinks: 'Our Drinks' },
-        about: "Welcome to <strong>Rocket Bar</strong>, where Metal, Rock, and great drinks come together. In the heart of Bern's Old Town, we offer an atmosphere where you feel at home, with loud music, cold beer, and hot riffs.",
-        contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
-        drinks: [
-            { name: 'Rocket Mule', desc: 'Vodka • Lime • Ginger Beer' },
-            { name: 'Whisky Sour', desc: 'Whisky • Lemon Juice • Sugar Syrup' },
-            { name: 'House Beer', desc: "Bern's Finest Craft Brew" }
-        ]
+if (LIGHTBOX) {
+  LIGHTBOX.addEventListener('click', e => {
+    if (e.target === LIGHTBOX) {
+      LIGHTBOX.style.display = 'none';
+      document.body.style.overflow = '';
     }
-};
+  });
+}
+
+/* ==========================================
+   LANGUAGE / TRANSLATIONS
+========================================== */
 
 function setLanguage(lang) {
-    if (!translations[lang]) lang = 'en';
-    localStorage.setItem('language', lang);
+  if (!TRANSLATIONS[lang]) lang = 'en';
+  localStorage.setItem('language', lang);
 
-    document.querySelectorAll('nav').forEach(nav => {
-        const links = nav.querySelectorAll('a');
-        for (let i = 0; i < Math.min(3, links.length); i++) {
-            links[i].textContent = translations[lang].nav[i];
-        }
+  document.querySelectorAll('nav').forEach(nav => {
+    const links = nav.querySelectorAll('a');
+    links.forEach((link, i) => {
+      if (TRANSLATIONS[lang].nav[i]) link.textContent = TRANSLATIONS[lang].nav[i];
     });
+  });
 
-    sectionTitles.forEach(title => {
-        const key = title.dataset.key.split('-')[0];
-        if (translations[lang].titles && translations[lang].titles[key]) {
-            title.textContent = translations[lang].titles[key];
-        }
-    });
+  SECTION_TITLES.forEach(title => {
+    const key = title.dataset.key.split('-')[0];
+    const t   = TRANSLATIONS[lang].titles?.[key];
+    if (t) title.textContent = t;
+  });
 
-    if (aboutText) aboutText.innerHTML = translations[lang].about;
+  if (ABOUT_TEXT) ABOUT_TEXT.innerHTML = TRANSLATIONS[lang].about;
 
-    drinkCards.forEach((card, i) => {
-        if (translations[lang].drinks[i]) {
-            const h3 = card.querySelector('h3');
-            const p = card.querySelector('p');
-            if (h3) h3.textContent = translations[lang].drinks[i].name;
-            if (p) p.textContent = translations[lang].drinks[i].desc;
-        }
-    });
+  CONTACT_ITEMS.forEach((item, i) => {
+    const label = TRANSLATIONS[lang].contact[i];
+    if (label) item.textContent = label;
+  });
 
-    contactItems.forEach((item, i) => {
-        if (translations[lang].contact[i]) item.textContent = translations[lang].contact[i];
-    });
+  LANGUAGE_SELECTORS.forEach(sel => {
+    const selectedDiv = sel.querySelector('.selected');
+    const option      = sel.querySelector(`.options li[data-value="${lang}"]`);
+    if (selectedDiv && option) selectedDiv.textContent = option.textContent;
+  });
 
-    languageSelectors.forEach(sel => {
-        const selectedDiv = sel.querySelector('.selected');
-        const option = sel.querySelector(`.options li[data-value="${lang}"]`);
-        if (selectedDiv && option) selectedDiv.textContent = option.textContent;
-    });
+  if (DRINK_NOTE) {
+    const note = TRANSLATIONS[lang].drink_note;
+    if (note) {
+      DRINK_NOTE.textContent   = note;
+      DRINK_NOTE.style.display = 'block';
+    } else {
+      DRINK_NOTE.textContent   = '';
+      DRINK_NOTE.style.display = 'none';
+    }
+  }
+
+  renderDrinks(lang);
 }
 
-/* -------- language selector behavior -------- */
-languageSelectors.forEach(sel => {
-    const selected = sel.querySelector('.selected');
-    const options = sel.querySelectorAll('.options li');
+/* Language selector behavior */
+LANGUAGE_SELECTORS.forEach(sel => {
+  const selected = sel.querySelector('.selected');
+  const options  = sel.querySelectorAll('.options li');
 
-    selected && selected.addEventListener('click', (e) => {
-        e.stopPropagation();
-        sel.classList.toggle('open');
-        sel.querySelector('.options').classList.toggle('show');
-    });
+  selected?.addEventListener('click', e => {
+    e.stopPropagation();
+    sel.classList.toggle('open');
+    sel.querySelector('.options')?.classList.toggle('show');
+  });
 
-    options.forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const lang = option.dataset.value;
-            setLanguage(lang);
-            document.querySelectorAll('.language-selector .options').forEach(o => o.classList.remove('show'));
-            document.querySelectorAll('.language-selector').forEach(s => s.classList.remove('open'));
-        });
+  options.forEach(option => {
+    option.addEventListener('click', e => {
+      e.stopPropagation();
+      const lang = option.dataset.value;
+      setLanguage(lang);
+      document
+        .querySelectorAll('.language-selector .options')
+        .forEach(o => o.classList.remove('show'));
+      document
+        .querySelectorAll('.language-selector')
+        .forEach(s => s.classList.remove('open'));
     });
+  });
 });
 
 document.addEventListener('click', () => {
-    document.querySelectorAll('.language-selector .options').forEach(o => o.classList.remove('show'));
-    document.querySelectorAll('.language-selector').forEach(s => s.classList.remove('open'));
+  document
+    .querySelectorAll('.language-selector .options')
+    .forEach(o => o.classList.remove('show'));
+  document
+    .querySelectorAll('.language-selector')
+    .forEach(s => s.classList.remove('open'));
 });
 
-/* -------- initialize language from localStorage or browser -------- */
-let initialLang = localStorage.getItem('language');
+/* Initial language from localStorage or browser */
+initialLang = localStorage.getItem('language');
 if (!initialLang) {
-    initialLang = supported.includes(userLang) ? userLang : 'de';
-    localStorage.setItem('language', initialLang);
+  initialLang = SUPPORTED_LANGS.includes(USER_LANG) ? USER_LANG : 'de';
+  localStorage.setItem('language', initialLang);
 }
 setLanguage(initialLang);
 
-languageSelectors.forEach(sel => {
-    const selVal = localStorage.getItem('language') || initialLang;
-    const initialOption = sel.querySelector(`.options li[data-value="${selVal}"]`);
-    const selectedDiv = sel.querySelector('.selected');
-    if (selectedDiv && initialOption) selectedDiv.textContent = initialOption.textContent;
+LANGUAGE_SELECTORS.forEach(sel => {
+  const selVal        = localStorage.getItem('language') || initialLang;
+  const initialOption = sel.querySelector(`.options li[data-value="${selVal}"]`);
+  const selectedDiv   = sel.querySelector('.selected');
+  if (selectedDiv && initialOption) selectedDiv.textContent = initialOption.textContent;
 });
 
-/* -------- Hamburger Menu -------- */
-const hamburger = document.querySelector('.hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileClose = document.querySelector('.mobile-close');
+/* ==========================================
+   MOBILE / HAMBURGER MENU
+========================================== */
 
 function openMobileMenu() {
-    if (!mobileMenu || !hamburger) return;
-    mobileMenu.hidden = false;
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    hamburger.setAttribute('aria-expanded', 'true');
-    requestAnimationFrame(() => {
-        mobileMenu.style.transform = '';
-    });
-    document.body.style.overflow = 'hidden';
-    const firstLink = mobileMenu.querySelector('.mobile-nav a');
-    if (firstLink) firstLink.focus();
+  if (!MOBILE_MENU || !HAMBURGER) return;
+  MOBILE_MENU.hidden = false;
+  MOBILE_MENU.setAttribute('aria-hidden', 'false');
+  HAMBURGER.setAttribute('aria-expanded', 'true');
+
+  requestAnimationFrame(() => {
+    MOBILE_MENU.style.transform = '';
+  });
+
+  document.body.style.overflow = 'hidden';
+
+  const firstLink = MOBILE_MENU.querySelector('.mobile-nav a');
+  firstLink?.focus();
 }
 
 function closeMobileMenu() {
-    if (!mobileMenu || !hamburger) return;
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    setTimeout(() => {
-        if (mobileMenu) mobileMenu.hidden = true;
-    }, 380);
+  if (!MOBILE_MENU || !HAMBURGER) return;
+  MOBILE_MENU.setAttribute('aria-hidden', 'true');
+  HAMBURGER.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+
+  setTimeout(() => {
+    MOBILE_MENU.hidden = true;
+  }, 380);
 }
 
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-        if (expanded) closeMobileMenu(); else openMobileMenu();
-    });
-}
-if (mobileClose) {
-    mobileClose.addEventListener('click', () => closeMobileMenu());
-}
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMobileMenu();
+HAMBURGER?.addEventListener('click', () => {
+  const expanded = HAMBURGER.getAttribute('aria-expanded') === 'true';
+  expanded ? closeMobileMenu() : openMobileMenu();
 });
 
-if (mobileMenu) {
-    const links = mobileMenu.querySelectorAll('.mobile-nav a');
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            closeMobileMenu();
-        });
+MOBILE_CLOSE?.addEventListener('click', closeMobileMenu);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMobileMenu();
+});
+
+if (MOBILE_MENU) {
+  MOBILE_MENU.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+}
+
+/* ==========================================
+   DRINKS
+========================================== */
+
+function renderDrinks(lang) {
+  if (!DRINKS_CONTAINER) return;
+  const menu = TRANSLATIONS[lang]?.drinks;
+  if (!menu) return;
+
+  DRINKS_CONTAINER.innerHTML = '';
+
+  menu.forEach(category => {
+    const card = document.createElement('div');
+    card.className = 'drink-card';
+
+    const h3 = document.createElement('h3');
+    h3.className = 'drink-category';
+    h3.textContent = category.category;
+    card.appendChild(h3);
+
+    if (category.note) {
+      const note = document.createElement('div');
+      note.className = 'softdrink-note';
+      note.textContent = category.note;
+      card.appendChild(note);
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'drink-list';
+
+    category.items.forEach(item => {
+      const li = document.createElement('li');
+
+      const line = document.createElement('div');
+      line.className = 'drink-line';
+
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'drink-name';
+      nameSpan.textContent = item.name;
+      line.appendChild(nameSpan);
+
+      if (item.price) {
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'drink-price';
+        priceSpan.textContent = item.price;
+        line.appendChild(priceSpan);
+      }
+
+      li.appendChild(line);
+
+      if (item.desc) {
+        const descDiv = document.createElement('div');
+        descDiv.className = 'drink-desc';
+        descDiv.textContent = item.desc;
+        li.appendChild(descDiv);
+      }
+
+      ul.appendChild(li);
     });
+
+    card.appendChild(ul);
+    DRINKS_CONTAINER.appendChild(card);
+  });
 }

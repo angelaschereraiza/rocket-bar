@@ -3,13 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rocket Bar</title>
+
+  <title>Rocket Bar Bern | Rock & Metal Bar beim Bahnhof</title>
+
+  <meta name="description" content="Rocket Bar in Bern - Rock & Metal Bar beim Bahnhof Bern. Drinks, Shots und gute Musik in lockerer Atmosphäre. Genfergasse 10, 3011 Bern." />
+  <meta name="keywords" content="Rocket Bar Bern, Rock Bar Bern, Metal Bar Bern, Rock Kneipe Bern, Bar beim Bahnhof Bern, Cocktailbar Bern, Shots Bern, Rock Musik Bar Bern" />
+  <meta name="robots" content="index,follow" />
+  <meta http-equiv="content-language" content="de-CH" />
+
+  <meta name="geo.region" content="CH-BE" />
+  <meta name="geo.placename" content="Bern" />
+  <meta name="geo.position" content="46.9480;7.4391" />
+  <meta name="ICBM" content="46.9480, 7.4391" />
+
+  <link rel="canonical" href="https://www.DEINE-DOMAIN.ch/" />
+
+  <meta property="og:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
+  <meta property="og:description" content="Rock & Metal Bar mit grosser Drink- und Shot-Auswahl direkt beim Bahnhof Bern. Besuche uns in der Genfergasse 10." />
+  <meta property="og:image" content="https://www.DEINE-DOMAIN.ch/images/rocketbar-social.jpg" />
+  <meta property="og:url" content="https://www.DEINE-DOMAIN.ch/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_CH" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
+  <meta name="twitter:description" content="Drinks, Shots & Rock/Metal-Sound - Rocket Bar in der Genfergasse 10, 3011 Bern." />
+  <meta name="twitter:image" content="https://www.DEINE-DOMAIN.ch/images/rocketbar-social.jpg" />
+
+  <meta name="theme-color" content="#000000" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Rocket Bar",
+    "image": "https://www.rocket-bar.ch/images/logo.jpg",
+    "url": "https://www.rocket-bar.ch/",
+    "telephone": "+41 31 558 09 88",
+    "email": "rocketbar@gmx.ch",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Genfergasse 10",
+      "postalCode": "3011",
+      "addressLocality": "Bern",
+      "addressCountry": "CH"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 46.9480,
+      "longitude": 7.4391
+    },
+    "priceRange": "CHF",
+    "servesCuisine": "Drinks, Cocktails, Shots",
+    "sameAs": [
+      "https://www.facebook.com/p/Rocket-Bar-61578631981520/",
+      "https://www.instagram.com/rocket_bar_bern/"
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "17:00",
+        "closes": "00:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Friday",
+        "opens": "17:00",
+        "closes": "03:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "18:00",
+        "closes": "03:30"
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <img src="images/logo.jpg" alt="Rocket Bar Logo" class="logo" />
+
     <nav class="desktop-nav">
       <a href="#about" data-key="nav-about"></a>
       <a href="#pictures" data-key="nav-pictures"></a>
@@ -39,7 +118,7 @@
         <a href="#pictures" data-key="nav-pictures"></a>
         <a href="#drinks" data-key="nav-drinks"></a>
       </nav>
-      <div class="language-selector language-selector">
+      <div class="language-selector">
         <div class="selected">Deutsch</div>
         <ul class="options">
           <li data-value="de">Deutsch</li>
@@ -54,7 +133,7 @@
     <h2 data-key="about-title"></h2>
     <p class="about-text"></p>
 
-    <div class="contact-container">      
+    <div class="contact-container">
       <div class="contact-item">
         <h3></h3>
         <p>Rocket Bar</p>
@@ -91,6 +170,7 @@
       <div class="carousel-track" id="carousel-track"></div>
       <span class="next">&#10095;</span>
     </div>
+
     <div id="lightbox" class="lightbox">
       <span class="close">&times;</span>
       <img class="lightbox-img" src="" alt="Bild">
@@ -99,30 +179,20 @@
 
   <section id="drinks">
     <h2 data-key="drinks-title"></h2>
+
     <div class="shots-video">
       <video controls autoplay muted loop>
         <source src="images/shot.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
       </video>
     </div>
-    <div class="drink-grid">
-      <div class="drink-card">
-        <h3></h3>
-        <p></p>
-      </div>
-      <div class="drink-card">
-        <h3></h3>
-        <p></p>
-      </div>
-      <div class="drink-card">
-        <h3></h3>
-        <p></p>
-      </div>
-    </div>
+
+    <div id="drinks-menu" class="drink-grid"></div>
+    <p id="drink-note" class="drink-note"></p>
   </section>
 
   <footer>
-    <p>©<span id="year"></span> Rocket Rock & Metal Bar</p>
+    <p>©<span id="year"></span> Rocket Bar</p>
   </footer>
 
   <script src="script.js"></script>
