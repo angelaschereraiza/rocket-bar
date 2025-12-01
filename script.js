@@ -28,18 +28,63 @@ const MOBILE_MENU        = document.getElementById('mobile-menu');
 const MOBILE_CLOSE       = document.querySelector('.mobile-close');
 
 /* --- App Config --- */
-const USER_LANG       = navigator.language ? navigator.language.slice(0, 2) : 'de';
-const SUPPORTED_LANGS = ['de', 'fr', 'en'];
+const USER_LANG          = navigator.language ? navigator.language.slice(0, 2) : 'de';
+const SUPPORTED_LANGS    = ['de', 'fr', 'en'];
 
 /* --- Translations --- */
 const TRANSLATIONS = {
   de: {
     nav: ['Über uns', 'Bilder', 'Getränke'],
     titles: { about: 'Über uns', pictures: 'Bilder', drinks: 'Unsere Drinks' },
-    about: "Willkommen in der <strong>Rocket Bar</strong>, wo Metal, Rock und gute Drinks verschmelzen. Inmitten der Berner Altstadt bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
+    about: "Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Inmitten der Berner Altstadt und nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
     contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
     drink_note: "Alle Preise in CHF inkl. 8.1% MWST",
     drinks: [
+      {
+        category: 'Bier in der Flasche',
+        items: [
+          { name: 'Valaisanne Bière De Cave',  desc: '3.3 dl | 5.4% (CH)',   price: '7.00' },
+          { name: 'Grimbergen Ambrée',         desc: '2.5 dl | 6.5% (BE)',   price: '7.00' },
+          { name: 'Brooklyn Stonewall Inn IPA',desc: '3.3 dl | 4.6% (US)',   price: '7.00' },
+          { name: 'Superbock Unfiltered',      desc: '3.3 dl | 4.9% (PT)',   price: '6.00' },
+          { name: 'Coruja IPA',                desc: '3.3 dl | 6.0% (PT)',   price: '7.00' },
+          { name: 'Corona',                    desc: '3.3 dl | 4.6% (MEX)',  price: '7.00' },
+          { name: 'Alhambra',                  desc: '3.3 dl | 6.4% (GRA)',  price: '8.00' },
+          { name: "Cooper's Pale Ale",         desc: '3.3 dl | 5.1% (AUS)',  price: '7.00' },
+          { name: 'Lush',                      desc: '3.3 dl | 5.3% (NOR)',  price: '9.00' },
+          { name: 'Orval',                     desc: '3.3 dl | 6.2% (BE)',   price: '8.00' },
+          { name: 'Andechs Weissbier',         desc: '5 dl | 5.5% (DE)',     price: '9.00' },
+          { name: 'Schlenkerla Rauchbier',     desc: '5 dl | 5.5% (DE)',     price: '9.00' },
+          { name: 'Brewdog Wingman IPA',       desc: '3.3 dl | 4.3% (SCO)',  price: '7.00' },
+          { name: 'Astra Kiezmische',          desc: '3.3 dl | 2.5% (DE)',   price: '6.00' },
+          { name: 'Möhl Saft vom Fass',        desc: '5 dl | 2.5% (CH)',     price: '9.00' },
+          { name: 'Smirnoff Ice',              desc: '3.3 dl | 4% (GB)',     price: '7.00' },
+          { name: 'White Claw Hard Seltzer',   desc: '3.3 dl | 4.5% (USA)',  price: '8.00' },
+          { name: 'Cardinal Alkoholfrei',      desc: '3.3 dl | 0.0% (CH)',   price: '6.00' },
+          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' }
+        ]
+      },
+      {
+        category: 'Bier vom Fass',
+        note: '3 dl / 5 dl',
+        items: [
+          { name: 'Valaisanne Lager',          desc: '4.8%',      price: '5.00 / 7.00' },
+          { name: 'Valaisanne White IPA',      desc: '6.0%',      price: '7.00 / 9.00' },
+          { name: "Smithwick's Irish Ale",     desc: '3.8%',      price: '6.00 / 9.00' },
+          { name: 'Guinness Irish Draught',    desc: '5.0%',      price: '6.00 / 9.00' }
+        ]
+      },
+      {
+        category: 'Shots',
+        note: '2.5 cl',
+        items: [
+          { name: 'Ingwerer',   desc: '24%', price: '6.00' },
+          { name: 'Minttu',     desc: '35%', price: '6.00' },
+          { name: "Shanky's Whip", desc: '33%', price: '6.00' },
+          { name: 'Nebula Shot', desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
+          { name: 'Muh-Muh',    desc: '17%', price: '6.00' }
+        ]
+      },
       {
         category: 'Cocktails',
         items: [
@@ -108,14 +153,58 @@ const TRANSLATIONS = {
       }
     ]
   },
-
   fr: {
     nav: ['À propos', 'Images', 'Boissons'],
     titles: { about: 'À propos', pictures: 'Images', drinks: 'Nos Boissons' },
-    about: "Bienvenue au <strong>Rocket Bar</strong>, où le Metal, le Rock et de bons drinks se rencontrent. Au cœur de la vieille ville de Berne, nous offrons une atmosphère où vous vous sentirez chez vous, avec de la musique forte, de la bière fraîche et des riffs brûlants.",
+    about: "Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un seul élan. Au cœur de la vieille ville de Berne, à quelques pas de la gare centrale, nous offrons une atmosphère qui te donne l’impression d’être chez toi, avec de la musique forte, de la bière glacée et des riffs brûlants.",
     contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
     drink_note: "Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse",
     drinks: [
+      {
+        category: 'Bière en bouteille',
+        items: [
+          { name: 'Valaisanne Bière De Cave',     desc: '3.3 dl | 5.4% (CH)', price: '7.00' },
+          { name: 'Grimbergen Ambrée',            desc: '2.5 dl | 6.5% (BE)', price: '7.00' },
+          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (US)', price: '7.00' },
+          { name: 'Superbock Unfiltered',         desc: '3.3 dl | 4.9% (PT)', price: '6.00' },
+          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PT)', price: '7.00' },
+          { name: 'Corona',                       desc: '3.3 dl | 4.6% (MEX)',price: '7.00' },
+          { name: 'Alhambra',                     desc: '3.3 dl | 6.4% (GRA)',price: '8.00' },
+          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)',price: '7.00' },
+          { name: 'Lush',                         desc: '3.3 dl | 5.3% (NOR)',price: '9.00' },
+          { name: 'Orval',                        desc: '3.3 dl | 6.2% (BE)', price: '8.00' },
+          { name: 'Andechs Bière Blanche',        desc: '5 dl | 5.5% (DE)',   price: '9.00' },
+          { name: 'Schlenkerla Bière Fumée',      desc: '5 dl | 5.5% (DE)',   price: '9.00' },
+          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)',price: '7.00' },
+          { name: 'Astra Kiezmische',             desc: '3.3 dl | 2.5% (DE)', price: '6.00' },
+          { name: 'Möhl Jus de pomme',            desc: '5 dl | 2.5% (CH)',   price: '9.00' },
+          { name: 'Smirnoff Ice',                 desc: '3.3 dl | 4% (GB)',   price: '7.00' },
+          { name: 'White Claw Hard Seltzer',      desc: '3.3 dl | 4.5% (USA)',price: '8.00' },
+          { name: 'Cardinal Sans Alcool',         desc: '3.3 dl | 0.0% (CH)', price: '6.00' },
+          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' }
+        ]
+      },
+      {
+        category: 'Bière pression',
+        note: '3 dl / 5 dl',
+        items: [
+          { name: 'Valaisanne Lager',          desc: '4.8%',     price: '5.00 / 7.00' },
+          { name: 'Valaisanne White IPA',      desc: '6.0%',     price: '7.00 / 9.00' },
+          { name: "Smithwick's Irish Ale",     desc: '3.8%',     price: '6.00 / 9.00' },
+          { name: 'Guinness Irish Draught',    desc: '5.0%',     price: '6.00 / 9.00' }
+        ]
+      },
+      {
+        category: 'Shots',
+        note: '2.5 cl',
+        items: [
+          { name: 'Ingwerer',   desc: '24%', price: '6.00' },
+          { name: 'Minttu',     desc: '35%', price: '6.00' },
+          { name: "Shanky's Whip", desc: '33%', price: '6.00' },
+          { name: 'Nebula Shot', desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
+          { name: 'Muh-Muh',    desc: '17%', price: '6.00' }
+        ]
+      },
       {
         category: 'Cocktails',
         items: [
@@ -184,14 +273,58 @@ const TRANSLATIONS = {
       }
     ]
   },
-
   en: {
     nav: ['About', 'Pictures', 'Drinks'],
     titles: { about: 'About', pictures: 'Pictures', drinks: 'Our Drinks' },
-    about: "Welcome to <strong>Rocket Bar</strong>, where Metal, Rock, and great drinks come together. In the heart of Bern's Old Town, we offer an atmosphere where you feel at home, with loud music, cold beer, and hot riffs.",
+    about: "Welcome to the Rocket Bar, where metal, rock and good drinks fuse into one roaring vibe. In the middle of Bern’s old town and only a few steps from the main station, we offer an atmosphere that feels like home, filled with loud music, cold beer and hot riffs.",
     contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
     drink_note: "All prices in CHF incl. 8.1% VAT",
     drinks: [
+      {
+        category: 'Bottled Beer',
+        items: [
+          { name: 'Valaisanne Bière De Cave',     desc: '3.3 dl | 5.4% (CH)', price: '7.00' },
+          { name: 'Grimbergen Ambrée',            desc: '2.5 dl | 6.5% (BE)', price: '7.00' },
+          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (US)', price: '7.00' },
+          { name: 'Superbock Unfiltered',         desc: '3.3 dl | 4.9% (PT)', price: '6.00' },
+          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PT)', price: '7.00' },
+          { name: 'Corona',                       desc: '3.3 dl | 4.6% (MEX)',price: '7.00' },
+          { name: 'Alhambra',                     desc: '3.3 dl | 6.4% (GRA)',price: '8.00' },
+          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)',price: '7.00' },
+          { name: 'Lush',                         desc: '3.3 dl | 5.3% (NOR)',price: '9.00' },
+          { name: 'Orval',                        desc: '3.3 dl | 6.2% (BE)', price: '8.00' },
+          { name: 'Andechs Wheat Beer',            desc: '5 dl | 5.5% (DE)',  price: '9.00' },
+          { name: 'Schlenkerla Smoked Beer',       desc: '5 dl | 5.5% (DE)',  price: '9.00' },
+          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)',price: '7.00' },
+          { name: 'Astra Kiezmische',             desc: '3.3 dl | 2.5% (DE)', price: '6.00' },
+          { name: 'Möhl Apple Cider',             desc: '5 dl | 2.5% (CH)',   price: '9.00' },
+          { name: 'Smirnoff Ice',                 desc: '3.3 dl | 4% (GB)',   price: '7.00' },
+          { name: 'White Claw Hard Seltzer',      desc: '3.3 dl | 4.5% (USA)',price: '8.00' },
+          { name: 'Cardinal Alcohol-free',        desc: '3.3 dl | 0.0% (CH)', price: '6.00' },
+          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' }
+        ]
+      },
+      {
+        category: 'Beer on Tap',
+        note: '3 dl / 5 dl',
+        items: [
+          { name: 'Valaisanne Lager',          desc: '4.8%',     price: '5.00 / 7.00' },
+          { name: 'Valaisanne White IPA',      desc: '6.0%',     price: '7.00 / 9.00' },
+          { name: "Smithwick's Irish Ale",     desc: '3.8%',     price: '6.00 / 9.00' },
+          { name: 'Guinness Irish Draught',    desc: '5.0%',     price: '6.00 / 9.00' }
+        ]
+      },
+      {
+        category: 'Shots',
+        note: '2.5 cl',
+        items: [
+          { name: 'Ingwerer',   desc: '24%', price: '6.00' },
+          { name: 'Minttu',     desc: '35%', price: '6.00' },
+          { name: "Shanky's Whip", desc: '33%', price: '6.00' },
+          { name: 'Nebula Shot', desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
+          { name: 'Muh-Muh',    desc: '17%', price: '6.00' }
+        ]
+      },
       {
         category: 'Cocktails',
         items: [
@@ -262,11 +395,13 @@ const TRANSLATIONS = {
   }
 };
 
+
 /* Language / misc */
 let initialLang = null;
+let currentLang = null;
 
 /* ==========================================
-   CAROUSEL (INFINITE, OHNE SPRUNG)
+   CAROUSEL
 ========================================== */
 
 /* Carousel state */
@@ -276,7 +411,7 @@ let gapPx          = 0;
 let slideWidth     = 0;
 let stepPx         = 0;
 let cloneCount     = 0;
-let internalIndex  = 0;   // aktueller Index im Track (inkl. Klone)
+let internalIndex  = 0;
 let isTransitioning = false;
 let resizeTimeout  = null;
 
@@ -298,26 +433,21 @@ function computeMeasurements() {
   slideWidth = rect.width;
   stepPx     = slideWidth + gapPx;
 
-  // WICHTIG: sichtbare Breite = Breite der Container-Box, NICHT des Tracks
   const containerWidth = CAROUSEL_CONTAINER.getBoundingClientRect().width || slideWidth;
 
-  // Wie viele Slides passen wirklich in den Viewport?
   visibleSlides = Math.max(
     1,
     Math.min(srcList.length, Math.round(containerWidth / stepPx))
   );
 
-  // Nicht mehr Klone anlegen als es Originalbilder gibt
   cloneCount = visibleSlides;
 }
 
-/* Build/rebuild carousel mit Klonen */
 function buildCarousel() {
   if (!TRACK) return;
 
   TRACK.innerHTML = '';
 
-  // Originalbilder einfügen
   srcList.forEach(src => {
     const img = document.createElement('img');
     img.className = 'carousel-img';
@@ -327,17 +457,14 @@ function buildCarousel() {
     TRACK.appendChild(img);
   });
 
-  // Erst jetzt messen (damit Breite stimmt)
   computeMeasurements();
 
   const originals = Array.from(TRACK.children);
   const n         = originals.length;
   const cc        = Math.min(cloneCount, n);
 
-  // Sicherheit: ohne Bilder abbrechen
   if (!n || !cc) return;
 
-  // Klone hinten → an den Anfang (für links unendlich)
   const lastItems = originals.slice(-cc);
   lastItems.forEach(node => {
     const clone = node.cloneNode(true);
@@ -345,7 +472,6 @@ function buildCarousel() {
     TRACK.insertBefore(clone, TRACK.firstChild);
   });
 
-  // Klone vorne → ans Ende (für rechts unendlich)
   const firstItems = originals.slice(0, cc);
   firstItems.forEach(node => {
     const clone = node.cloneNode(true);
@@ -353,20 +479,16 @@ function buildCarousel() {
     TRACK.appendChild(clone);
   });
 
-  // Start-Index = erstes Original (nach den vorderen Klonen)
   internalIndex = cc;
-
-  // Ohne Animation an Startposition springen, dann Transition wieder aktivieren
   TRACK.style.transition = 'none';
   TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
-  TRACK.getBoundingClientRect(); // Reflow
+  TRACK.getBoundingClientRect();
   TRACK.style.transition = 'transform 0.45s ease';
 
   attachSlideClickListeners();
   attachTransitionEnd();
 }
 
-/* Bild klick → Lightbox */
 function attachSlideClickListeners() {
   if (!TRACK || !LIGHTBOX || !LIGHTBOX_IMG) return;
 
@@ -379,18 +501,14 @@ function attachSlideClickListeners() {
   });
 }
 
-/* transitionend handler – korrektes Wrappen mit Klonen */
 function onTransitionEnd() {
   isTransitioning = false;
   const n = srcList.length;
   if (!TRACK || !n) return;
 
-  // Struktur im Track:
-  // [cloneCount Klone vorne] [n Originale] [cloneCount Klone hinten]
   const originalsStart = cloneCount;
-  const originalsEnd   = cloneCount + n; // exklusiv
+  const originalsEnd   = cloneCount + n;
 
-  // Zu weit nach links → gleichen „Block“ am rechten Ende anspringen
   if (internalIndex < originalsStart) {
     internalIndex += n;
     TRACK.style.transition = 'none';
@@ -398,7 +516,6 @@ function onTransitionEnd() {
     TRACK.getBoundingClientRect();
     TRACK.style.transition = 'transform 0.45s ease';
   }
-  // Zu weit nach rechts → gleichen „Block“ am linken Ende anspringen
   else if (internalIndex >= originalsEnd) {
     internalIndex -= n;
     TRACK.style.transition = 'none';
@@ -414,7 +531,6 @@ function attachTransitionEnd() {
   TRACK.addEventListener('transitionend', onTransitionEnd);
 }
 
-/* Buttons: Prev / Next */
 function prevClick() {
   if (isTransitioning || !TRACK) return;
   isTransitioning = true;
@@ -440,18 +556,16 @@ function attachButtonListeners() {
   }
 }
 
-/* Rebuild on resize (weil sich sichtbare Slides ändern) */
 function handleResize() {
   if (!TRACK) return;
   if (resizeTimeout) clearTimeout(resizeTimeout);
 
   resizeTimeout = setTimeout(() => {
-    buildCarousel();        // Track + Klone neu aufbauen
+    buildCarousel();
     attachButtonListeners();
   }, 150);
 }
 
-/* Init: Bilder-Liste + Preload, dann Carousel bauen */
 function initCarousel() {
   if (!TRACK) return;
 
@@ -524,6 +638,7 @@ if (LIGHTBOX) {
 
 function setLanguage(lang) {
   if (!TRANSLATIONS[lang]) lang = 'en';
+  currentLang = lang;
   localStorage.setItem('language', lang);
 
   document.querySelectorAll('nav').forEach(nav => {
@@ -675,56 +790,86 @@ function renderDrinks(lang) {
 
   DRINKS_CONTAINER.innerHTML = '';
 
+  const isDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
+  const MAX_ITEMS_PER_CARD = 10;
+
   menu.forEach(category => {
-    const card = document.createElement('div');
-    card.className = 'drink-card';
+    const items = category.items || [];
 
-    const h3 = document.createElement('h3');
-    h3.className = 'drink-category';
-    h3.textContent = category.category;
-    card.appendChild(h3);
-
-    if (category.note) {
-      const note = document.createElement('div');
-      note.className = 'softdrink-note';
-      note.textContent = category.note;
-      card.appendChild(note);
+    if (isDesktopTwoCols && items.length > MAX_ITEMS_PER_CARD) {
+      let partIndex = 0;
+      for (let i = 0; i < items.length; i += MAX_ITEMS_PER_CARD) {
+        const slice = items.slice(i, i + MAX_ITEMS_PER_CARD);
+        createDrinkCard(category, slice, partIndex);
+        partIndex++;
+      }
+    } else {
+      createDrinkCard(category, items, 0);
     }
-
-    const ul = document.createElement('ul');
-    ul.className = 'drink-list';
-
-    category.items.forEach(item => {
-      const li = document.createElement('li');
-
-      const line = document.createElement('div');
-      line.className = 'drink-line';
-
-      const nameSpan = document.createElement('span');
-      nameSpan.className = 'drink-name';
-      nameSpan.textContent = item.name;
-      line.appendChild(nameSpan);
-
-      if (item.price) {
-        const priceSpan = document.createElement('span');
-        priceSpan.className = 'drink-price';
-        priceSpan.textContent = item.price;
-        line.appendChild(priceSpan);
-      }
-
-      li.appendChild(line);
-
-      if (item.desc) {
-        const descDiv = document.createElement('div');
-        descDiv.className = 'drink-desc';
-        descDiv.textContent = item.desc;
-        li.appendChild(descDiv);
-      }
-
-      ul.appendChild(li);
-    });
-
-    card.appendChild(ul);
-    DRINKS_CONTAINER.appendChild(card);
   });
 }
+
+function createDrinkCard(category, items, partIndex = 0) {
+  const card = document.createElement('div');
+  card.className = 'drink-card';
+
+  const h3 = document.createElement('h3');
+  h3.className = 'drink-category';
+  h3.textContent = category.category;
+  card.appendChild(h3);
+
+  if (category.note && partIndex === 0) {
+    const note = document.createElement('div');
+    note.className = 'softdrink-note';
+    note.textContent = category.note;
+    card.appendChild(note);
+  }
+
+  const ul = document.createElement('ul');
+  ul.className = 'drink-list';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+
+    const line = document.createElement('div');
+    line.className = 'drink-line';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'drink-name';
+    nameSpan.textContent = item.name;
+    line.appendChild(nameSpan);
+
+    if (item.price) {
+      const priceSpan = document.createElement('span');
+      priceSpan.className = 'drink-price';
+      priceSpan.textContent = item.price;
+      line.appendChild(priceSpan);
+    }
+
+    li.appendChild(line);
+
+    if (item.desc) {
+      const descDiv = document.createElement('div');
+      descDiv.className = 'drink-desc';
+      descDiv.textContent = item.desc;
+      li.appendChild(descDiv);
+    }
+
+    ul.appendChild(li);
+  });
+
+  card.appendChild(ul);
+  DRINKS_CONTAINER.appendChild(card);
+}
+
+let lastIsDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
+
+window.addEventListener('resize', () => {
+  const isDesktopNow = window.matchMedia('(min-width: 801px)').matches;
+  if (isDesktopNow === lastIsDesktopTwoCols) return;
+  lastIsDesktopTwoCols = isDesktopNow;
+
+  if (currentLang) {
+    renderDrinks(currentLang);
+  }
+});
