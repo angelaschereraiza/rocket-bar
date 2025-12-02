@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <link rel="icon" href="/images/favicon.ico" sizes="any"> 
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Rocket Bar Bern | Rock & Metal Bar beim Bahnhof</title>
+  <title>Rocket Bar</title>
 
   <meta name="description" content="Rocket Bar in Bern - Rock & Metal Bar beim Bahnhof Bern. Drinks, Shots und gute Musik in lockerer Atmosphäre. Genfergasse 10, 3011 Bern." />
   <meta name="keywords" content="Rocket Bar Bern, Rock Bar Bern, Metal Bar Bern, Rock Kneipe Bern, Bar beim Bahnhof Bern, Cocktailbar Bern, Shots Bern, Rock Musik Bar Bern" />
@@ -94,7 +96,6 @@
       <a href="#pictures" data-key="nav-pictures"></a>
       <a href="#drinks" data-key="nav-drinks"></a>
     </nav>
-
     <div class="language-selector-container">
       <div class="language-selector">
         <div class="selected" id="selected-language">Deutsch</div>
@@ -116,8 +117,11 @@
       <nav class="mobile-nav">
         <a href="#about" data-key="nav-about"></a>
         <a href="#pictures" data-key="nav-pictures"></a>
-        <a href="#drinks" data-key="nav-drinks"></a>
       </nav>
+      <div class="drink-menu-selector">
+        <div class="drink-menu-selected" data-key="nav-drinks"></div>
+        <ul class="drink-menu-options"></ul>
+      </div>
       <div class="language-selector">
         <div class="selected">Deutsch</div>
         <ul class="options">
@@ -166,33 +170,47 @@
   <section id="pictures">
     <h2 data-key="pictures-title"></h2>
     <div class="carousel-container">
-      <span class="prev">&#10094;</span>
+      <span class="prev">
+        <svg viewBox="0 0 24 24" class="arrow-icon">
+          <path d="M14 4l-6 8 6 8" />
+        </svg>
+      </span>
       <div class="carousel-track" id="carousel-track"></div>
-      <span class="next">&#10095;</span>
+      <span class="next">
+        <svg viewBox="0 0 24 24" class="arrow-icon">
+          <path d="M10 4l6 8-6 8" />
+        </svg>
+      </span>
     </div>
 
     <div id="lightbox" class="lightbox">
       <span class="close">&times;</span>
-      <img class="lightbox-img" src="" alt="Bild">
+      <img class="lightbox-img" src="" alt="Image">
     </div>
   </section>
 
   <section id="drinks">
     <h2 data-key="drinks-title"></h2>
-
+    <div id="drink-category-nav" class="drink-category-nav"></div>
+    <div class="drink-menu-selector-container">
+      <div class="drink-menu-selector">
+        <div class="drink-menu-selected" data-key="nav-drinks"></div>
+        <ul class="drink-menu-options"></ul>
+      </div>
+    </div>
     <div class="shots-video">
       <video controls autoplay muted loop>
         <source src="images/shot.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
       </video>
     </div>
-
     <div id="drinks-menu" class="drink-grid"></div>
     <p id="drink-note" class="drink-note"></p>
   </section>
 
   <footer>
     <p>©<span id="year"></span> Rocket Bar</p>
+    <p id="website-note"></p>
   </footer>
 
   <script src="script.js"></script>

@@ -104,21 +104,18 @@ nav a:hover::after {
   color: var(--text);
   padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;
-  transition: 0.3s;
-  position: relative;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 0.35rem;
 }
 
 .language-selector .selected::after {
   content: "▼";
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
   font-size: 0.7em;
-  pointer-events: none;
-  color: var(--text);
   transition: transform 0.3s;
+  color: var(--text);
 }
 
 .language-selector .options.show + .selected::after,
@@ -129,9 +126,6 @@ nav a:hover::after {
 
 .language-selector .options {
   display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
   width: 100%;
   background: var(--bg);
   border-radius: 0.25rem;
@@ -155,6 +149,11 @@ nav a:hover::after {
 
 .language-selector .options.show {
   display: block;
+}
+
+.language-selector.open .selected::after {
+  transform: rotate(180deg);
+  color: var(--accent);
 }
 
 /* ===========================
@@ -234,6 +233,7 @@ nav a:hover::after {
   opacity: 0;
   pointer-events: none;
   transition: transform 0.35s ease, opacity 0.35s ease;
+  overflow-y: auto; 
 }
 
 .mobile-menu[aria-hidden="false"] {
@@ -364,7 +364,6 @@ section h2 {
   overflow: hidden;
   display: flex;
   align-items: center;
-  height: 20rem;
   object-fit: contain;
 }
 
@@ -398,8 +397,6 @@ section h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: var(--accent);
   cursor: pointer;
   z-index: 10;
 }
@@ -410,6 +407,22 @@ section h2 {
 
 .next {
   right: 0.25rem;
+}
+
+.arrow-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.prev:hover,
+.next:hover {
+  background: rgba(0,0,0,0.7);
 }
 
 .lightbox {
@@ -441,9 +454,15 @@ section h2 {
    Drinks
 =========================== */
 
+.drink-menu-selector-container {
+  display: none;
+}
+
 .shots-video {
   width: 50%;
   margin: 0 auto 1.875rem;
+  border-radius: 0.75rem; 
+  overflow: hidden; 
 }
 
 .shots-video video {
@@ -465,6 +484,7 @@ section h2 {
   border-radius: 0.75rem;
   text-align: left;
   transition: all 0.3s;
+  scroll-margin-top: 12.5rem;
 }
 
 .drink-category {
@@ -526,6 +546,112 @@ section h2 {
   text-transform: uppercase;
 }
 
+.drink-category-nav {
+  position: sticky;
+  top: 7rem;     
+  z-index: 60;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1.5rem 0 1.5rem;
+  padding: 0.5rem 0;
+  background: var(--bg);
+}
+
+.drink-category-nav-item {
+  background: var(--bg-alt);
+  border: 1px solid #222;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-family: var(--font-head); 
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.drink-category-nav-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.drink-menu-selector {
+  position: relative;
+  width: 12rem;            
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 1.125rem;
+}
+
+.drink-menu-selected {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-head);
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;    
+  align-items: center;     
+  justify-content: center;  
+  gap: 0.35rem;            
+}
+
+.drink-menu-selected::after {
+  content: "▼";
+  font-size: 0.8em;
+}
+
+.drink-menu-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--bg);
+  border-radius: 0.25rem;
+  max-height: 65vh;        
+  overflow-y: auto;         
+  overflow-x: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.3);
+  -webkit-overflow-scrolling: touch;
+}
+
+.drink-menu-options button {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease, color 0.2s ease;
+}
+
+.drink-menu-options button:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.drink-menu-selector.open .drink-menu-options {
+  display: block;
+}
+
+.drink-menu-selector.open .drink-menu-selected::after {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
 /* ===========================
    Footer
 =========================== */
@@ -538,9 +664,27 @@ footer {
   font-size: 0.875rem;
 }
 
+#website-note a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+#website-note a:hover {
+  filter: drop-shadow(0 0 4px var(--accent));
+  opacity: 1;
+}
+
 /* ===========================
    Media Queries
 =========================== */
+
+@media (max-width: 984px) {
+  .drink-card {
+    scroll-margin-top: 15rem;
+  }
+}
 
 @media (max-width: 977px) {
   #about .contact-container {
@@ -550,8 +694,31 @@ footer {
 
 @media (max-width: 900px) {
   .desktop-nav,
-  .language-selector-container {
+  .language-selector-container,
+  .drink-category-nav {
     display: none;
+  }
+
+  .drink-menu-selector-container .drink-menu-selector {
+    margin-top: 0;
+  }
+
+  .drink-menu-selector-container {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: center;
+    position: sticky;
+    top: 5.8rem;       
+    z-index: 70; 
+    background: var(--bg); 
+    padding: 0.5rem 0;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .drink-card {
+    scroll-margin-top: 9rem;
   }
 
   section {
@@ -560,7 +727,6 @@ footer {
 
   .language-selector {
     margin-top: 1.5rem;
-    margin-right: 0.75rem;
   }
 
   .hamburger {
@@ -599,6 +765,11 @@ footer {
 
   section h2 {
     font-size: 1.75rem;
+    margin: 1rem 0;
+  }
+
+  #about .contact-item h3 {
+    margin-top: 0;
   }
 
   .drink-grid {
@@ -617,11 +788,32 @@ footer {
     width: 100%;
   }
 
+  .drink-menu-selector-container {
+    top: 5.3rem;       
+  }
+
   .drink-card {
     padding: 1rem;
+    scroll-margin-top: 8.5rem;
   }
 
   .carousel-img {
     width: 100%;
+  }
+
+  .drink-category-nav {
+    justify-content: center;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .drink-category-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 320px) {
+  .drink-menu-selector-container {
+    top: 5rem;       
   }
 }

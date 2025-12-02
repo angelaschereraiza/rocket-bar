@@ -5,27 +5,31 @@
 ========================================== */
 
 /* --- DOM Elements --- */
-const CAROUSEL_CONTAINER = document.querySelector('.carousel-container');
-const TRACK              = document.querySelector('.carousel-track');
-const PREV_BUTTON        = document.querySelector('.prev');
-const NEXT_BUTTON        = document.querySelector('.next');
-const TOTAL_IMG          = 7;
+const CAROUSEL_CONTAINER    = document.querySelector('.carousel-container');
+const TRACK                 = document.querySelector('.carousel-track');
+const PREV_BUTTON           = document.querySelector('.prev');
+const NEXT_BUTTON           = document.querySelector('.next');
+const TOTAL_IMG             = 7;
 
-const LIGHTBOX           = document.getElementById('lightbox');
-const LIGHTBOX_IMG       = document.querySelector('.lightbox-img');
-const CLOSE_BTN          = document.querySelector('.lightbox .close');
+const LIGHTBOX              = document.getElementById('lightbox');
+const LIGHTBOX_IMG          = document.querySelector('.lightbox-img');
+const CLOSE_BTN             = document.querySelector('.lightbox .close');
 
-const SECTION_TITLES     = document.querySelectorAll('h2[data-key]');
-const ABOUT_TEXT         = document.querySelector('.about-text');
-const CONTACT_ITEMS      = document.querySelectorAll('.contact-item h3');
-const DRINK_CARDS        = document.querySelectorAll('.drink-card');
-const LANGUAGE_SELECTORS = document.querySelectorAll('.language-selector');
-const DRINKS_CONTAINER   = document.getElementById('drinks-menu');
-const DRINK_NOTE         = document.getElementById('drink-note');
+const SECTION_TITLES        = document.querySelectorAll('h2[data-key]');
+const ABOUT_TEXT            = document.querySelector('.about-text');
+const CONTACT_ITEMS         = document.querySelectorAll('.contact-item h3');
+const DRINK_CARDS           = document.querySelectorAll('.drink-card');
+const LANGUAGE_SELECTORS    = document.querySelectorAll('.language-selector');
+const WEBSITE_NOTE          = document.getElementById('website-note');
 
-const HAMBURGER          = document.querySelector('.hamburger');
-const MOBILE_MENU        = document.getElementById('mobile-menu');
-const MOBILE_CLOSE       = document.querySelector('.mobile-close');
+const DRINKS_CONTAINER      = document.getElementById('drinks-menu');
+const DRINK_NOTE            = document.getElementById('drink-note');
+const DRINK_CATEGORY_NAV    = document.getElementById('drink-category-nav');
+const DRINK_MENU_SELECTORS  = document.querySelectorAll('.drink-menu-selector');
+
+const HAMBURGER             = document.querySelector('.hamburger');
+const MOBILE_MENU           = document.getElementById('mobile-menu');
+const MOBILE_CLOSE          = document.querySelector('.mobile-close');
 
 /* --- App Config --- */
 const USER_LANG          = navigator.language ? navigator.language.slice(0, 2) : 'de';
@@ -36,66 +40,66 @@ const TRANSLATIONS = {
   de: {
     nav: ['Über uns', 'Bilder', 'Getränke'],
     titles: { about: 'Über uns', pictures: 'Bilder', drinks: 'Unsere Drinks' },
-    about: "Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Inmitten der Berner Altstadt und nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
+    about: "Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
     contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
+    website_note: "Webseite von ",
     drink_note: "Alle Preise in CHF inkl. 8.1% MWST",
     drinks: [
       {
-        category: 'Bier in der Flasche',
+        category: 'Lager & Spezialbier (Flasche)',
         items: [
-          { name: 'Valaisanne Bière De Cave',  desc: '3.3 dl | 5.4% (CH)',   price: '7.00' },
-          { name: 'Grimbergen Ambrée',         desc: '2.5 dl | 6.5% (BE)',   price: '7.00' },
-          { name: 'Brooklyn Stonewall Inn IPA',desc: '3.3 dl | 4.6% (US)',   price: '7.00' },
-          { name: 'Superbock Unfiltered',      desc: '3.3 dl | 4.9% (PT)',   price: '6.00' },
-          { name: 'Coruja IPA',                desc: '3.3 dl | 6.0% (PT)',   price: '7.00' },
-          { name: 'Corona',                    desc: '3.3 dl | 4.6% (MEX)',  price: '7.00' },
-          { name: 'Alhambra',                  desc: '3.3 dl | 6.4% (GRA)',  price: '8.00' },
-          { name: "Cooper's Pale Ale",         desc: '3.3 dl | 5.1% (AUS)',  price: '7.00' },
-          { name: 'Lush',                      desc: '3.3 dl | 5.3% (NOR)',  price: '9.00' },
-          { name: 'Orval',                     desc: '3.3 dl | 6.2% (BE)',   price: '8.00' },
-          { name: 'Andechs Weissbier',         desc: '5 dl | 5.5% (DE)',     price: '9.00' },
-          { name: 'Schlenkerla Rauchbier',     desc: '5 dl | 5.5% (DE)',     price: '9.00' },
-          { name: 'Brewdog Wingman IPA',       desc: '3.3 dl | 4.3% (SCO)',  price: '7.00' },
-          { name: 'Astra Kiezmische',          desc: '3.3 dl | 2.5% (DE)',   price: '6.00' },
-          { name: 'Möhl Saft vom Fass',        desc: '5 dl | 2.5% (CH)',     price: '9.00' },
-          { name: 'Smirnoff Ice',              desc: '3.3 dl | 4% (GB)',     price: '7.00' },
-          { name: 'White Claw Hard Seltzer',   desc: '3.3 dl | 4.5% (USA)',  price: '8.00' },
-          { name: 'Cardinal Alkoholfrei',      desc: '3.3 dl | 0.0% (CH)',   price: '6.00' },
-          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' }
+          { name: 'Valaisanne Bière De Cave',  desc: '3.3 dl | 5.4% (CHE)',   price: '7.00' },
+          { name: 'Grimbergen Ambrée',         desc: '2.5 dl | 6.5% (BEL)',   price: '7.00' },
+          { name: 'Superbock Unfiltered',      desc: '3.3 dl | 4.7% (PRT)',   price: '6.00' },
+          { name: 'Corona',                    desc: '3.3 dl | 4.6% (MEX)',   price: '7.00' },
+          { name: 'Alhambra',                  desc: '3.3 dl | 6.4% (ESP)',   price: '8.00' },
+          { name: 'Andechs Weissbier',         desc: '5 dl | 5.5% (DEU)',     price: '9.00' },
+          { name: 'Schlenkerla Rauchbier',     desc: '5 dl | 5.1% (DEU)',     price: '9.00' },
+          { name: 'Astra Kiezmische',          desc: '3.3 dl | 2.5% (DEU)',   price: '6.00' },
+          { name: 'Cardinal Alkoholfrei',      desc: '3.3 dl | 0.0% (CHE)',   price: '6.00' },
+        ]
+      },
+      {
+        category: 'Craft Beer & Cider (Flasche)',
+        items: [
+          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (USA)',  price: '7.00' },
+          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PRT)',  price: '7.00' },
+          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)',  price: '7.00' },
+          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)',  price: '7.00' },
+          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)',  price: '7.00' },
+          { name: 'Lush IPA',                     desc: '3.3 dl | 5.3% (NOR)',  price: '9.00' },
+          { name: 'Orval Pale Ale',               desc: '3.3 dl | 6.2% (BEL)',  price: '8.00' },
+          { name: 'Möhl Saft vom Fass',           desc: '5 dl | 4.0% (CHE)',    price: '9.00' }
         ]
       },
       {
         category: 'Bier vom Fass',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Valaisanne Lager',          desc: '4.8%',      price: '5.00 / 7.00' },
-          { name: 'Valaisanne White IPA',      desc: '6.0%',      price: '7.00 / 9.00' },
-          { name: "Smithwick's Irish Ale",     desc: '3.8%',      price: '6.00 / 9.00' },
-          { name: 'Guinness Irish Draught',    desc: '5.0%',      price: '6.00 / 9.00' }
+          { name: 'Valaisanne Lager',          desc: '4.8% (CHE)',      price: '5.00 / 7.00' },
+          { name: 'Valaisanne White IPA',      desc: '6.0% (CHE)',      price: '7.00 / 9.00' },
+          { name: "Smithwick's Irish Ale",     desc: '3.8% (IRL)',      price: '6.00 / 9.00' },
+          { name: 'Guinness Irish Draught',    desc: '4.2% (IRL)',      price: '6.00 / 9.00' }
         ]
       },
       {
-        category: 'Shots',
-        note: '2.5 cl',
+        category: 'Alkopop',
         items: [
-          { name: 'Ingwerer',   desc: '24%', price: '6.00' },
-          { name: 'Minttu',     desc: '35%', price: '6.00' },
-          { name: "Shanky's Whip", desc: '33%', price: '6.00' },
-          { name: 'Nebula Shot', desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
-          { name: 'Muh-Muh',    desc: '17%', price: '6.00' }
+          { name: 'Smirnoff Ice',              desc: '3.3 dl | 4% (GBR)',     price: '7.00' },
+          { name: 'White Claw Hard Seltzer',   desc: '3.3 dl | 4.5% (USA)',  price: '8.00' }
         ]
       },
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Zuckersirup', price: '20.00' },
-          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet&Sour', price: '20.00' },
-          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Zuckersirup',   price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',  price: '16.00' },
           { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue', price: '17.00' },
-          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet&Sour', price: '16.00' },
-          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet&Sour',    price: '16.00' },
-          { name: 'Whisky Sour',      desc: 'Whisky | Sweet&Sour',      price: '16.00' },
-          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',    price: '17.00' }
+          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet & Sour',     price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet & Sour',        price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet & Sour',          price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',          price: '17.00' }
         ]
       },
       {
@@ -120,22 +124,33 @@ const TRANSLATIONS = {
       {
         category: 'Mules',
         items: [
-          { name: 'Moscow Mule', desc: 'Vodka | Ginger Bier | Limette',     price: '15.00' },
-          { name: 'London Mule', desc: 'Gin | Ginger Bier | Limette',       price: '15.00' },
-          { name: 'Berner Mule', desc: 'Ingwerer | Ginger Bier | Limette',  price: '15.00' }
+          { name: 'Moscow Mule', desc: 'Vodka | Ginger Beer | Limette',     price: '15.00' },
+          { name: 'London Mule', desc: 'Gin | Ginger Beer | Limette',       price: '15.00' },
+          { name: 'Berner Mule', desc: 'Ingwerer | Ginger Beer | Limette',  price: '15.00' }
         ]
       },
       {
         category: 'Spirituosen',
         items: [
-          { name: 'Bunnahabhain 18y', desc: '46.3%', price: '24.00' },
-          { name: 'Ardbeg 14y',       desc: '46%',   price: '24.00' },
-          { name: 'Bowmore 15y',      desc: '43%',   price: '23.00' },
-          { name: 'Macallen 12y',     desc: '40%',   price: '19.00' },
-          { name: 'Oban 14y',         desc: '43%',   price: '17.00' },
-          { name: 'Yamazaki',         desc: '43%',   price: '22.00' },
-          { name: 'Absinth',          desc: '53%',   price: '17.00' },
-          { name: 'Bumbu Rum',        desc: '40%',   price: '18.00' }
+          { name: 'Bunnahabhain 18y', desc: '46.3% (SCO)', price: '24.00' },
+          { name: 'Ardbeg 14y',       desc: '46% (SCO)',   price: '24.00' },
+          { name: 'Bowmore 15y',      desc: '43% (SCO)',   price: '23.00' },
+          { name: 'Macallan 12y',     desc: '40% (SCO)',   price: '19.00' },
+          { name: 'Oban 14y',         desc: '43% (SCO)',   price: '17.00' },
+          { name: 'Yamazaki',         desc: '43% (JPN)',   price: '22.00' },
+          { name: 'Absinth',          desc: '53%',         price: '17.00' },
+          { name: 'Bumbu Rum',        desc: '40% (BRB)',   price: '18.00' }
+        ]
+      },
+      {
+        category: 'Shots',
+        note: '2.5 cl',
+        items: [
+          { name: 'Ingwerer',       desc: '24% (CHE)',   price: '6.00' },
+          { name: 'Minttu',         desc: '35% (FIN)',   price: '6.00' },
+          { name: "Shanky's Whip",  desc: '33% (IRL)',   price: '6.00' },
+          { name: 'Nebula Shot',    desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
+          { name: 'Muh-Muh',        desc: '17% (DEU)',   price: '6.00' }
         ]
       },
       {
@@ -156,66 +171,66 @@ const TRANSLATIONS = {
   fr: {
     nav: ['À propos', 'Images', 'Boissons'],
     titles: { about: 'À propos', pictures: 'Images', drinks: 'Nos Boissons' },
-    about: "Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un seul élan. Au cœur de la vieille ville de Berne, à quelques pas de la gare centrale, nous offrons une atmosphère qui te donne l’impression d’être chez toi, avec de la musique forte, de la bière glacée et des riffs brûlants.",
+    about: "Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un tout. À quelques pas de la gare centrale de Berne, nous t’offrons une atmosphère où tu te sens comme chez toi, avec de la musique forte, de la bière bien fraîche et des riffs brûlants.",
     contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
-    drink_note: "Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse",
+    website_note: "Site web de ",
+    drink_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse',
     drinks: [
       {
         category: 'Bière en bouteille',
         items: [
-          { name: 'Valaisanne Bière De Cave',     desc: '3.3 dl | 5.4% (CH)', price: '7.00' },
-          { name: 'Grimbergen Ambrée',            desc: '2.5 dl | 6.5% (BE)', price: '7.00' },
-          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (US)', price: '7.00' },
-          { name: 'Superbock Unfiltered',         desc: '3.3 dl | 4.9% (PT)', price: '6.00' },
-          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PT)', price: '7.00' },
-          { name: 'Corona',                       desc: '3.3 dl | 4.6% (MEX)',price: '7.00' },
-          { name: 'Alhambra',                     desc: '3.3 dl | 6.4% (GRA)',price: '8.00' },
-          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)',price: '7.00' },
-          { name: 'Lush',                         desc: '3.3 dl | 5.3% (NOR)',price: '9.00' },
-          { name: 'Orval',                        desc: '3.3 dl | 6.2% (BE)', price: '8.00' },
-          { name: 'Andechs Bière Blanche',        desc: '5 dl | 5.5% (DE)',   price: '9.00' },
-          { name: 'Schlenkerla Bière Fumée',      desc: '5 dl | 5.5% (DE)',   price: '9.00' },
-          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)',price: '7.00' },
-          { name: 'Astra Kiezmische',             desc: '3.3 dl | 2.5% (DE)', price: '6.00' },
-          { name: 'Möhl Jus de pomme',            desc: '5 dl | 2.5% (CH)',   price: '9.00' },
-          { name: 'Smirnoff Ice',                 desc: '3.3 dl | 4% (GB)',   price: '7.00' },
-          { name: 'White Claw Hard Seltzer',      desc: '3.3 dl | 4.5% (USA)',price: '8.00' },
-          { name: 'Cardinal Sans Alcool',         desc: '3.3 dl | 0.0% (CH)', price: '6.00' },
-          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' }
+          { name: 'Valaisanne Bière De Cave', desc: '3.3 dl | 5.4% (CHE)', price: '7.00' },
+          { name: 'Grimbergen Ambrée',        desc: '2.5 dl | 6.5% (BEL)', price: '7.00' },
+          { name: 'Superbock Unfiltered',     desc: '3.3 dl | 4.7% (PRT)', price: '6.00' },
+          { name: 'Corona',                   desc: '3.3 dl | 4.6% (MEX)', price: '7.00' },
+          { name: 'Alhambra',                 desc: '3.3 dl | 6.4% (ESP)', price: '8.00' },
+          { name: 'Andechs Bière Blanche',    desc: '5 dl | 5.5% (DEU)',   price: '9.00' },
+          { name: 'Schlenkerla Bière Fumée',  desc: '5 dl | 5.1% (DEU)',   price: '9.00' },
+          { name: 'Astra Kiezmische',         desc: '3.3 dl | 2.5% (DEU)', price: '6.00' },
+          { name: 'Cardinal Sans Alcool',     desc: '3.3 dl | 0.0% (CHE)', price: '6.00' }
+        ]
+      },
+      {
+        category: 'Craft Beer & Cider (Bouteille)',
+        items: [
+          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (USA)', price: '7.00' },
+          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PRT)', price: '7.00' },
+          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)', price: '7.00' },
+          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)', price: '7.00' },
+          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' },
+          { name: 'Lush IPA',                     desc: '3.3 dl | 5.3% (NOR)', price: '9.00' },
+          { name: 'Orval Pale Ale',               desc: '3.3 dl | 6.2% (BEL)', price: '8.00' },
+          { name: 'Möhl Jus de pomme',    desc: '5 dl | 4.0% (CHE)',   price: '9.00' }
         ]
       },
       {
         category: 'Bière pression',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Valaisanne Lager',          desc: '4.8%',     price: '5.00 / 7.00' },
-          { name: 'Valaisanne White IPA',      desc: '6.0%',     price: '7.00 / 9.00' },
-          { name: "Smithwick's Irish Ale",     desc: '3.8%',     price: '6.00 / 9.00' },
-          { name: 'Guinness Irish Draught',    desc: '5.0%',     price: '6.00 / 9.00' }
+          { name: 'Valaisanne Lager',       desc: '4.8% (CHE)', price: '5.00 / 7.00' },
+          { name: 'Valaisanne White IPA',   desc: '6.0% (CHE)', price: '7.00 / 9.00' },
+          { name: "Smithwick's Irish Ale",  desc: '3.8% (IRL)', price: '6.00 / 9.00' },
+          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.00' }
         ]
       },
       {
-        category: 'Shots',
-        note: '2.5 cl',
+        category: 'Alcopops',
         items: [
-          { name: 'Ingwerer',   desc: '24%', price: '6.00' },
-          { name: 'Minttu',     desc: '35%', price: '6.00' },
-          { name: "Shanky's Whip", desc: '33%', price: '6.00' },
-          { name: 'Nebula Shot', desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
-          { name: 'Muh-Muh',    desc: '17%', price: '6.00' }
+          { name: 'Smirnoff Ice',            desc: '3.3 dl | 4% (GBR)',   price: '7.00' },
+          { name: 'White Claw Hard Seltzer', desc: '3.3 dl | 4.5% (USA)', price: '8.00' }
         ]
       },
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sirop de sucre', price: '20.00' },
-          { name: 'Blueberry',        desc: 'Tequila | Cointreau | myrtille | Basilic | Sweet&Sour', price: '20.00' },
-          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',   price: '16.00' },
-          { name: 'Nebula',           desc: 'Berentzen | Rhum | Cointreau | Bols Blue', price: '17.00' },
-          { name: 'Basil Smash',      desc: 'Gin | Basilic | Sweet&Sour',      price: '16.00' },
-          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet&Sour',           price: '16.00' },
-          { name: 'Whisky Sour',      desc: 'Whisky | Sweet&Sour',             price: '16.00' },
-          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',           price: '17.00' }
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sirop de sucre',                         price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Myrtille | Basilic | Sweet & Sour', price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',                           price: '16.00' },
+          { name: 'Nebula',           desc: 'Berentzen | Rhum | Cointreau | Bols Blue',                price: '17.00' },
+          { name: 'Basil Smash',      desc: 'Gin | Basilic | Sweet & Sour',                            price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet & Sour',                                 price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet & Sour',                                   price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',                                   price: '17.00' }
         ]
       },
       {
@@ -248,27 +263,38 @@ const TRANSLATIONS = {
       {
         category: 'Spiritueux',
         items: [
-          { name: 'Bunnahabhain 18y', desc: '46.3%', price: '24.00' },
-          { name: 'Ardbeg 14y',       desc: '46%',   price: '24.00' },
-          { name: 'Bowmore 15y',      desc: '43%',   price: '23.00' },
-          { name: 'Macallen 12y',     desc: '40%',   price: '19.00' },
-          { name: 'Oban 14y',         desc: '43%',   price: '17.00' },
-          { name: 'Yamazaki',         desc: '43%',   price: '22.00' },
-          { name: 'Absinthe',         desc: '53%',   price: '17.00' },
-          { name: 'Bumbu Rum',        desc: '40%',   price: '18.00' }
+          { name: 'Bunnahabhain 18y', desc: '46.3% (SCO)', price: '24.00' },
+          { name: 'Ardbeg 14y',       desc: '46% (SCO)',   price: '24.00' },
+          { name: 'Bowmore 15y',      desc: '43% (SCO)',   price: '23.00' },
+          { name: 'Macallan 12y',     desc: '40% (SCO)',   price: '19.00' },
+          { name: 'Oban 14y',         desc: '43% (SCO)',   price: '17.00' },
+          { name: 'Yamazaki',         desc: '43% (JPN)',   price: '22.00' },
+          { name: 'Absinthe',         desc: '53%',         price: '17.00' },
+          { name: 'Bumbu Rum',        desc: '40% (BRB)',   price: '18.00' }
+        ]
+      },
+      {
+        category: 'Shots',
+        note: '2.5 cl',
+        items: [
+          { name: 'Ingwerer',      desc: '24% (CHE)', price: '6.00' },
+          { name: 'Minttu',        desc: '35% (FIN)', price: '6.00' },
+          { name: "Shanky's Whip", desc: '33% (IRL)', price: '6.00' },
+          { name: 'Nebula Shot',   desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
+          { name: 'Muh-Muh',       desc: '17% (DEU)', price: '6.00' }
         ]
       },
       {
         category: 'Boissons sans alcool',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Thé froid',              desc: 'Lemon-Lemongrass',   price: '4.00 / 7.00' },
-          { name: 'Valser',                 desc: 'Classic | Silence',  price: '4.00 / 7.00' },
-          { name: 'Pepsi',                  desc: 'Classic | Zero',     price: '4.00 / 7.00' },
-          { name: 'Zitro | Fanta',          desc: '',                   price: '4.00 / 7.00' },
-          { name: 'Jus d´orange',           desc: '',                   price: '4.00 / 7.00' },
-          { name: 'Jus de canneberge',      desc: '',                   price: '4.00 / 7.00' },
-          { name: 'Café crème / Espresso',  desc: '',                   price: '4.00' }
+          { name: 'Thé froid',             desc: 'Lemon-Lemongrass',  price: '4.00 / 7.00' },
+          { name: 'Valser',                desc: 'Classic | Silence', price: '4.00 / 7.00' },
+          { name: 'Pepsi',                 desc: 'Classic | Zero',    price: '4.00 / 7.00' },
+          { name: 'Zitro | Fanta',         desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Jus d’orange',          desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Jus de canneberge',     desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Café crème / Espresso', desc: '',                  price: '4.00' }
         ]
       }
     ]
@@ -276,66 +302,66 @@ const TRANSLATIONS = {
   en: {
     nav: ['About', 'Pictures', 'Drinks'],
     titles: { about: 'About', pictures: 'Pictures', drinks: 'Our Drinks' },
-    about: "Welcome to the Rocket Bar, where metal, rock and good drinks fuse into one roaring vibe. In the middle of Bern’s old town and only a few steps from the main station, we offer an atmosphere that feels like home, filled with loud music, cold beer and hot riffs.",
+    about: 'Welcome to the Rocket Bar, where metal, rock and good drinks melt into one. Just a few steps from Bern’s main station, we offer an atmosphere that feels like home, with loud music, cold beer and blazing riffs.',
     contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
-    drink_note: "All prices in CHF incl. 8.1% VAT",
+    website_note: "Website by ",
+    drink_note: 'All prices in CHF incl. 8.1% VAT',
     drinks: [
       {
         category: 'Bottled Beer',
         items: [
-          { name: 'Valaisanne Bière De Cave',     desc: '3.3 dl | 5.4% (CH)', price: '7.00' },
-          { name: 'Grimbergen Ambrée',            desc: '2.5 dl | 6.5% (BE)', price: '7.00' },
-          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (US)', price: '7.00' },
-          { name: 'Superbock Unfiltered',         desc: '3.3 dl | 4.9% (PT)', price: '6.00' },
-          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PT)', price: '7.00' },
-          { name: 'Corona',                       desc: '3.3 dl | 4.6% (MEX)',price: '7.00' },
-          { name: 'Alhambra',                     desc: '3.3 dl | 6.4% (GRA)',price: '8.00' },
-          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)',price: '7.00' },
-          { name: 'Lush',                         desc: '3.3 dl | 5.3% (NOR)',price: '9.00' },
-          { name: 'Orval',                        desc: '3.3 dl | 6.2% (BE)', price: '8.00' },
-          { name: 'Andechs Wheat Beer',            desc: '5 dl | 5.5% (DE)',  price: '9.00' },
-          { name: 'Schlenkerla Smoked Beer',       desc: '5 dl | 5.5% (DE)',  price: '9.00' },
-          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)',price: '7.00' },
-          { name: 'Astra Kiezmische',             desc: '3.3 dl | 2.5% (DE)', price: '6.00' },
-          { name: 'Möhl Apple Cider',             desc: '5 dl | 2.5% (CH)',   price: '9.00' },
-          { name: 'Smirnoff Ice',                 desc: '3.3 dl | 4% (GB)',   price: '7.00' },
-          { name: 'White Claw Hard Seltzer',      desc: '3.3 dl | 4.5% (USA)',price: '8.00' },
-          { name: 'Cardinal Alcohol-free',        desc: '3.3 dl | 0.0% (CH)', price: '6.00' },
-          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' }
+          { name: 'Valaisanne Bière De Cave', desc: '3.3 dl | 5.4% (CHE)', price: '7.00' },
+          { name: 'Grimbergen Ambrée',        desc: '2.5 dl | 6.5% (BEL)', price: '7.00' },
+          { name: 'Superbock Unfiltered',     desc: '3.3 dl | 4.7% (PRT)', price: '6.00' },
+          { name: 'Corona',                   desc: '3.3 dl | 4.6% (MEX)', price: '7.00' },
+          { name: 'Alhambra',                 desc: '3.3 dl | 6.4% (ESP)', price: '8.00' },
+          { name: 'Andechs Wheat Beer',       desc: '5 dl | 5.5% (DEU)',   price: '9.00' },
+          { name: 'Schlenkerla Smoked Beer',  desc: '5 dl | 5.1% (DEU)',   price: '9.00' },
+          { name: 'Astra Kiezmische',         desc: '3.3 dl | 2.5% (DEU)', price: '6.00' },
+          { name: 'Cardinal Alcohol-free',    desc: '3.3 dl | 0.0% (CHE)', price: '6.00' }
+        ]
+      },
+      {
+        category: 'Craft Beer & Cider (Bottle)',
+        items: [
+          { name: 'Brooklyn Stonewall Inn IPA',   desc: '3.3 dl | 4.6% (USA)', price: '7.00' },
+          { name: 'Coruja IPA',                   desc: '3.3 dl | 6.0% (PRT)', price: '7.00' },
+          { name: "Cooper's Pale Ale",            desc: '3.3 dl | 5.1% (AUS)', price: '7.00' },
+          { name: 'Brewdog Wingman IPA',          desc: '3.3 dl | 4.3% (SCO)', price: '7.00' },
+          { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' },
+          { name: 'Lush IPA',                     desc: '3.3 dl | 5.3% (NOR)', price: '9.00' },
+          { name: 'Orval Pale Ale',               desc: '3.3 dl | 6.2% (BEL)', price: '8.00' },
+          { name: 'Möhl Apple Cider',             desc: '5 dl | 4.0% (CHE)',   price: '9.00' }
         ]
       },
       {
         category: 'Beer on Tap',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Valaisanne Lager',          desc: '4.8%',     price: '5.00 / 7.00' },
-          { name: 'Valaisanne White IPA',      desc: '6.0%',     price: '7.00 / 9.00' },
-          { name: "Smithwick's Irish Ale",     desc: '3.8%',     price: '6.00 / 9.00' },
-          { name: 'Guinness Irish Draught',    desc: '5.0%',     price: '6.00 / 9.00' }
+          { name: 'Valaisanne Lager',       desc: '4.8% (CHE)', price: '5.00 / 7.00' },
+          { name: 'Valaisanne White IPA',   desc: '6.0% (CHE)', price: '7.00 / 9.00' },
+          { name: "Smithwick's Irish Ale",  desc: '3.8% (IRL)', price: '6.00 / 9.00' },
+          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.00' }
         ]
       },
       {
-        category: 'Shots',
-        note: '2.5 cl',
+        category: 'Alcopops',
         items: [
-          { name: 'Ingwerer',   desc: '24%', price: '6.00' },
-          { name: 'Minttu',     desc: '35%', price: '6.00' },
-          { name: "Shanky's Whip", desc: '33%', price: '6.00' },
-          { name: 'Nebula Shot', desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
-          { name: 'Muh-Muh',    desc: '17%', price: '6.00' }
+          { name: 'Smirnoff Ice',            desc: '3.3 dl | 4% (GBR)',   price: '7.00' },
+          { name: 'White Claw Hard Seltzer', desc: '3.3 dl | 4.5% (USA)', price: '8.00' }
         ]
       },
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup', price: '20.00' },
-          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet&Sour', price: '20.00' },
-          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
-          { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue',               price: '17.00' },
-          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet&Sour',                              price: '16.00' },
-          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet&Sour',                                 price: '16.00' },
-          { name: 'Whisky Sour',      desc: 'Whisky | Sweet&Sour',                                   price: '16.00' },
-          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',                                 price: '17.00' }
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup',                        price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',                        price: '16.00' },
+          { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue',              price: '17.00' },
+          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet & Sour',                           price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet & Sour',                              price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet & Sour',                                price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',                                price: '17.00' }
         ]
       },
       {
@@ -368,27 +394,38 @@ const TRANSLATIONS = {
       {
         category: 'Spirits',
         items: [
-          { name: 'Bunnahabhain 18y', desc: '46.3%', price: '24.00' },
-          { name: 'Ardbeg 14y',       desc: '46%',   price: '24.00' },
-          { name: 'Bowmore 15y',      desc: '43%',   price: '23.00' },
-          { name: 'Macallen 12y',     desc: '40%',   price: '19.00' },
-          { name: 'Oban 14y',         desc: '43%',   price: '17.00' },
-          { name: 'Yamazaki',         desc: '43%',   price: '22.00' },
-          { name: 'Absinthe',         desc: '53%',   price: '17.00' },
-          { name: 'Bumbu Rum',        desc: '40%',   price: '18.00' }
+          { name: 'Bunnahabhain 18y', desc: '46.3% (SCO)', price: '24.00' },
+          { name: 'Ardbeg 14y',       desc: '46% (SCO)',   price: '24.00' },
+          { name: 'Bowmore 15y',      desc: '43% (SCO)',   price: '23.00' },
+          { name: 'Macallan 12y',     desc: '40% (SCO)',   price: '19.00' },
+          { name: 'Oban 14y',         desc: '43% (SCO)',   price: '17.00' },
+          { name: 'Yamazaki',         desc: '43% (JPN)',   price: '22.00' },
+          { name: 'Absinthe',         desc: '53%',         price: '17.00' },
+          { name: 'Bumbu Rum',        desc: '40% (BRB)',   price: '18.00' }
         ]
       },
       {
-        category: 'Soft drinks',
+        category: 'Shots',
+        note: '2.5 cl',
+        items: [
+          { name: 'Ingwerer',      desc: '24% (CHE)', price: '6.00' },
+          { name: 'Minttu',        desc: '35% (FIN)', price: '6.00' },
+          { name: "Shanky's Whip", desc: '33% (IRL)', price: '6.00' },
+          { name: 'Nebula Shot',   desc: 'Gin | Berentzen | Cointreau | Bols Blue', price: '5.00' },
+          { name: 'Muh-Muh',       desc: '17% (DEU)', price: '6.00' }
+        ]
+      },
+      {
+        category: 'Softdrinks',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Iced Tea',              desc: 'Lemon-Lemongrass',  price: '4.00 / 7.00' },
-          { name: 'Valser',                desc: 'Classic | Silence', price: '4.00 / 7.00' },
-          { name: 'Pepsi',                 desc: 'Classic | Zero',    price: '4.00 / 7.00' },
-          { name: 'Zitro | Fanta',         desc: '',                  price: '4.00 / 7.00' },
-          { name: 'Orange juice',          desc: '',                  price: '4.00 / 7.00' },
-          { name: 'Cranberry juice',       desc: '',                  price: '4.00 / 7.00' },
-          { name: 'Café crème / Espresso', desc: '',                  price: '4.00' }
+          { name: 'Iced Tea',               desc: 'Lemon-Lemongrass',  price: '4.00 / 7.00' },
+          { name: 'Valser',                 desc: 'Classic | Silence', price: '4.00 / 7.00' },
+          { name: 'Pepsi',                  desc: 'Classic | Zero',    price: '4.00 / 7.00' },
+          { name: 'Zitro | Fanta',          desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Orange juice',           desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Cranberry juice',        desc: '',                  price: '4.00 / 7.00' },
+          { name: 'Café crème / Espresso',  desc: '',                  price: '4.00' }
         ]
       }
     ]
@@ -399,6 +436,14 @@ const TRANSLATIONS = {
 /* Language / misc */
 let initialLang = null;
 let currentLang = null;
+
+/* Current Year */
+document.addEventListener("DOMContentLoaded", () => {
+  const yearSpan = document.getElementById("year");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+});
 
 /* ==========================================
    CAROUSEL
@@ -571,7 +616,7 @@ function initCarousel() {
 
   srcList = [];
   for (let i = 1; i <= TOTAL_IMG; i++) {
-    srcList.push(`images/bild_${i}.jpg`);
+    srcList.push(`images/img_${i}.jpg`);
   }
 
   TRACK.innerHTML = '';
@@ -594,6 +639,7 @@ function initCarousel() {
       setTimeout(() => {
         buildCarousel();
         attachButtonListeners();
+        attachTouchEvents();
         window.addEventListener('resize', handleResize);
       }, 30);
     }
@@ -605,6 +651,63 @@ function initCarousel() {
     } else {
       img.addEventListener('load', oneDone,  { once: true });
       img.addEventListener('error', oneDone, { once: true });
+    }
+  });
+}
+
+function attachTouchEvents() {
+  if (!CAROUSEL_CONTAINER) return;
+
+  let startX = 0;
+  let startY = 0;
+  let isTouching = false;
+  let isHorizontalSwipe = false;
+  const SWIPE_THRESHOLD = 30;
+
+  CAROUSEL_CONTAINER.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    isTouching = true;
+    isHorizontalSwipe = false;
+  }, { passive: true });
+
+  CAROUSEL_CONTAINER.addEventListener('touchmove', e => {
+    if (!isTouching) return;
+    if (e.touches.length !== 1) return;
+
+    const touch = e.touches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+
+    if (!isHorizontalSwipe) {
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+        isHorizontalSwipe = true;
+      } else if (Math.abs(dy) > Math.abs(dx)) {
+        isTouching = false;
+        return;
+      }
+    }
+
+    if (isHorizontalSwipe) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  CAROUSEL_CONTAINER.addEventListener('touchend', e => {
+    if (!isTouching) return;
+    isTouching = false;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - startX;
+
+    if (Math.abs(dx) > SWIPE_THRESHOLD && !isTransitioning) {
+      if (dx < 0) {
+        nextClick();
+      } else {
+        prevClick();
+      }
     }
   });
 }
@@ -678,7 +781,20 @@ function setLanguage(lang) {
     }
   }
 
+  if (WEBSITE_NOTE) {
+    const website_note = TRANSLATIONS[lang].website_note;
+    if (website_note) {
+      WEBSITE_NOTE.innerHTML = `${website_note}<a href="https://aiza.ch">Aiza GmbH</a>`;
+      WEBSITE_NOTE.style.display = 'block';
+    } else {
+      WEBSITE_NOTE.textContent   = '';
+      WEBSITE_NOTE.style.display = 'none';
+    }
+  }
+
   renderDrinks(lang);
+  renderDrinkCategoryNav(lang);
+  renderMobileDrinkMenu(lang);
 }
 
 /* Language selector behavior */
@@ -779,6 +895,51 @@ if (MOBILE_MENU) {
   });
 }
 
+DRINK_MENU_SELECTORS.forEach(selector => {
+  const selectedEl  = selector.querySelector('.drink-menu-selected');
+  const optionsList = selector.querySelector('.drink-menu-options');
+
+  selectedEl?.addEventListener('click', e => {
+    e.stopPropagation();
+    selector.classList.toggle('open');
+  });
+
+  optionsList?.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-category-index]');
+    if (!btn) return;
+    e.stopPropagation();
+
+    const index = btn.dataset.categoryIndex;
+
+    if (DRINKS_CONTAINER) {
+      const targetCard = DRINKS_CONTAINER.querySelector(
+        `.drink-card[data-category-index="${index}"]`
+      );
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    if (DRINK_CATEGORY_NAV) {
+      const navButtons = DRINK_CATEGORY_NAV.querySelectorAll('.drink-category-nav-item');
+      navButtons.forEach((b, i) => {
+        b.classList.toggle('active', String(i) === String(index));
+      });
+    }
+
+    selector.classList.remove('open');
+
+    if (selector.closest('#mobile-menu')) {
+      closeMobileMenu();
+    }
+  });
+});
+
+document.addEventListener('click', () => {
+  DRINK_MENU_SELECTORS.forEach(sel => sel.classList.remove('open'));
+});
+
+
 /* ==========================================
    DRINKS
 ========================================== */
@@ -793,25 +954,55 @@ function renderDrinks(lang) {
   const isDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
   const MAX_ITEMS_PER_CARD = 10;
 
-  menu.forEach(category => {
+  menu.forEach((category, categoryIndex) => { 
     const items = category.items || [];
 
     if (isDesktopTwoCols && items.length > MAX_ITEMS_PER_CARD) {
       let partIndex = 0;
       for (let i = 0; i < items.length; i += MAX_ITEMS_PER_CARD) {
         const slice = items.slice(i, i + MAX_ITEMS_PER_CARD);
-        createDrinkCard(category, slice, partIndex);
+        createDrinkCard(category, slice, partIndex, categoryIndex);
         partIndex++;
       }
     } else {
-      createDrinkCard(category, items, 0);
+      createDrinkCard(category, items, 0, categoryIndex); 
     }
   });
 }
 
-function createDrinkCard(category, items, partIndex = 0) {
+function renderMobileDrinkMenu(lang) {
+  if (!TRANSLATIONS[lang] || !DRINK_MENU_SELECTORS.length) return;
+
+  const menu = TRANSLATIONS[lang].drinks;
+  if (!menu) return;
+
+  DRINK_MENU_SELECTORS.forEach(selector => {
+    const optionsList = selector.querySelector('.drink-menu-options');
+    const selectedEl  = selector.querySelector('.drink-menu-selected');
+    if (!optionsList || !selectedEl) return;
+
+    optionsList.innerHTML = '';
+
+    menu.forEach((category, index) => {
+      const li  = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.type  = 'button';
+      btn.textContent = category.category;
+      btn.dataset.categoryIndex = String(index);
+      li.appendChild(btn);
+      optionsList.appendChild(li);
+    });
+
+    if (lang === 'de')      selectedEl.textContent = 'Getränke';
+    else if (lang === 'fr') selectedEl.textContent = 'Boissons';
+    else                    selectedEl.textContent = 'Drinks';
+  });
+}
+
+function createDrinkCard(category, items, partIndex = 0, categoryIndex = 0) {
   const card = document.createElement('div');
   card.className = 'drink-card';
+  card.dataset.categoryIndex = String(categoryIndex); 
 
   const h3 = document.createElement('h3');
   h3.className = 'drink-category';
@@ -860,6 +1051,48 @@ function createDrinkCard(category, items, partIndex = 0) {
 
   card.appendChild(ul);
   DRINKS_CONTAINER.appendChild(card);
+}
+
+function renderDrinkCategoryNav(lang) {
+  if (!DRINK_CATEGORY_NAV || !DRINKS_CONTAINER) return;
+  const menu = TRANSLATIONS[lang]?.drinks;
+  if (!menu) return;
+
+  DRINK_CATEGORY_NAV.innerHTML = '';
+
+  const fragment = document.createDocumentFragment();
+
+  menu.forEach((category, index) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'drink-category-nav-item';
+    btn.textContent = category.category;
+
+    if (index === 0) {
+      btn.classList.add('active');
+    }
+
+    btn.addEventListener('click', () => {
+      DRINK_CATEGORY_NAV
+        .querySelectorAll('.drink-category-nav-item')
+        .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const targetCard = DRINKS_CONTAINER.querySelector(
+        `.drink-card[data-category-index="${index}"]`
+      );
+      if (targetCard) {
+        targetCard.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+
+    fragment.appendChild(btn);
+  });
+
+  DRINK_CATEGORY_NAV.appendChild(fragment);
 }
 
 let lastIsDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
