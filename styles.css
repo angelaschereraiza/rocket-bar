@@ -548,7 +548,7 @@ section h2 {
 
 .drink-category-nav {
   position: sticky;
-  top: 7rem;     
+  top: 7.3rem;     
   z-index: 60;
   display: flex;
   flex-wrap: wrap;

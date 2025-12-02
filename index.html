@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <link rel="icon" href="/images/favicon.ico" sizes="any"> 
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Rocket Bar</title>
+  <title>Rocket Bar Bern | Rock &amp; Metal Bar beim Bahnhof</title>
 
+  <link rel="icon" href="/images/favicon.ico" sizes="any" />
+
+  <!-- SEO -->
   <meta name="description" content="Rocket Bar in Bern - Rock & Metal Bar beim Bahnhof Bern. Drinks, Shots und gute Musik in lockerer Atmosphäre. Genfergasse 10, 3011 Bern." />
   <meta name="keywords" content="Rocket Bar Bern, Rock Bar Bern, Metal Bar Bern, Rock Kneipe Bern, Bar beim Bahnhof Bern, Cocktailbar Bern, Shots Bern, Rock Musik Bar Bern" />
   <meta name="robots" content="index,follow" />
   <meta http-equiv="content-language" content="de-CH" />
 
+  <!-- Geo / Local business -->
   <meta name="geo.region" content="CH-BE" />
   <meta name="geo.placename" content="Bern" />
   <meta name="geo.position" content="46.9480;7.4391" />
-  <meta name="ICBM" content="46.9480, 7.4391" />
+  <meta name="ICBM" content="46.9480,7.4391" />
 
-  <link rel="canonical" href="https://www.DEINE-DOMAIN.ch/" />
+  <!-- Canonical URL (use your real domain here) -->
+  <link rel="canonical" href="https://www.rocket-bar.ch/" />
 
+  <!-- Open Graph -->
   <meta property="og:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
   <meta property="og:description" content="Rock & Metal Bar mit grosser Drink- und Shot-Auswahl direkt beim Bahnhof Bern. Besuche uns in der Genfergasse 10." />
-  <meta property="og:image" content="https://www.DEINE-DOMAIN.ch/images/rocketbar-social.jpg" />
-  <meta property="og:url" content="https://www.DEINE-DOMAIN.ch/" />
+  <meta property="og:image" content="https://www.rocket-bar.ch/images/rocketbar-social.jpg" />
+  <meta property="og:url" content="https://www.rocket-bar.ch/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="de_CH" />
 
+  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
   <meta name="twitter:description" content="Drinks, Shots & Rock/Metal-Sound - Rocket Bar in der Genfergasse 10, 3011 Bern." />
-  <meta name="twitter:image" content="https://www.DEINE-DOMAIN.ch/images/rocketbar-social.jpg" />
+  <meta name="twitter:image" content="https://www.rocket-bar.ch/images/rocketbar-social.jpg" />
 
   <meta name="theme-color" content="#000000" />
 
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -84,20 +90,25 @@
   }
   </script>
 
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header>
-    <img src="images/logo.jpg" alt="Rocket Bar Logo" class="logo" />
+    <a href="#about" aria-label="Zur Startsektion springen">
+      <img src="images/logo.jpg" alt="Rocket Bar Bern Logo" class="logo" />
+    </a>
 
-    <nav class="desktop-nav">
+    <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#about" data-key="nav-about"></a>
       <a href="#pictures" data-key="nav-pictures"></a>
       <a href="#drinks" data-key="nav-drinks"></a>
     </nav>
+
     <div class="language-selector-container">
-      <div class="language-selector">
+      <div class="language-selector" aria-label="Select language">
         <div class="selected" id="selected-language">Deutsch</div>
         <ul class="options">
           <li data-value="de">Deutsch</li>
@@ -107,22 +118,25 @@
       </div>
     </div>
 
-    <button class="hamburger" aria-label="Menü öffnen" aria-controls="mobile-menu" aria-expanded="false">
+    <button class="hamburger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
       </span>
     </button>
 
-    <div id="mobile-menu" class="mobile-menu" hidden>
-      <nav class="mobile-nav">
+    <div id="mobile-menu" class="mobile-menu" hidden aria-hidden="true">
+
+      <nav class="mobile-nav" aria-label="Mobile navigation">
         <a href="#about" data-key="nav-about"></a>
         <a href="#pictures" data-key="nav-pictures"></a>
       </nav>
+
       <div class="drink-menu-selector">
         <div class="drink-menu-selected" data-key="nav-drinks"></div>
         <ul class="drink-menu-options"></ul>
       </div>
-      <div class="language-selector">
+
+      <div class="language-selector" aria-label="Select language">
         <div class="selected">Deutsch</div>
         <ul class="options">
           <li data-value="de">Deutsch</li>
@@ -133,86 +147,89 @@
     </div>
   </header>
 
-  <section id="about">
-    <h2 data-key="about-title"></h2>
-    <p class="about-text"></p>
+  <main>
+    <section id="about">
+      <h2 data-key="about-title"></h2>
+      <p class="about-text"></p>
 
-    <div class="contact-container">
-      <div class="contact-item">
-        <h3></h3>
-        <p>Rocket Bar</p>
-        <p>Genfergasse 10</p>
-        <p>3011 Bern</p>
+      <div class="contact-container">
+        <div class="contact-item">
+          <h3></h3>
+          <p>Rocket Bar</p>
+          <p>Genfergasse 10</p>
+          <p>3011 Bern</p>
+        </div>
+        <div class="contact-item">
+          <h3></h3>
+          <p>Mo-Do: 17:00-00:30</p>
+          <p>Fr: 17:00-03:30</p>
+          <p>Sa: 18:00-03:30</p>
+        </div>
+        <div class="contact-item">
+          <h3></h3>
+          <p><a href="tel:+41315580988">+41 31 558 09 88</a></p>
+          <p><a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a></p>
+        </div>
+        <div class="contact-item social-links">
+          <h3></h3>
+          <a href="https://www.facebook.com/p/Rocket-Bar-61578631981520/" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="images/facebook.svg" alt="Facebook" class="social-icon" />
+          </a>
+          <a href="https://www.instagram.com/rocket_bar_bern/" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="images/instagram.svg" alt="Instagram" class="social-icon" />
+          </a>
+        </div>
       </div>
-      <div class="contact-item">
-        <h3></h3>
-        <p>Mo-Do: 17:00-00:30</p>
-        <p>Fr: 17:00-03:30</p>
-        <p>Sa: 18:00-03:30</p>
-      </div>
-      <div class="contact-item">
-        <h3></h3>
-        <p><a href="tel:+41315580988">+41 31 558 09 88</a></p>
-        <p><a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a></p>
-      </div>
-      <div class="contact-item social-links">
-        <h3></h3>
-        <a href="https://www.facebook.com/p/Rocket-Bar-61578631981520/" target="_blank" aria-label="Facebook">
-          <img src="images/facebook.svg" alt="Facebook" class="social-icon">
-        </a>
-        <a href="https://www.instagram.com/rocket_bar_bern/" target="_blank" aria-label="Instagram">
-          <img src="images/instagram.svg" alt="Instagram" class="social-icon">
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="pictures">
-    <h2 data-key="pictures-title"></h2>
-    <div class="carousel-container">
-      <span class="prev">
-        <svg viewBox="0 0 24 24" class="arrow-icon">
-          <path d="M14 4l-6 8 6 8" />
-        </svg>
-      </span>
-      <div class="carousel-track" id="carousel-track"></div>
-      <span class="next">
-        <svg viewBox="0 0 24 24" class="arrow-icon">
-          <path d="M10 4l6 8-6 8" />
-        </svg>
-      </span>
-    </div>
-
-    <div id="lightbox" class="lightbox">
-      <span class="close">&times;</span>
-      <img class="lightbox-img" src="" alt="Image">
-    </div>
-  </section>
-
-  <section id="drinks">
-    <h2 data-key="drinks-title"></h2>
-    <div id="drink-category-nav" class="drink-category-nav"></div>
-    <div class="drink-menu-selector-container">
-      <div class="drink-menu-selector">
-        <div class="drink-menu-selected" data-key="nav-drinks"></div>
-        <ul class="drink-menu-options"></ul>
+    <section id="pictures">
+      <h2 data-key="pictures-title"></h2>
+      <div class="carousel-container">
+        <span class="prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
+            <path d="M14 4l-6 8 6 8" />
+          </svg>
+        </span>
+        <div class="carousel-track" id="carousel-track"></div>
+        <span class="next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
+            <path d="M10 4l6 8-6 8" />
+          </svg>
+        </span>
       </div>
-    </div>
-    <div class="shots-video">
-      <video controls autoplay muted loop>
-        <source src="images/shot.mp4" type="video/mp4">
-        Dein Browser unterstützt das Video-Tag nicht.
-      </video>
-    </div>
-    <div id="drinks-menu" class="drink-grid"></div>
-    <p id="drink-note" class="drink-note"></p>
-  </section>
+
+      <div id="lightbox" class="lightbox" aria-modal="true" role="dialog">
+        <span class="close" aria-label="Close image">&times;</span>
+        <img class="lightbox-img" src="" alt="Rocket Bar picture" />
+      </div>
+    </section>
+
+    <section id="drinks">
+      <h2 data-key="drinks-title"></h2>
+
+      <div id="drink-category-nav" class="drink-category-nav"></div>
+
+      <div class="drink-menu-selector-container">
+        <div class="drink-menu-selector">
+          <div class="drink-menu-selected" data-key="nav-drinks"></div>
+          <ul class="drink-menu-options"></ul>
+        </div>
+      </div>
+
+      <div class="shots-video">
+        <video controls autoplay muted loop>
+          <source src="images/shot.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div id="drinks-menu" class="drink-grid"></div>
+      <p id="drink-note" class="drink-note"></p>
+    </section>
+  </main>
 
   <footer>
     <p>©<span id="year"></span> Rocket Bar</p>
     <p id="website-note"></p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

@@ -1,49 +1,15 @@
 'use strict';
 
-/* ==========================================
-   GLOBAL CONSTANTS (DOM, CONFIG, DATA)
-========================================== */
+const SUPPORTED_LANGS = ['de', 'fr', 'en'];
 
-/* --- DOM Elements --- */
-const CAROUSEL_CONTAINER    = document.querySelector('.carousel-container');
-const TRACK                 = document.querySelector('.carousel-track');
-const PREV_BUTTON           = document.querySelector('.prev');
-const NEXT_BUTTON           = document.querySelector('.next');
-const TOTAL_IMG             = 7;
-
-const LIGHTBOX              = document.getElementById('lightbox');
-const LIGHTBOX_IMG          = document.querySelector('.lightbox-img');
-const CLOSE_BTN             = document.querySelector('.lightbox .close');
-
-const SECTION_TITLES        = document.querySelectorAll('h2[data-key]');
-const ABOUT_TEXT            = document.querySelector('.about-text');
-const CONTACT_ITEMS         = document.querySelectorAll('.contact-item h3');
-const DRINK_CARDS           = document.querySelectorAll('.drink-card');
-const LANGUAGE_SELECTORS    = document.querySelectorAll('.language-selector');
-const WEBSITE_NOTE          = document.getElementById('website-note');
-
-const DRINKS_CONTAINER      = document.getElementById('drinks-menu');
-const DRINK_NOTE            = document.getElementById('drink-note');
-const DRINK_CATEGORY_NAV    = document.getElementById('drink-category-nav');
-const DRINK_MENU_SELECTORS  = document.querySelectorAll('.drink-menu-selector');
-
-const HAMBURGER             = document.querySelector('.hamburger');
-const MOBILE_MENU           = document.getElementById('mobile-menu');
-const MOBILE_CLOSE          = document.querySelector('.mobile-close');
-
-/* --- App Config --- */
-const USER_LANG          = navigator.language ? navigator.language.slice(0, 2) : 'de';
-const SUPPORTED_LANGS    = ['de', 'fr', 'en'];
-
-/* --- Translations --- */
 const TRANSLATIONS = {
   de: {
     nav: ['Über uns', 'Bilder', 'Getränke'],
     titles: { about: 'Über uns', pictures: 'Bilder', drinks: 'Unsere Drinks' },
-    about: "Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.",
+    about: 'Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.',
     contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
-    website_note: "Webseite von ",
-    drink_note: "Alle Preise in CHF inkl. 8.1% MWST",
+    website_note: 'Webseite von ',
+    drink_note: 'Alle Preise in CHF inkl. 8.1% MWST',
     drinks: [
       {
         category: 'Lager & Spezialbier (Flasche)',
@@ -56,7 +22,7 @@ const TRANSLATIONS = {
           { name: 'Andechs Weissbier',         desc: '5 dl | 5.5% (DEU)',     price: '9.00' },
           { name: 'Schlenkerla Rauchbier',     desc: '5 dl | 5.1% (DEU)',     price: '9.00' },
           { name: 'Astra Kiezmische',          desc: '3.3 dl | 2.5% (DEU)',   price: '6.00' },
-          { name: 'Cardinal Alkoholfrei',      desc: '3.3 dl | 0.0% (CHE)',   price: '6.00' },
+          { name: 'Cardinal Alkoholfrei',      desc: '3.3 dl | 0.0% (CHE)',   price: '6.00' }
         ]
       },
       {
@@ -171,9 +137,9 @@ const TRANSLATIONS = {
   fr: {
     nav: ['À propos', 'Images', 'Boissons'],
     titles: { about: 'À propos', pictures: 'Images', drinks: 'Nos Boissons' },
-    about: "Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un tout. À quelques pas de la gare centrale de Berne, nous t’offrons une atmosphère où tu te sens comme chez toi, avec de la musique forte, de la bière bien fraîche et des riffs brûlants.",
+    about: 'Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un tout. À quelques pas de la gare centrale de Berne, nous t’offrons une atmosphère où tu te sens comme chez toi, avec de la musique forte, de la bière bien fraîche et des riffs brûlants.',
     contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
-    website_note: "Site web de ",
+    website_note: 'Site web de ',
     drink_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse',
     drinks: [
       {
@@ -200,7 +166,7 @@ const TRANSLATIONS = {
           { name: 'Brooklyn Special Effects IPA', desc: '3.3 dl | 0.4% (USA)', price: '7.00' },
           { name: 'Lush IPA',                     desc: '3.3 dl | 5.3% (NOR)', price: '9.00' },
           { name: 'Orval Pale Ale',               desc: '3.3 dl | 6.2% (BEL)', price: '8.00' },
-          { name: 'Möhl Jus de pomme',    desc: '5 dl | 4.0% (CHE)',   price: '9.00' }
+          { name: 'Möhl Jus de pomme',            desc: '5 dl | 4.0% (CHE)',   price: '9.00' }
         ]
       },
       {
@@ -304,7 +270,7 @@ const TRANSLATIONS = {
     titles: { about: 'About', pictures: 'Pictures', drinks: 'Our Drinks' },
     about: 'Welcome to the Rocket Bar, where metal, rock and good drinks melt into one. Just a few steps from Bern’s main station, we offer an atmosphere that feels like home, with loud music, cold beer and blazing riffs.',
     contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
-    website_note: "Website by ",
+    website_note: 'Website by ',
     drink_note: 'All prices in CHF incl. 8.1% VAT',
     drinks: [
       {
@@ -354,14 +320,14 @@ const TRANSLATIONS = {
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup',                        price: '20.00' },
-          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '20.00' },
-          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',                        price: '16.00' },
-          { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue',              price: '17.00' },
-          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet & Sour',                           price: '16.00' },
-          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet & Sour',                              price: '16.00' },
-          { name: 'Whisky Sour',      desc: 'Whisky | Sweet & Sour',                                price: '16.00' },
-          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',                                price: '17.00' }
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup',                            price: '20.00' },
+          { name: 'Blueberry',        desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour',  price: '20.00' },
+          { name: 'Negroni',          desc: 'Gin | Campari | Martini Rosso',                           price: '16.00' },
+          { name: 'Nebula',           desc: 'Berentzen | Rum | Cointreau | Bols Blue',                 price: '17.00' },
+          { name: 'Basil Smash',      desc: 'Gin | Basil | Sweet & Sour',                              price: '16.00' },
+          { name: 'Amaretto Sour',    desc: 'Amaretto | Sweet & Sour',                                 price: '16.00' },
+          { name: 'Whisky Sour',      desc: 'Whisky | Sweet & Sour',                                   price: '16.00' },
+          { name: '007 Dry Martini',  desc: 'Gin | Vodka | Martini',                                   price: '17.00' }
         ]
       },
       {
@@ -432,677 +398,719 @@ const TRANSLATIONS = {
   }
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+  /* ==========================================
+     DOM ELEMENTS
+  ========================================== */
+  const CAROUSEL_CONTAINER   = document.querySelector('.carousel-container');
+  const TRACK                = document.querySelector('.carousel-track');
+  const PREV_BUTTON          = document.querySelector('.prev');
+  const NEXT_BUTTON          = document.querySelector('.next');
+  const TOTAL_IMG            = 7;
 
-/* Language / misc */
-let initialLang = null;
-let currentLang = null;
+  const LIGHTBOX             = document.getElementById('lightbox');
+  const LIGHTBOX_IMG         = document.querySelector('.lightbox-img');
+  const CLOSE_BTN            = document.querySelector('.lightbox .close');
 
-/* Current Year */
-document.addEventListener("DOMContentLoaded", () => {
-  const yearSpan = document.getElementById("year");
+  const SECTION_TITLES       = document.querySelectorAll('h2[data-key]');
+  const ABOUT_TEXT           = document.querySelector('.about-text');
+  const CONTACT_ITEMS        = document.querySelectorAll('.contact-item h3');
+  const LANGUAGE_SELECTORS   = document.querySelectorAll('.language-selector');
+  const WEBSITE_NOTE         = document.getElementById('website-note');
+
+  const DRINKS_CONTAINER     = document.getElementById('drinks-menu');
+  const DRINK_NOTE           = document.getElementById('drink-note');
+  const DRINK_CATEGORY_NAV   = document.getElementById('drink-category-nav');
+  const DRINK_MENU_SELECTORS = document.querySelectorAll('.drink-menu-selector');
+
+  const HAMBURGER            = document.querySelector('.hamburger');
+  const MOBILE_MENU          = document.getElementById('mobile-menu');
+  const MOBILE_CLOSE         = document.querySelector('.mobile-close');
+
+  /* ==========================================
+     BASIC CONFIG (LANGUAGE, YEAR)
+  ========================================== */
+
+  // Set current year in footer
+  const yearSpan = document.getElementById('year');
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
-});
 
-/* ==========================================
-   CAROUSEL
-========================================== */
+  const browserLang = (navigator.language || 'de').slice(0, 2);
+  const storedLang  = localStorage.getItem('language');
+  let currentLang   = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'de');
+  localStorage.setItem('language', currentLang);
 
-/* Carousel state */
-let srcList        = [];
-let visibleSlides  = 1;
-let gapPx          = 0;
-let slideWidth     = 0;
-let stepPx         = 0;
-let cloneCount     = 0;
-let internalIndex  = 0;
-let isTransitioning = false;
-let resizeTimeout  = null;
+  /* ==========================================
+     CAROUSEL
+  ========================================== */
+  let srcList          = [];
+  let visibleSlides    = 1;
+  let gapPx            = 0;
+  let slideWidth       = 0;
+  let stepPx           = 0;
+  let cloneCount       = 0;
+  let internalIndex    = 0;
+  let isTransitioning  = false;
+  let resizeTimeout    = null;
 
-function getTrackGap() {
-  if (!TRACK) return 0;
-  const cs  = getComputedStyle(TRACK);
-  const gap = cs.gap || cs.columnGap || cs.rowGap || '16px';
-  return parseFloat(gap) || 0;
-}
+  function getTrackGap() {
+    if (!TRACK) return 0;
+    const cs  = getComputedStyle(TRACK);
+    const gap = cs.gap || cs.columnGap || cs.rowGap || '16px';
+    return parseFloat(gap) || 0;
+  }
 
-function computeMeasurements() {
-  if (!TRACK || !CAROUSEL_CONTAINER) return;
+  function computeMeasurements() {
+    if (!TRACK || !CAROUSEL_CONTAINER) return;
 
-  gapPx = getTrackGap();
-  const first = TRACK.querySelector('img');
-  if (!first) return;
+    gapPx = getTrackGap();
+    const first = TRACK.querySelector('img');
+    if (!first) return;
 
-  const rect = first.getBoundingClientRect();
-  slideWidth = rect.width;
-  stepPx     = slideWidth + gapPx;
+    const rect = first.getBoundingClientRect();
+    slideWidth = rect.width;
+    stepPx     = slideWidth + gapPx;
 
-  const containerWidth = CAROUSEL_CONTAINER.getBoundingClientRect().width || slideWidth;
+    const containerWidth = CAROUSEL_CONTAINER.getBoundingClientRect().width || slideWidth;
 
-  visibleSlides = Math.max(
-    1,
-    Math.min(srcList.length, Math.round(containerWidth / stepPx))
-  );
+    visibleSlides = Math.max(
+      1,
+      Math.min(srcList.length, Math.round(containerWidth / stepPx))
+    );
 
-  cloneCount = visibleSlides;
-}
+    cloneCount = visibleSlides;
+  }
 
-function buildCarousel() {
-  if (!TRACK) return;
+  function attachSlideClickListeners() {
+    if (!TRACK || !LIGHTBOX || !LIGHTBOX_IMG) return;
 
-  TRACK.innerHTML = '';
+    TRACK.querySelectorAll('img').forEach((img, index) => {
+      img.onclick = () => {
+        LIGHTBOX.style.display = 'flex';
+        LIGHTBOX_IMG.src       = img.src;
+        LIGHTBOX_IMG.alt       = `Rocket Bar picture ${index + 1}`;
+        document.body.style.overflow = 'hidden';
+      };
+    });
+  }
 
-  srcList.forEach(src => {
-    const img = document.createElement('img');
-    img.className = 'carousel-img';
-    img.src       = src;
-    img.alt       = '';
-    img.loading   = 'lazy';
-    TRACK.appendChild(img);
-  });
+  function onTransitionEnd() {
+    isTransitioning = false;
+    const n = srcList.length;
+    if (!TRACK || !n) return;
 
-  computeMeasurements();
+    const originalsStart = cloneCount;
+    const originalsEnd   = cloneCount + n;
 
-  const originals = Array.from(TRACK.children);
-  const n         = originals.length;
-  const cc        = Math.min(cloneCount, n);
+    if (internalIndex < originalsStart) {
+      internalIndex += n;
+      TRACK.style.transition = 'none';
+      TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+      TRACK.getBoundingClientRect();
+      TRACK.style.transition = 'transform 0.45s ease';
+    } else if (internalIndex >= originalsEnd) {
+      internalIndex -= n;
+      TRACK.style.transition = 'none';
+      TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+      TRACK.getBoundingClientRect();
+      TRACK.style.transition = 'transform 0.45s ease';
+    }
+  }
 
-  if (!n || !cc) return;
+  function attachTransitionEnd() {
+    if (!TRACK) return;
+    TRACK.removeEventListener('transitionend', onTransitionEnd);
+    TRACK.addEventListener('transitionend', onTransitionEnd);
+  }
 
-  const lastItems = originals.slice(-cc);
-  lastItems.forEach(node => {
-    const clone = node.cloneNode(true);
-    clone.classList.add('clone');
-    TRACK.insertBefore(clone, TRACK.firstChild);
-  });
+  function buildCarousel() {
+    if (!TRACK) return;
 
-  const firstItems = originals.slice(0, cc);
-  firstItems.forEach(node => {
-    const clone = node.cloneNode(true);
-    clone.classList.add('clone');
-    TRACK.appendChild(clone);
-  });
+    TRACK.innerHTML = '';
 
-  internalIndex = cc;
-  TRACK.style.transition = 'none';
-  TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
-  TRACK.getBoundingClientRect();
-  TRACK.style.transition = 'transform 0.45s ease';
+    srcList.forEach(src => {
+      const img = document.createElement('img');
+      img.className = 'carousel-img';
+      img.src       = src;
+      img.alt       = '';
+      img.loading   = 'lazy';
+      TRACK.appendChild(img);
+    });
 
-  attachSlideClickListeners();
-  attachTransitionEnd();
-}
+    computeMeasurements();
 
-function attachSlideClickListeners() {
-  if (!TRACK || !LIGHTBOX || !LIGHTBOX_IMG) return;
+    const originals = Array.from(TRACK.children);
+    const n         = originals.length;
+    const cc        = Math.min(cloneCount, n);
 
-  TRACK.querySelectorAll('img').forEach(img => {
-    img.onclick = () => {
-      LIGHTBOX.style.display = 'flex';
-      LIGHTBOX_IMG.src       = img.src;
-      document.body.style.overflow = 'hidden';
-    };
-  });
-}
+    if (!n || !cc) return;
 
-function onTransitionEnd() {
-  isTransitioning = false;
-  const n = srcList.length;
-  if (!TRACK || !n) return;
+    // Prepend clones of last items for infinite effect
+    const lastItems = originals.slice(-cc);
+    lastItems.forEach(node => {
+      const clone = node.cloneNode(true);
+      clone.classList.add('clone');
+      TRACK.insertBefore(clone, TRACK.firstChild);
+    });
 
-  const originalsStart = cloneCount;
-  const originalsEnd   = cloneCount + n;
+    // Append clones of first items for infinite effect
+    const firstItems = originals.slice(0, cc);
+    firstItems.forEach(node => {
+      const clone = node.cloneNode(true);
+      clone.classList.add('clone');
+      TRACK.appendChild(clone);
+    });
 
-  if (internalIndex < originalsStart) {
-    internalIndex += n;
+    internalIndex = cc;
     TRACK.style.transition = 'none';
     TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
     TRACK.getBoundingClientRect();
     TRACK.style.transition = 'transform 0.45s ease';
-  }
-  else if (internalIndex >= originalsEnd) {
-    internalIndex -= n;
-    TRACK.style.transition = 'none';
-    TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
-    TRACK.getBoundingClientRect();
-    TRACK.style.transition = 'transform 0.45s ease';
-  }
-}
 
-function attachTransitionEnd() {
-  if (!TRACK) return;
-  TRACK.removeEventListener('transitionend', onTransitionEnd);
-  TRACK.addEventListener('transitionend', onTransitionEnd);
-}
-
-function prevClick() {
-  if (isTransitioning || !TRACK) return;
-  isTransitioning = true;
-  internalIndex--;
-  TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-}
-
-function nextClick() {
-  if (isTransitioning || !TRACK) return;
-  isTransitioning = true;
-  internalIndex++;
-  TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-}
-
-function attachButtonListeners() {
-  if (PREV_BUTTON) {
-    PREV_BUTTON.removeEventListener('click', prevClick);
-    PREV_BUTTON.addEventListener('click', prevClick);
-  }
-  if (NEXT_BUTTON) {
-    NEXT_BUTTON.removeEventListener('click', nextClick);
-    NEXT_BUTTON.addEventListener('click', nextClick);
-  }
-}
-
-function handleResize() {
-  if (!TRACK) return;
-  if (resizeTimeout) clearTimeout(resizeTimeout);
-
-  resizeTimeout = setTimeout(() => {
-    buildCarousel();
-    attachButtonListeners();
-  }, 150);
-}
-
-function initCarousel() {
-  if (!TRACK) return;
-
-  srcList = [];
-  for (let i = 1; i <= TOTAL_IMG; i++) {
-    srcList.push(`images/img_${i}.jpg`);
+    attachSlideClickListeners();
+    attachTransitionEnd();
   }
 
-  TRACK.innerHTML = '';
-  const imgs = [];
+  function prevClick() {
+    if (isTransitioning || !TRACK) return;
+    isTransitioning = true;
+    internalIndex--;
+    TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+  }
 
-  srcList.forEach(src => {
-    const img = document.createElement('img');
-    img.className = 'carousel-img';
-    img.src       = src;
-    img.alt       = '';
-    img.loading   = 'lazy';
-    TRACK.appendChild(img);
-    imgs.push(img);
-  });
+  function nextClick() {
+    if (isTransitioning || !TRACK) return;
+    isTransitioning = true;
+    internalIndex++;
+    TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+  }
 
-  let done = 0;
-  function oneDone() {
-    done++;
-    if (done >= imgs.length) {
-      setTimeout(() => {
-        buildCarousel();
-        attachButtonListeners();
-        attachTouchEvents();
-        window.addEventListener('resize', handleResize);
-      }, 30);
+  function attachButtonListeners() {
+    if (PREV_BUTTON) {
+      PREV_BUTTON.removeEventListener('click', prevClick);
+      PREV_BUTTON.addEventListener('click', prevClick);
+    }
+    if (NEXT_BUTTON) {
+      NEXT_BUTTON.removeEventListener('click', nextClick);
+      NEXT_BUTTON.addEventListener('click', nextClick);
     }
   }
 
-  imgs.forEach(img => {
-    if (img.complete) {
-      oneDone();
-    } else {
-      img.addEventListener('load', oneDone,  { once: true });
-      img.addEventListener('error', oneDone, { once: true });
+  function handleResize() {
+    if (!TRACK) return;
+    if (resizeTimeout) clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(() => {
+      buildCarousel();
+      attachButtonListeners();
+    }, 150);
+  }
+
+  function attachTouchEvents() {
+    if (!CAROUSEL_CONTAINER) return;
+
+    let startX = 0;
+    let startY = 0;
+    let isTouching = false;
+    let isHorizontalSwipe = false;
+    const SWIPE_THRESHOLD = 30;
+
+    CAROUSEL_CONTAINER.addEventListener('touchstart', e => {
+      if (e.touches.length !== 1) return;
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      isTouching = true;
+      isHorizontalSwipe = false;
+    }, { passive: true });
+
+    CAROUSEL_CONTAINER.addEventListener('touchmove', e => {
+      if (!isTouching) return;
+      if (e.touches.length !== 1) return;
+
+      const touch = e.touches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+
+      // Detect scroll direction
+      if (!isHorizontalSwipe) {
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+          isHorizontalSwipe = true;
+        } else if (Math.abs(dy) > Math.abs(dx)) {
+          isTouching = false;
+          return;
+        }
+      }
+
+      if (isHorizontalSwipe) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    CAROUSEL_CONTAINER.addEventListener('touchend', e => {
+      if (!isTouching) return;
+      isTouching = false;
+
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - startX;
+
+      if (Math.abs(dx) > SWIPE_THRESHOLD && !isTransitioning) {
+        if (dx < 0) {
+          nextClick();
+        } else {
+          prevClick();
+        }
+      }
+    });
+  }
+
+  function initCarousel() {
+    if (!TRACK) return;
+
+    srcList = [];
+    for (let i = 1; i <= TOTAL_IMG; i++) {
+      srcList.push(`images/img_${i}.jpg`);
     }
-  });
-}
 
-function attachTouchEvents() {
-  if (!CAROUSEL_CONTAINER) return;
+    TRACK.innerHTML = '';
+    const imgs = [];
 
-  let startX = 0;
-  let startY = 0;
-  let isTouching = false;
-  let isHorizontalSwipe = false;
-  const SWIPE_THRESHOLD = 30;
+    srcList.forEach(src => {
+      const img = document.createElement('img');
+      img.className = 'carousel-img';
+      img.src       = src;
+      img.alt       = '';
+      img.loading   = 'lazy';
+      TRACK.appendChild(img);
+      imgs.push(img);
+    });
 
-  CAROUSEL_CONTAINER.addEventListener('touchstart', e => {
-    if (e.touches.length !== 1) return;
-    const touch = e.touches[0];
-    startX = touch.clientX;
-    startY = touch.clientY;
-    isTouching = true;
-    isHorizontalSwipe = false;
-  }, { passive: true });
-
-  CAROUSEL_CONTAINER.addEventListener('touchmove', e => {
-    if (!isTouching) return;
-    if (e.touches.length !== 1) return;
-
-    const touch = e.touches[0];
-    const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
-
-    if (!isHorizontalSwipe) {
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
-        isHorizontalSwipe = true;
-      } else if (Math.abs(dy) > Math.abs(dx)) {
-        isTouching = false;
-        return;
+    let done = 0;
+    function oneDone() {
+      done++;
+      if (done >= imgs.length) {
+        setTimeout(() => {
+          buildCarousel();
+          attachButtonListeners();
+          attachTouchEvents();
+          window.addEventListener('resize', handleResize);
+        }, 30);
       }
     }
 
-    if (isHorizontalSwipe) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  CAROUSEL_CONTAINER.addEventListener('touchend', e => {
-    if (!isTouching) return;
-    isTouching = false;
-
-    const touch = e.changedTouches[0];
-    const dx = touch.clientX - startX;
-
-    if (Math.abs(dx) > SWIPE_THRESHOLD && !isTransitioning) {
-      if (dx < 0) {
-        nextClick();
+    imgs.forEach(img => {
+      if (img.complete) {
+        oneDone();
       } else {
-        prevClick();
+        img.addEventListener('load', oneDone,  { once: true });
+        img.addEventListener('error', oneDone, { once: true });
       }
-    }
-  });
-}
+    });
+  }
 
-initCarousel();
+  initCarousel();
 
-/* ==========================================
-   LIGHTBOX
-========================================== */
+  /* ==========================================
+     LIGHTBOX
+  ========================================== */
 
-if (CLOSE_BTN) {
-  CLOSE_BTN.addEventListener('click', () => {
-    if (!LIGHTBOX) return;
-    LIGHTBOX.style.display = 'none';
-    document.body.style.overflow = '';
-  });
-}
-
-if (LIGHTBOX) {
-  LIGHTBOX.addEventListener('click', e => {
-    if (e.target === LIGHTBOX) {
+  if (CLOSE_BTN) {
+    CLOSE_BTN.addEventListener('click', () => {
+      if (!LIGHTBOX) return;
       LIGHTBOX.style.display = 'none';
       document.body.style.overflow = '';
-    }
-  });
-}
-
-/* ==========================================
-   LANGUAGE / TRANSLATIONS
-========================================== */
-
-function setLanguage(lang) {
-  if (!TRANSLATIONS[lang]) lang = 'en';
-  currentLang = lang;
-  localStorage.setItem('language', lang);
-
-  document.querySelectorAll('nav').forEach(nav => {
-    const links = nav.querySelectorAll('a');
-    links.forEach((link, i) => {
-      if (TRANSLATIONS[lang].nav[i]) link.textContent = TRANSLATIONS[lang].nav[i];
     });
-  });
-
-  SECTION_TITLES.forEach(title => {
-    const key = title.dataset.key.split('-')[0];
-    const t   = TRANSLATIONS[lang].titles?.[key];
-    if (t) title.textContent = t;
-  });
-
-  if (ABOUT_TEXT) ABOUT_TEXT.innerHTML = TRANSLATIONS[lang].about;
-
-  CONTACT_ITEMS.forEach((item, i) => {
-    const label = TRANSLATIONS[lang].contact[i];
-    if (label) item.textContent = label;
-  });
-
-  LANGUAGE_SELECTORS.forEach(sel => {
-    const selectedDiv = sel.querySelector('.selected');
-    const option      = sel.querySelector(`.options li[data-value="${lang}"]`);
-    if (selectedDiv && option) selectedDiv.textContent = option.textContent;
-  });
-
-  if (DRINK_NOTE) {
-    const note = TRANSLATIONS[lang].drink_note;
-    if (note) {
-      DRINK_NOTE.textContent   = note;
-      DRINK_NOTE.style.display = 'block';
-    } else {
-      DRINK_NOTE.textContent   = '';
-      DRINK_NOTE.style.display = 'none';
-    }
   }
 
-  if (WEBSITE_NOTE) {
-    const website_note = TRANSLATIONS[lang].website_note;
-    if (website_note) {
-      WEBSITE_NOTE.innerHTML = `${website_note}<a href="https://aiza.ch">Aiza GmbH</a>`;
-      WEBSITE_NOTE.style.display = 'block';
-    } else {
-      WEBSITE_NOTE.textContent   = '';
-      WEBSITE_NOTE.style.display = 'none';
-    }
+  if (LIGHTBOX) {
+    LIGHTBOX.addEventListener('click', e => {
+      if (e.target === LIGHTBOX) {
+        LIGHTBOX.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
   }
 
-  renderDrinks(lang);
-  renderDrinkCategoryNav(lang);
-  renderMobileDrinkMenu(lang);
-}
+  /* ==========================================
+     LANGUAGE / TRANSLATIONS
+  ========================================== */
 
-/* Language selector behavior */
-LANGUAGE_SELECTORS.forEach(sel => {
-  const selected = sel.querySelector('.selected');
-  const options  = sel.querySelectorAll('.options li');
+  function renderDrinks(lang) {
+    if (!DRINKS_CONTAINER) return;
+    const menu = TRANSLATIONS[lang]?.drinks;
+    if (!menu) return;
 
-  selected?.addEventListener('click', e => {
-    e.stopPropagation();
-    sel.classList.toggle('open');
-    sel.querySelector('.options')?.classList.toggle('show');
-  });
+    DRINKS_CONTAINER.innerHTML = '';
 
-  options.forEach(option => {
-    option.addEventListener('click', e => {
-      e.stopPropagation();
-      const lang = option.dataset.value;
-      setLanguage(lang);
-      document
-        .querySelectorAll('.language-selector .options')
-        .forEach(o => o.classList.remove('show'));
-      document
-        .querySelectorAll('.language-selector')
-        .forEach(s => s.classList.remove('open'));
+    const isDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
+    const MAX_ITEMS_PER_CARD = 10;
+
+    menu.forEach((category, categoryIndex) => {
+      const items = category.items || [];
+
+      if (isDesktopTwoCols && items.length > MAX_ITEMS_PER_CARD) {
+        let partIndex = 0;
+        for (let i = 0; i < items.length; i += MAX_ITEMS_PER_CARD) {
+          const slice = items.slice(i, i + MAX_ITEMS_PER_CARD);
+          createDrinkCard(category, slice, partIndex, categoryIndex);
+          partIndex++;
+        }
+      } else {
+        createDrinkCard(category, items, 0, categoryIndex);
+      }
     });
-  });
-});
+  }
 
-document.addEventListener('click', () => {
-  document
-    .querySelectorAll('.language-selector .options')
-    .forEach(o => o.classList.remove('show'));
-  document
-    .querySelectorAll('.language-selector')
-    .forEach(s => s.classList.remove('open'));
-});
+  function renderMobileDrinkMenu(lang) {
+    if (!TRANSLATIONS[lang] || !DRINK_MENU_SELECTORS.length) return;
 
-/* Initial language from localStorage or browser */
-initialLang = localStorage.getItem('language');
-if (!initialLang) {
-  initialLang = SUPPORTED_LANGS.includes(USER_LANG) ? USER_LANG : 'de';
-  localStorage.setItem('language', initialLang);
-}
-setLanguage(initialLang);
+    const menu = TRANSLATIONS[lang].drinks;
+    if (!menu) return;
 
-LANGUAGE_SELECTORS.forEach(sel => {
-  const selVal        = localStorage.getItem('language') || initialLang;
-  const initialOption = sel.querySelector(`.options li[data-value="${selVal}"]`);
-  const selectedDiv   = sel.querySelector('.selected');
-  if (selectedDiv && initialOption) selectedDiv.textContent = initialOption.textContent;
-});
+    DRINK_MENU_SELECTORS.forEach(selector => {
+      const optionsList = selector.querySelector('.drink-menu-options');
+      const selectedEl  = selector.querySelector('.drink-menu-selected');
+      if (!optionsList || !selectedEl) return;
 
-/* ==========================================
-   MOBILE / HAMBURGER MENU
-========================================== */
+      optionsList.innerHTML = '';
 
-function openMobileMenu() {
-  if (!MOBILE_MENU || !HAMBURGER) return;
-  MOBILE_MENU.hidden = false;
-  MOBILE_MENU.setAttribute('aria-hidden', 'false');
-  HAMBURGER.setAttribute('aria-expanded', 'true');
+      menu.forEach((category, index) => {
+        const li  = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.type  = 'button';
+        btn.textContent = category.category;
+        btn.dataset.categoryIndex = String(index);
+        li.appendChild(btn);
+        optionsList.appendChild(li);
+      });
 
-  requestAnimationFrame(() => {
-    MOBILE_MENU.style.transform = '';
-  });
+      if (lang === 'de')       selectedEl.textContent = 'Getränke';
+      else if (lang === 'fr')  selectedEl.textContent = 'Boissons';
+      else                     selectedEl.textContent = 'Drinks';
+    });
+  }
 
-  document.body.style.overflow = 'hidden';
+  function createDrinkCard(category, items, partIndex = 0, categoryIndex = 0) {
+    const card = document.createElement('div');
+    card.className = 'drink-card';
+    card.dataset.categoryIndex = String(categoryIndex);
 
-  const firstLink = MOBILE_MENU.querySelector('.mobile-nav a');
-  firstLink?.focus();
-}
+    const h3 = document.createElement('h3');
+    h3.className = 'drink-category';
+    h3.textContent = category.category;
+    card.appendChild(h3);
 
-function closeMobileMenu() {
-  if (!MOBILE_MENU || !HAMBURGER) return;
-  MOBILE_MENU.setAttribute('aria-hidden', 'true');
-  HAMBURGER.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
+    if (category.note && partIndex === 0) {
+      const note = document.createElement('div');
+      note.className = 'softdrink-note';
+      note.textContent = category.note;
+      card.appendChild(note);
+    }
 
-  setTimeout(() => {
-    MOBILE_MENU.hidden = true;
-  }, 380);
-}
+    const ul = document.createElement('ul');
+    ul.className = 'drink-list';
 
-HAMBURGER?.addEventListener('click', () => {
-  const expanded = HAMBURGER.getAttribute('aria-expanded') === 'true';
-  expanded ? closeMobileMenu() : openMobileMenu();
-});
+    items.forEach(item => {
+      const li = document.createElement('li');
 
-MOBILE_CLOSE?.addEventListener('click', closeMobileMenu);
+      const line = document.createElement('div');
+      line.className = 'drink-line';
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeMobileMenu();
-});
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'drink-name';
+      nameSpan.textContent = item.name;
+      line.appendChild(nameSpan);
 
-if (MOBILE_MENU) {
-  MOBILE_MENU.querySelectorAll('.mobile-nav a').forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
-  });
-}
+      if (item.price) {
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'drink-price';
+        priceSpan.textContent = item.price;
+        line.appendChild(priceSpan);
+      }
 
-DRINK_MENU_SELECTORS.forEach(selector => {
-  const selectedEl  = selector.querySelector('.drink-menu-selected');
-  const optionsList = selector.querySelector('.drink-menu-options');
+      li.appendChild(line);
 
-  selectedEl?.addEventListener('click', e => {
-    e.stopPropagation();
-    selector.classList.toggle('open');
-  });
+      if (item.desc) {
+        const descDiv = document.createElement('div');
+        descDiv.className = 'drink-desc';
+        descDiv.textContent = item.desc;
+        li.appendChild(descDiv);
+      }
 
-  optionsList?.addEventListener('click', e => {
-    const btn = e.target.closest('button[data-category-index]');
-    if (!btn) return;
-    e.stopPropagation();
+      ul.appendChild(li);
+    });
 
-    const index = btn.dataset.categoryIndex;
+    card.appendChild(ul);
+    DRINKS_CONTAINER.appendChild(card);
+  }
 
-    if (DRINKS_CONTAINER) {
-      const targetCard = DRINKS_CONTAINER.querySelector(
-        `.drink-card[data-category-index="${index}"]`
-      );
-      if (targetCard) {
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function renderDrinkCategoryNav(lang) {
+    if (!DRINK_CATEGORY_NAV || !DRINKS_CONTAINER) return;
+    const menu = TRANSLATIONS[lang]?.drinks;
+    if (!menu) return;
+
+    DRINK_CATEGORY_NAV.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+
+    menu.forEach((category, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'drink-category-nav-item';
+      btn.textContent = category.category;
+
+      if (index === 0) {
+        btn.classList.add('active');
+      }
+
+      btn.addEventListener('click', () => {
+        DRINK_CATEGORY_NAV
+          .querySelectorAll('.drink-category-nav-item')
+          .forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const targetCard = DRINKS_CONTAINER.querySelector(
+          `.drink-card[data-category-index="${index}"]`
+        );
+        if (targetCard) {
+          targetCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+
+      fragment.appendChild(btn);
+    });
+
+    DRINK_CATEGORY_NAV.appendChild(fragment);
+  }
+
+  function setLanguage(lang) {
+    if (!TRANSLATIONS[lang]) lang = 'en';
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+
+    // Update all nav labels
+    document.querySelectorAll('nav').forEach(nav => {
+      const links = nav.querySelectorAll('a');
+      links.forEach((link, i) => {
+        if (TRANSLATIONS[lang].nav[i]) link.textContent = TRANSLATIONS[lang].nav[i];
+      });
+    });
+
+    // Update section titles
+    SECTION_TITLES.forEach(title => {
+      const key = title.dataset.key.split('-')[0];
+      const t   = TRANSLATIONS[lang].titles?.[key];
+      if (t) title.textContent = t;
+    });
+
+    // About text
+    if (ABOUT_TEXT) ABOUT_TEXT.innerHTML = TRANSLATIONS[lang].about;
+
+    // Contact headings
+    CONTACT_ITEMS.forEach((item, i) => {
+      const label = TRANSLATIONS[lang].contact[i];
+      if (label) item.textContent = label;
+    });
+
+    // Language selectors display text
+    LANGUAGE_SELECTORS.forEach(sel => {
+      const selectedDiv = sel.querySelector('.selected');
+      const option      = sel.querySelector(`.options li[data-value="${lang}"]`);
+      if (selectedDiv && option) selectedDiv.textContent = option.textContent;
+    });
+
+    // Drink note
+    if (DRINK_NOTE) {
+      const note = TRANSLATIONS[lang].drink_note;
+      if (note) {
+        DRINK_NOTE.textContent   = note;
+        DRINK_NOTE.style.display = 'block';
+      } else {
+        DRINK_NOTE.textContent   = '';
+        DRINK_NOTE.style.display = 'none';
       }
     }
 
-    if (DRINK_CATEGORY_NAV) {
-      const navButtons = DRINK_CATEGORY_NAV.querySelectorAll('.drink-category-nav-item');
-      navButtons.forEach((b, i) => {
-        b.classList.toggle('active', String(i) === String(index));
-      });
+    // Website note
+    if (WEBSITE_NOTE) {
+      const website_note = TRANSLATIONS[lang].website_note;
+      if (website_note) {
+        WEBSITE_NOTE.innerHTML = `${website_note}<a href="https://aiza.ch" target="_blank" rel="noopener">Aiza GmbH</a>`;
+        WEBSITE_NOTE.style.display = 'block';
+      } else {
+        WEBSITE_NOTE.textContent   = '';
+        WEBSITE_NOTE.style.display = 'none';
+      }
     }
 
-    selector.classList.remove('open');
+    // Render drinks UI
+    renderDrinks(lang);
+    renderDrinkCategoryNav(lang);
+    renderMobileDrinkMenu(lang);
+  }
 
-    if (selector.closest('#mobile-menu')) {
+  // Language selector behavior with accessibility tweaks
+  LANGUAGE_SELECTORS.forEach(sel => {
+    const selected = sel.querySelector('.selected');
+    const options  = sel.querySelector('.options');
+
+    if (!selected || !options) return;
+
+    selected.setAttribute('role', 'button');
+    selected.setAttribute('aria-haspopup', 'listbox');
+    selected.setAttribute('aria-expanded', 'false');
+
+    selected.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = options.classList.toggle('show');
+      sel.classList.toggle('open', isOpen);
+      selected.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    options.querySelectorAll('li').forEach(option => {
+      option.setAttribute('role', 'option');
+      option.addEventListener('click', e => {
+        e.stopPropagation();
+        const lang = option.dataset.value;
+        setLanguage(lang);
+
+        options.classList.remove('show');
+        sel.classList.remove('open');
+        selected.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+
+  // Close language dropdowns on outside click
+  document.addEventListener('click', () => {
+    document
+      .querySelectorAll('.language-selector .options')
+      .forEach(o => o.classList.remove('show'));
+    document
+      .querySelectorAll('.language-selector')
+      .forEach(s => s.classList.remove('open'));
+  });
+
+  // Initial language setup
+  setLanguage(currentLang);
+
+  LANGUAGE_SELECTORS.forEach(sel => {
+    const selectedDiv   = sel.querySelector('.selected');
+    const initialOption = sel.querySelector(`.options li[data-value="${currentLang}"]`);
+    if (selectedDiv && initialOption) selectedDiv.textContent = initialOption.textContent;
+  });
+
+  /* ==========================================
+     MOBILE / HAMBURGER MENU
+  ========================================== */
+
+  function openMobileMenu() {
+    if (!MOBILE_MENU || !HAMBURGER) return;
+    MOBILE_MENU.hidden = false;
+    MOBILE_MENU.setAttribute('aria-hidden', 'false');
+    HAMBURGER.setAttribute('aria-expanded', 'true');
+    MOBILE_MENU.style.transform = '';
+
+    document.body.style.overflow = 'hidden';
+
+    const firstLink = MOBILE_MENU.querySelector('.mobile-nav a');
+    firstLink?.focus();
+  }
+
+  function closeMobileMenu() {
+    if (!MOBILE_MENU || !HAMBURGER) return;
+    MOBILE_MENU.setAttribute('aria-hidden', 'true');
+    HAMBURGER.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      MOBILE_MENU.hidden = true;
+    }, 380);
+  }
+
+  HAMBURGER?.addEventListener('click', () => {
+    const expanded = HAMBURGER.getAttribute('aria-expanded') === 'true';
+    expanded ? closeMobileMenu() : openMobileMenu();
+  });
+
+  MOBILE_CLOSE?.addEventListener('click', closeMobileMenu);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
       closeMobileMenu();
     }
   });
-});
 
-document.addEventListener('click', () => {
-  DRINK_MENU_SELECTORS.forEach(sel => sel.classList.remove('open'));
-});
-
-
-/* ==========================================
-   DRINKS
-========================================== */
-
-function renderDrinks(lang) {
-  if (!DRINKS_CONTAINER) return;
-  const menu = TRANSLATIONS[lang]?.drinks;
-  if (!menu) return;
-
-  DRINKS_CONTAINER.innerHTML = '';
-
-  const isDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
-  const MAX_ITEMS_PER_CARD = 10;
-
-  menu.forEach((category, categoryIndex) => { 
-    const items = category.items || [];
-
-    if (isDesktopTwoCols && items.length > MAX_ITEMS_PER_CARD) {
-      let partIndex = 0;
-      for (let i = 0; i < items.length; i += MAX_ITEMS_PER_CARD) {
-        const slice = items.slice(i, i + MAX_ITEMS_PER_CARD);
-        createDrinkCard(category, slice, partIndex, categoryIndex);
-        partIndex++;
-      }
-    } else {
-      createDrinkCard(category, items, 0, categoryIndex); 
-    }
-  });
-}
-
-function renderMobileDrinkMenu(lang) {
-  if (!TRANSLATIONS[lang] || !DRINK_MENU_SELECTORS.length) return;
-
-  const menu = TRANSLATIONS[lang].drinks;
-  if (!menu) return;
-
-  DRINK_MENU_SELECTORS.forEach(selector => {
-    const optionsList = selector.querySelector('.drink-menu-options');
-    const selectedEl  = selector.querySelector('.drink-menu-selected');
-    if (!optionsList || !selectedEl) return;
-
-    optionsList.innerHTML = '';
-
-    menu.forEach((category, index) => {
-      const li  = document.createElement('li');
-      const btn = document.createElement('button');
-      btn.type  = 'button';
-      btn.textContent = category.category;
-      btn.dataset.categoryIndex = String(index);
-      li.appendChild(btn);
-      optionsList.appendChild(li);
+  if (MOBILE_MENU) {
+    MOBILE_MENU.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
     });
-
-    if (lang === 'de')      selectedEl.textContent = 'Getränke';
-    else if (lang === 'fr') selectedEl.textContent = 'Boissons';
-    else                    selectedEl.textContent = 'Drinks';
-  });
-}
-
-function createDrinkCard(category, items, partIndex = 0, categoryIndex = 0) {
-  const card = document.createElement('div');
-  card.className = 'drink-card';
-  card.dataset.categoryIndex = String(categoryIndex); 
-
-  const h3 = document.createElement('h3');
-  h3.className = 'drink-category';
-  h3.textContent = category.category;
-  card.appendChild(h3);
-
-  if (category.note && partIndex === 0) {
-    const note = document.createElement('div');
-    note.className = 'softdrink-note';
-    note.textContent = category.note;
-    card.appendChild(note);
   }
 
-  const ul = document.createElement('ul');
-  ul.className = 'drink-list';
+  // Drink menu selector interactions (desktop & mobile)
+  DRINK_MENU_SELECTORS.forEach(selector => {
+    const selectedEl  = selector.querySelector('.drink-menu-selected');
+    const optionsList = selector.querySelector('.drink-menu-options');
 
-  items.forEach(item => {
-    const li = document.createElement('li');
+    selectedEl?.addEventListener('click', e => {
+      e.stopPropagation();
+      selector.classList.toggle('open');
+    });
 
-    const line = document.createElement('div');
-    line.className = 'drink-line';
+    optionsList?.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-category-index]');
+      if (!btn) return;
+      e.stopPropagation();
 
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'drink-name';
-    nameSpan.textContent = item.name;
-    line.appendChild(nameSpan);
+      const index = btn.dataset.categoryIndex;
 
-    if (item.price) {
-      const priceSpan = document.createElement('span');
-      priceSpan.className = 'drink-price';
-      priceSpan.textContent = item.price;
-      line.appendChild(priceSpan);
-    }
+      if (DRINKS_CONTAINER) {
+        const targetCard = DRINKS_CONTAINER.querySelector(
+          `.drink-card[data-category-index="${index}"]`
+        );
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
 
-    li.appendChild(line);
-
-    if (item.desc) {
-      const descDiv = document.createElement('div');
-      descDiv.className = 'drink-desc';
-      descDiv.textContent = item.desc;
-      li.appendChild(descDiv);
-    }
-
-    ul.appendChild(li);
-  });
-
-  card.appendChild(ul);
-  DRINKS_CONTAINER.appendChild(card);
-}
-
-function renderDrinkCategoryNav(lang) {
-  if (!DRINK_CATEGORY_NAV || !DRINKS_CONTAINER) return;
-  const menu = TRANSLATIONS[lang]?.drinks;
-  if (!menu) return;
-
-  DRINK_CATEGORY_NAV.innerHTML = '';
-
-  const fragment = document.createDocumentFragment();
-
-  menu.forEach((category, index) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'drink-category-nav-item';
-    btn.textContent = category.category;
-
-    if (index === 0) {
-      btn.classList.add('active');
-    }
-
-    btn.addEventListener('click', () => {
-      DRINK_CATEGORY_NAV
-        .querySelectorAll('.drink-category-nav-item')
-        .forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const targetCard = DRINKS_CONTAINER.querySelector(
-        `.drink-card[data-category-index="${index}"]`
-      );
-      if (targetCard) {
-        targetCard.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+      if (DRINK_CATEGORY_NAV) {
+        const navButtons = DRINK_CATEGORY_NAV.querySelectorAll('.drink-category-nav-item');
+        navButtons.forEach((b, i) => {
+          b.classList.toggle('active', String(i) === String(index));
         });
       }
-    });
 
-    fragment.appendChild(btn);
+      selector.classList.remove('open');
+
+      if (selector.closest('#mobile-menu')) {
+        closeMobileMenu();
+      }
+    });
   });
 
-  DRINK_CATEGORY_NAV.appendChild(fragment);
-}
+  // Close drink menu selector on outside click
+  document.addEventListener('click', () => {
+    DRINK_MENU_SELECTORS.forEach(sel => sel.classList.remove('open'));
+  });
 
-let lastIsDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
+  /* ==========================================
+     DRINKS RESPONSIVE RE-RENDER
+  ========================================== */
 
-window.addEventListener('resize', () => {
-  const isDesktopNow = window.matchMedia('(min-width: 801px)').matches;
-  if (isDesktopNow === lastIsDesktopTwoCols) return;
-  lastIsDesktopTwoCols = isDesktopNow;
+  let lastIsDesktopTwoCols = window.matchMedia('(min-width: 801px)').matches;
 
-  if (currentLang) {
-    renderDrinks(currentLang);
-  }
+  window.addEventListener('resize', () => {
+    const isDesktopNow = window.matchMedia('(min-width: 801px)').matches;
+    if (isDesktopNow === lastIsDesktopTwoCols) return;
+    lastIsDesktopTwoCols = isDesktopNow;
+
+    if (currentLang) {
+      renderDrinks(currentLang);
+    }
+  });
 });
