@@ -54,14 +54,13 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
   margin-top: 1rem;
 }
 
 nav a {
   color: var(--text);
-  margin-left: 1.5rem;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 500;
@@ -118,14 +117,10 @@ nav a:hover::after {
   color: var(--text);
 }
 
-.language-selector .options.show + .selected::after,
-.language-selector .selected.active::after {
-  transform: translateY(-50%) rotate(180deg);
-  color: var(--accent);
-}
-
 .language-selector .options {
   display: none;
+  position: absolute;
+  top: 100%;  
   width: 100%;
   background: var(--bg);
   border-radius: 0.25rem;
@@ -242,22 +237,11 @@ nav a:hover::after {
   pointer-events: auto;
 }
 
-.mobile-close {
-  position: absolute;
-  right: 1rem;
-  top: 0.75rem;
-  font-size: 2.25rem;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  cursor: pointer;
-}
-
 .mobile-nav {
   display: flex;
   flex-direction: column;
   gap: 1.125rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -342,12 +326,6 @@ section h2 {
   transform: scale(1.2);
   color: var(--accent);
   filter: drop-shadow(0 0 0.375rem var(--accent));
-}
-
-.social-links svg.social-icon {
-  width: 2rem;
-  height: 2rem;
-  vertical-align: middle;
 }
 
 /* ===========================
@@ -460,7 +438,7 @@ section h2 {
 
 .shots-video {
   width: 50%;
-  margin: 0 auto 1.875rem;
+  margin: 1rem auto 1.875rem;
   border-radius: 0.75rem; 
   overflow: hidden; 
 }
@@ -680,9 +658,14 @@ footer {
    Media Queries
 =========================== */
 
-@media (max-width: 984px) {
-  .drink-card {
-    scroll-margin-top: 15rem;
+@media (min-width: 901px) {
+  .language-selector:hover .options {
+    display: block;
+  }
+
+  .language-selector:hover .selected::after {
+    transform: rotate(180deg);
+    color: var(--accent);
   }
 }
 
@@ -700,12 +683,11 @@ footer {
   }
 
   .drink-menu-selector-container .drink-menu-selector {
-    margin-top: 0;
+    margin-top: 0.2rem;
   }
 
   .drink-menu-selector-container {
     display: flex;
-    margin-bottom: 1rem;
     justify-content: center;
     position: sticky;
     top: 5.8rem;       
@@ -715,10 +697,6 @@ footer {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-  }
-
-  .drink-card {
-    scroll-margin-top: 9rem;
   }
 
   section {
@@ -794,7 +772,6 @@ footer {
 
   .drink-card {
     padding: 1rem;
-    scroll-margin-top: 8.5rem;
   }
 
   .carousel-img {

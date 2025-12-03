@@ -143,7 +143,7 @@ const TRANSLATIONS = {
     drink_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse',
     drinks: [
       {
-        category: 'Bière en bouteille',
+        category: 'Bière blonde et bière spéciale (bouteille)',
         items: [
           { name: 'Valaisanne Bière De Cave', desc: '3.3 dl | 5.4% (CHE)', price: '7.00' },
           { name: 'Grimbergen Ambrée',        desc: '2.5 dl | 6.5% (BEL)', price: '7.00' },
@@ -274,7 +274,7 @@ const TRANSLATIONS = {
     drink_note: 'All prices in CHF incl. 8.1% VAT',
     drinks: [
       {
-        category: 'Bottled Beer',
+        category: 'Lager & Speciality Beer (Bottle)',
         items: [
           { name: 'Valaisanne Bière De Cave', desc: '3.3 dl | 5.4% (CHE)', price: '7.00' },
           { name: 'Grimbergen Ambrée',        desc: '2.5 dl | 6.5% (BEL)', price: '7.00' },
@@ -413,6 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const CLOSE_BTN            = document.querySelector('.lightbox .close');
 
   const SECTION_TITLES       = document.querySelectorAll('h2[data-key]');
+  const LOGO_LINK            = document.querySelector('header .logo');
   const ABOUT_TEXT           = document.querySelector('.about-text');
   const CONTACT_ITEMS        = document.querySelectorAll('.contact-item h3');
   const LANGUAGE_SELECTORS   = document.querySelectorAll('.language-selector');
@@ -425,7 +426,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const HAMBURGER            = document.querySelector('.hamburger');
   const MOBILE_MENU          = document.getElementById('mobile-menu');
-  const MOBILE_CLOSE         = document.querySelector('.mobile-close');
 
   /* ==========================================
      BASIC CONFIG (LANGUAGE, YEAR)
@@ -498,25 +498,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function onTransitionEnd() {
     isTransitioning = false;
-    const n = srcList.length;
-    if (!TRACK || !n) return;
-
-    const originalsStart = cloneCount;
-    const originalsEnd   = cloneCount + n;
-
-    if (internalIndex < originalsStart) {
-      internalIndex += n;
-      TRACK.style.transition = 'none';
-      TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
-      TRACK.getBoundingClientRect();
-      TRACK.style.transition = 'transform 0.45s ease';
-    } else if (internalIndex >= originalsEnd) {
-      internalIndex -= n;
-      TRACK.style.transition = 'none';
-      TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
-      TRACK.getBoundingClientRect();
-      TRACK.style.transition = 'transform 0.45s ease';
-    }
   }
 
   function attachTransitionEnd() {
@@ -576,6 +557,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function prevClick() {
     if (isTransitioning || !TRACK) return;
     isTransitioning = true;
+
+    const n = srcList.length;
+    if (!n) return;
+
+    if (internalIndex <= cloneCount) {
+      TRACK.style.transition = 'none';
+      internalIndex += n;
+      TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+      TRACK.getBoundingClientRect();
+      TRACK.style.transition = 'transform 0.45s ease';
+    }
+
     internalIndex--;
     TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
   }
@@ -583,6 +576,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function nextClick() {
     if (isTransitioning || !TRACK) return;
     isTransitioning = true;
+
+    const n = srcList.length;
+    if (!n) return;
+
+    const originalsEnd = cloneCount + n;
+
+    if (internalIndex >= originalsEnd) {
+      TRACK.style.transition = 'none';
+      internalIndex -= n;
+      TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+      TRACK.getBoundingClientRect();
+      TRACK.style.transition = 'transform 0.45s ease';
+    }
+
     internalIndex++;
     TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
   }
@@ -871,15 +878,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        const targetCard = DRINKS_CONTAINER.querySelector(
-          `.drink-card[data-category-index="${index}"]`
-        );
-        if (targetCard) {
-          targetCard.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
+        scrollToDrinkCategory(index);
       });
 
       fragment.appendChild(btn);
@@ -1024,6 +1023,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeMobileMenu() {
     if (!MOBILE_MENU || !HAMBURGER) return;
+
+    const active = document.activeElement;
+    if (active && MOBILE_MENU.contains(active)) {
+      HAMBURGER.focus();
+    }
+
     MOBILE_MENU.setAttribute('aria-hidden', 'true');
     HAMBURGER.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
@@ -1038,19 +1043,36 @@ document.addEventListener('DOMContentLoaded', () => {
     expanded ? closeMobileMenu() : openMobileMenu();
   });
 
-  MOBILE_CLOSE?.addEventListener('click', closeMobileMenu);
-
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       closeMobileMenu();
     }
   });
 
-  if (MOBILE_MENU) {
-    MOBILE_MENU.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (!href || href === '#') return;
+
+      const targetId = href.slice(1);
+      const targetEl = document.getElementById(targetId);
+      if (!targetEl) return;
+
+      e.preventDefault();
+
+      const isInMobileMenu = !!link.closest('#mobile-menu');
+
+      if (isInMobileMenu) {
+        closeMobileMenu();
+
+        setTimeout(() => {
+          scrollToSection(targetId);
+        }, 420);
+      } else {
+        scrollToSection(targetId);
+      }
     });
-  }
+  });
 
   // Drink menu selector interactions (desktop & mobile)
   DRINK_MENU_SELECTORS.forEach(selector => {
@@ -1069,15 +1091,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const index = btn.dataset.categoryIndex;
 
-      if (DRINKS_CONTAINER) {
-        const targetCard = DRINKS_CONTAINER.querySelector(
-          `.drink-card[data-category-index="${index}"]`
-        );
-        if (targetCard) {
-          targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-
       if (DRINK_CATEGORY_NAV) {
         const navButtons = DRINK_CATEGORY_NAV.querySelectorAll('.drink-category-nav-item');
         navButtons.forEach((b, i) => {
@@ -1089,15 +1102,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (selector.closest('#mobile-menu')) {
         closeMobileMenu();
+        setTimeout(() => {
+          scrollToDrinkCategory(index);
+        }, 420);
+
+      } else {
+        scrollToDrinkCategory(index);
       }
     });
   });
 
-  // Close drink menu selector on outside click
   document.addEventListener('click', () => {
     DRINK_MENU_SELECTORS.forEach(sel => sel.classList.remove('open'));
   });
 
+  /* ==========================================
+     NAVIGATION
+  ========================================== */
+  
+  if (LOGO_LINK) {
+    LOGO_LINK.addEventListener('click', (e) => {
+      e.preventDefault(); 
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  function getScrollOffset() {
+    let offset = 0;
+
+    const header = document.querySelector('header');
+    if (header) offset += header.offsetHeight;
+
+    const desktopNav = document.querySelector('.drink-category-nav');
+    const mobileSelectorBar = document.querySelector('.drink-menu-selector-container');
+
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      if (mobileSelectorBar) offset += mobileSelectorBar.offsetHeight - 4;
+    } else {
+      if (desktopNav) offset += desktopNav.offsetHeight;
+    }
+
+    return offset;
+  }
+
+  function scrollToDrinkCategory(index) {
+    if (!DRINKS_CONTAINER) return;
+
+    const targetCard = DRINKS_CONTAINER.querySelector(
+      `.drink-card[data-category-index="${index}"]`
+    );
+    if (!targetCard) return;
+
+    const rect = targetCard.getBoundingClientRect();
+    const absoluteTop = rect.top + window.pageYOffset;
+    const offset = getScrollOffset();
+
+    window.scrollTo({
+      top: absoluteTop - offset,
+      behavior: 'smooth'
+    });
+  }
+
+  function scrollToSection(targetId) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    const rect = target.getBoundingClientRect();
+    const y = rect.top + window.pageYOffset;
+    const isDesktop = window.matchMedia("(min-width: 901px)").matches;
+    const offset = isDesktop ? 120 : 100;
+
+    window.scrollTo({
+      top: y - offset,
+      behavior: 'smooth'
+    });
+  }
+  
   /* ==========================================
      DRINKS RESPONSIVE RE-RENDER
   ========================================== */
