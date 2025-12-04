@@ -4,12 +4,54 @@ const SUPPORTED_LANGS = ['de', 'fr', 'en'];
 
 const TRANSLATIONS = {
   de: {
-    nav: ['Über uns', 'Bilder', 'Getränke'],
-    titles: { about: 'Über uns', pictures: 'Bilder', drinks: 'Unsere Drinks' },
+    nav: ['Über uns', 'Bilder', 'Take-Away', 'Getränke'],
+    titles: { about: 'Über uns', pictures: 'Bilder', takeaway: 'Take-Away', drinks: 'Unsere Drinks' },
     about: 'Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.',
     contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
-    website_note: 'Webseite von ',
-    drink_note: 'Alle Preise in CHF inkl. 8.1% MWST',
+    takeaway: 'Exklusiv in der Rocket Bar: Die besten Bành-Mì´s der Stadt im vietnamesischen Mittagsrestaurant und als Take-Away von Saigon Pearl.',
+    takeaway_hours_title: 'Öffnungszeiten',
+    food: [
+      {
+        category: 'Bánh Mì',
+        items: [
+          { 
+            name: 'Bánh Mì Rind',
+            desc: 'Rindfleisch in Knoblauch-Marinade, Pickles, Gurke, Koriander',
+            price: '14.50'
+          },
+          { 
+            name: 'Bánh Mì Poulet',
+            desc: 'Poulet in Zitronengras-Marinade, Pickles, Gurke, Koriander',
+            price: '14.00'
+          },
+          { 
+            name: 'Bánh Mì «Char Siu»',
+            desc: 'Hausgemachter Schweinebauch «Char Siu», Pickles, Gurke, Koriander',
+            price: '14.50'
+          },
+          { 
+            name: 'Bánh Mì Vegan',
+            desc: 'Tofu, Avocadocreme, Pickles, Gurke, Koriander',
+            price: '14.00'
+          }
+        ]
+      },
+      {
+        category: 'Bowls & Suppe',
+        items: [
+          { 
+            name: '«Char Siu» Reisteller',
+            desc: 'Schweinebauch «Char Siu» mit Reis & Pickles',
+            price: '18.00'
+          },
+          { 
+            name: 'Phở Bò',
+            desc: 'Vietnamesische Rindfleisch-Nudelsuppe mit Reisnudeln, Kräutern & Sprossen',
+            price: '20.00'
+          }
+        ]
+      }
+    ],
     drinks: [
       {
         category: 'Lager & Spezialbier (Flasche)',
@@ -132,15 +174,59 @@ const TRANSLATIONS = {
           { name: 'Café Crème / Espresso', desc: '',                      price: '4.00' }
         ]
       }
-    ]
+    ],
+    vat_note: 'Alle Preise in CHF inkl. 8.1% MWST',
+    website_note: 'Webseite von ',
   },
   fr: {
-    nav: ['À propos', 'Images', 'Boissons'],
-    titles: { about: 'À propos', pictures: 'Images', drinks: 'Nos Boissons' },
+    nav: ['À propos', 'Images', 'Takeaway', 'Boissons'],
+    titles: { about: 'À propos', pictures: 'Images', takeaway: 'Takeaway', drinks: 'Nos Boissons' },
     about: 'Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un tout. À quelques pas de la gare centrale de Berne, nous t’offrons une atmosphère où tu te sens comme chez toi, avec de la musique forte, de la bière bien fraîche et des riffs brûlants.',
     contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
-    website_note: 'Site web de ',
-    drink_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse',
+    takeaway: 'Exclusivement à la Rocket Bar : Les meilleurs Bánh Mì de la ville dans le restaurant vietnamien du midi et en take-away de Saigon Pearl.',
+    takeaway_hours_title: 'Horaires',
+    food: [
+      {
+        category: 'Bánh Mì',
+        items: [
+          { 
+            name: 'Bánh Mì boeuf',
+            desc: 'Boeuf mariné à l’ail, pickles, concombre, coriandre',
+            price: '14.50'
+          },
+          { 
+            name: 'Bánh Mì poulet',
+            desc: 'Poulet mariné à la citronnelle, pickles, concombre, coriandre',
+            price: '14.00'
+          },
+          { 
+            name: 'Bánh Mì «Char Siu»',
+            desc: 'Poitrine de porc grillée «Char Siu», pickles, concombre, coriandre',
+            price: '14.50'
+          },
+          { 
+            name: 'Bánh Mì vegan',
+            desc: 'Tofu, crème d’avocat, pickles, concombre, coriandre',
+            price: '14.00'
+          }
+        ]
+      },
+      {
+        category: 'Bowls & soupe',
+        items: [
+          { 
+            name: 'Assiette de riz «Char Siu»',
+            desc: 'Porc «Char Siu» maison avec riz & pickles',
+            price: '18.00'
+          },
+          { 
+            name: 'Phở Bò',
+            desc: 'Soupe vietnamienne de nouilles au boeuf avec nouilles de riz, herbes & pousses de soja',
+            price: '20.00'
+          }
+        ]
+      }
+    ],
     drinks: [
       {
         category: 'Bière blonde et bière spéciale (bouteille)',
@@ -263,15 +349,59 @@ const TRANSLATIONS = {
           { name: 'Café crème / Espresso', desc: '',                  price: '4.00' }
         ]
       }
-    ]
+    ],
+    vat_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse',
+    website_note: 'Site web de ',
   },
   en: {
-    nav: ['About', 'Pictures', 'Drinks'],
-    titles: { about: 'About', pictures: 'Pictures', drinks: 'Our Drinks' },
+    nav: ['About', 'Pictures', 'Takeaway', 'Drinks'],
+    titles: { about: 'About', pictures: 'Pictures', takeaway: 'Takeaway', drinks: 'Our Drinks' },
     about: 'Welcome to the Rocket Bar, where metal, rock and good drinks melt into one. Just a few steps from Bern’s main station, we offer an atmosphere that feels like home, with loud music, cold beer and blazing riffs.',
     contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
-    website_note: 'Website by ',
-    drink_note: 'All prices in CHF incl. 8.1% VAT',
+    takeaway: 'Exclusive at the Rocket Bar: The best Bánh Mì in town from the Vietnamese lunch restaurant and as take-away from Saigon Pearl.',
+    takeaway_hours_title: 'Opening Hours',
+    food: [
+      {
+        category: 'Bánh Mì',
+        items: [
+          { 
+            name: 'Bánh Mì Beef',
+            desc: 'Beef in garlic marinade, pickles, cucumber, coriander',
+            price: '14.50'
+          },
+          { 
+            name: 'Bánh Mì Chicken',
+            desc: 'Chicken in lemongrass marinade, pickles, cucumber, coriander',
+            price: '14.00'
+          },
+          { 
+            name: 'Bánh Mì «Char Siu»',
+            desc: 'Homemade pork belly «Char Siu», pickles, cucumber, coriander',
+            price: '14.50'
+          },
+          { 
+            name: 'Bánh Mì Vegan',
+            desc: 'Tofu, avocado cream, pickles, cucumber, coriander',
+            price: '14.00'
+          }
+        ]
+      },
+      {
+        category: 'Bowls & Soup',
+        items: [
+          { 
+            name: '«Char Siu» Rice Plate',
+            desc: 'Pork belly «Char Siu» with rice & pickles',
+            price: '18.00'
+          },
+          { 
+            name: 'Phở Bò',
+            desc: 'Vietnamese beef noodle soup with rice noodles, herbs & bean sprouts',
+            price: '20.00'
+          }
+        ]
+      }
+    ],
     drinks: [
       {
         category: 'Lager & Speciality Beer (Bottle)',
@@ -394,7 +524,9 @@ const TRANSLATIONS = {
           { name: 'Café crème / Espresso',  desc: '',                  price: '4.00' }
         ]
       }
-    ]
+    ],
+    vat_note: 'All prices in CHF incl. 8.1% VAT',
+    website_note: 'Website by ',
   }
 };
 
@@ -402,30 +534,39 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================
      DOM ELEMENTS
   ========================================== */
-  const CAROUSEL_CONTAINER   = document.querySelector('.carousel-container');
-  const TRACK                = document.querySelector('.carousel-track');
-  const PREV_BUTTON          = document.querySelector('.prev');
-  const NEXT_BUTTON          = document.querySelector('.next');
-  const TOTAL_IMG            = 7;
+  const CAROUSEL_CONTAINER        = document.querySelector('.carousel-container');
+  const TRACK                     = document.querySelector('.carousel-track');
+  const PREV_BUTTON               = document.querySelector('.prev');
+  const NEXT_BUTTON               = document.querySelector('.next');
+  const TOTAL_IMG                 = 7;
+  const CAROUSEL_FOOD_CONTAINER   = document.querySelector('.carousel-container-food');
+  const TRACK_FOOD                = document.querySelector('.carousel-track-food');
+  const PREV_FOOD_BUTTON          = document.querySelector('.prev-food');
+  const NEXT_FOOD_BUTTON          = document.querySelector('.next-food');
+  const TOTAL_FOOD_IMG            = 4;
 
-  const LIGHTBOX             = document.getElementById('lightbox');
-  const LIGHTBOX_IMG         = document.querySelector('.lightbox-img');
-  const CLOSE_BTN            = document.querySelector('.lightbox .close');
+  const LIGHTBOX                  = document.getElementById('lightbox');
+  const LIGHTBOX_IMG              = document.querySelector('.lightbox-img');
+  const CLOSE_BTN                 = document.querySelector('.lightbox .close');
 
-  const SECTION_TITLES       = document.querySelectorAll('h2[data-key]');
-  const LOGO_LINK            = document.querySelector('header .logo');
-  const ABOUT_TEXT           = document.querySelector('.about-text');
-  const CONTACT_ITEMS        = document.querySelectorAll('.contact-item h3');
-  const LANGUAGE_SELECTORS   = document.querySelectorAll('.language-selector');
-  const WEBSITE_NOTE         = document.getElementById('website-note');
+  const SECTION_TITLES            = document.querySelectorAll('h2[data-key]');
+  const LOGO_LINK                 = document.querySelector('header .logo');
+  const ABOUT_TEXT                = document.querySelector('.about-text');
+  const TAKEAWAY_TEXT             = document.querySelector('.takeaway-text');
+  const CONTACT_ITEMS             = document.querySelectorAll('.contact-item h3');
+  const LANGUAGE_SELECTORS        = document.querySelectorAll('.language-selector');
+  const WEBSITE_NOTE              = document.getElementById('website-note');
 
-  const DRINKS_CONTAINER     = document.getElementById('drinks-menu');
-  const DRINK_NOTE           = document.getElementById('drink-note');
-  const DRINK_CATEGORY_NAV   = document.getElementById('drink-category-nav');
-  const DRINK_MENU_SELECTORS = document.querySelectorAll('.drink-menu-selector');
+  const TAKEAWAY_HOURS_HEADING    = document.querySelector('#takeaway .takeaway-item h3');
+  const FOOD_MENU_CONTAINER       = document.getElementById('food-menu');
+  const DRINKS_CONTAINER          = document.getElementById('drinks-menu');
+  const DRINK_CATEGORY_NAV        = document.getElementById('drink-category-nav');
+  const DRINK_MENU_SELECTORS      = document.querySelectorAll('.drink-menu-selector');
+  const VAT_NOTE_FOOD             = document.getElementById('vat-note-food');
+  const VAT_NOTE_DRINKS           = document.getElementById('vat-note-drinks');
 
-  const HAMBURGER            = document.querySelector('.hamburger');
-  const MOBILE_MENU          = document.getElementById('mobile-menu');
+  const HAMBURGER                 = document.querySelector('.hamburger');
+  const MOBILE_MENU               = document.getElementById('mobile-menu');
 
   /* ==========================================
      BASIC CONFIG (LANGUAGE, YEAR)
@@ -442,282 +583,313 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentLang   = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'de');
   localStorage.setItem('language', currentLang);
 
-  /* ==========================================
-     CAROUSEL
+    /* ==========================================
+     CAROUSEL (Images & Food)
   ========================================== */
-  let srcList          = [];
-  let visibleSlides    = 1;
-  let gapPx            = 0;
-  let slideWidth       = 0;
-  let stepPx           = 0;
-  let cloneCount       = 0;
-  let internalIndex    = 0;
-  let isTransitioning  = false;
-  let resizeTimeout    = null;
 
-  function getTrackGap() {
-    if (!TRACK) return 0;
-    const cs  = getComputedStyle(TRACK);
-    const gap = cs.gap || cs.columnGap || cs.rowGap || '16px';
-    return parseFloat(gap) || 0;
-  }
+  function setupCarousel({
+    container,
+    track,
+    prevBtn,
+    nextBtn,
+    totalImages,
+    imgPathPattern
+  }) {
+    if (!track || !container || !totalImages) return;
 
-  function computeMeasurements() {
-    if (!TRACK || !CAROUSEL_CONTAINER) return;
+    let srcList         = [];
+    let visibleSlides   = 1;
+    let gapPx           = 0;
+    let slideWidth      = 0;
+    let stepPx          = 0;
+    let cloneCount      = 0;
+    let internalIndex   = 0;
+    let isTransitioning = false;
+    let resizeTimeout   = null;
 
-    gapPx = getTrackGap();
-    const first = TRACK.querySelector('img');
-    if (!first) return;
-
-    const rect = first.getBoundingClientRect();
-    slideWidth = rect.width;
-    stepPx     = slideWidth + gapPx;
-
-    const containerWidth = CAROUSEL_CONTAINER.getBoundingClientRect().width || slideWidth;
-
-    visibleSlides = Math.max(
-      1,
-      Math.min(srcList.length, Math.round(containerWidth / stepPx))
-    );
-
-    cloneCount = visibleSlides;
-  }
-
-  function attachSlideClickListeners() {
-    if (!TRACK || !LIGHTBOX || !LIGHTBOX_IMG) return;
-
-    TRACK.querySelectorAll('img').forEach((img, index) => {
-      img.onclick = () => {
-        LIGHTBOX.style.display = 'flex';
-        LIGHTBOX_IMG.src       = img.src;
-        LIGHTBOX_IMG.alt       = `Rocket Bar picture ${index + 1}`;
-        document.body.style.overflow = 'hidden';
-      };
-    });
-  }
-
-  function onTransitionEnd() {
-    isTransitioning = false;
-  }
-
-  function attachTransitionEnd() {
-    if (!TRACK) return;
-    TRACK.removeEventListener('transitionend', onTransitionEnd);
-    TRACK.addEventListener('transitionend', onTransitionEnd);
-  }
-
-  function buildCarousel() {
-    if (!TRACK) return;
-
-    TRACK.innerHTML = '';
-
-    srcList.forEach(src => {
-      const img = document.createElement('img');
-      img.className = 'carousel-img';
-      img.src       = src;
-      img.alt       = '';
-      img.loading   = 'lazy';
-      TRACK.appendChild(img);
-    });
-
-    computeMeasurements();
-
-    const originals = Array.from(TRACK.children);
-    const n         = originals.length;
-    const cc        = Math.min(cloneCount, n);
-
-    if (!n || !cc) return;
-
-    // Prepend clones of last items for infinite effect
-    const lastItems = originals.slice(-cc);
-    lastItems.forEach(node => {
-      const clone = node.cloneNode(true);
-      clone.classList.add('clone');
-      TRACK.insertBefore(clone, TRACK.firstChild);
-    });
-
-    // Append clones of first items for infinite effect
-    const firstItems = originals.slice(0, cc);
-    firstItems.forEach(node => {
-      const clone = node.cloneNode(true);
-      clone.classList.add('clone');
-      TRACK.appendChild(clone);
-    });
-
-    internalIndex = cc;
-    TRACK.style.transition = 'none';
-    TRACK.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
-    TRACK.getBoundingClientRect();
-    TRACK.style.transition = 'transform 0.45s ease';
-
-    attachSlideClickListeners();
-    attachTransitionEnd();
-  }
-
-  function prevClick() {
-    if (isTransitioning || !TRACK) return;
-    isTransitioning = true;
-
-    const n = srcList.length;
-    if (!n) return;
-
-    if (internalIndex <= cloneCount) {
-      TRACK.style.transition = 'none';
-      internalIndex += n;
-      TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-      TRACK.getBoundingClientRect();
-      TRACK.style.transition = 'transform 0.45s ease';
+    function getTrackGap() {
+      const cs  = getComputedStyle(track);
+      const gap = cs.gap || cs.columnGap || cs.rowGap || '16px';
+      return parseFloat(gap) || 0;
     }
 
-    internalIndex--;
-    TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-  }
+    function computeMeasurements() {
+      gapPx = getTrackGap();
+      const first = track.querySelector('img');
+      if (!first) return;
 
-  function nextClick() {
-    if (isTransitioning || !TRACK) return;
-    isTransitioning = true;
+      const rect = first.getBoundingClientRect();
+      slideWidth = rect.width;
+      stepPx     = slideWidth + gapPx;
 
-    const n = srcList.length;
-    if (!n) return;
+      const containerWidth = container.getBoundingClientRect().width || slideWidth;
+      visibleSlides = Math.max(
+        1,
+        Math.min(srcList.length, Math.round(containerWidth / stepPx))
+      );
 
-    const originalsEnd = cloneCount + n;
-
-    if (internalIndex >= originalsEnd) {
-      TRACK.style.transition = 'none';
-      internalIndex -= n;
-      TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-      TRACK.getBoundingClientRect();
-      TRACK.style.transition = 'transform 0.45s ease';
+      cloneCount = visibleSlides;
     }
 
-    internalIndex++;
-    TRACK.style.transform = `translateX(-${internalIndex * stepPx}px)`;
-  }
+    function attachSlideClickListeners() {
+      if (!LIGHTBOX || !LIGHTBOX_IMG) return;
 
-  function attachButtonListeners() {
-    if (PREV_BUTTON) {
-      PREV_BUTTON.removeEventListener('click', prevClick);
-      PREV_BUTTON.addEventListener('click', prevClick);
+      track.querySelectorAll('img').forEach((img, index) => {
+        img.onclick = () => {
+          // Open global lightbox
+          LIGHTBOX.style.display = 'flex';
+          LIGHTBOX_IMG.src       = img.src;
+          LIGHTBOX_IMG.alt       = `Rocket Bar picture ${index + 1}`;
+          document.body.style.overflow = 'hidden';
+        };
+      });
     }
-    if (NEXT_BUTTON) {
-      NEXT_BUTTON.removeEventListener('click', nextClick);
-      NEXT_BUTTON.addEventListener('click', nextClick);
+
+    function onTransitionEnd() {
+      isTransitioning = false;
     }
-  }
 
-  function handleResize() {
-    if (!TRACK) return;
-    if (resizeTimeout) clearTimeout(resizeTimeout);
+    function attachTransitionEnd() {
+      track.removeEventListener('transitionend', onTransitionEnd);
+      track.addEventListener('transitionend', onTransitionEnd);
+    }
 
-    resizeTimeout = setTimeout(() => {
-      buildCarousel();
-      attachButtonListeners();
-    }, 150);
-  }
+    function buildCarousel() {
+      // Reset track
+      track.innerHTML = '';
 
-  function attachTouchEvents() {
-    if (!CAROUSEL_CONTAINER) return;
+      // Add original images
+      srcList.forEach(src => {
+        const img = document.createElement('img');
+        img.className = 'carousel-img';
+        img.src       = src;
+        img.alt       = '';
+        img.loading   = 'lazy';
+        track.appendChild(img);
+      });
 
-    let startX = 0;
-    let startY = 0;
-    let isTouching = false;
-    let isHorizontalSwipe = false;
-    const SWIPE_THRESHOLD = 30;
+      computeMeasurements();
 
-    CAROUSEL_CONTAINER.addEventListener('touchstart', e => {
-      if (e.touches.length !== 1) return;
-      const touch = e.touches[0];
-      startX = touch.clientX;
-      startY = touch.clientY;
-      isTouching = true;
-      isHorizontalSwipe = false;
-    }, { passive: true });
+      const originals = Array.from(track.children);
+      const n         = originals.length;
+      const cc        = Math.min(cloneCount, n);
 
-    CAROUSEL_CONTAINER.addEventListener('touchmove', e => {
-      if (!isTouching) return;
-      if (e.touches.length !== 1) return;
+      if (!n || !cc) return;
 
-      const touch = e.touches[0];
-      const dx = touch.clientX - startX;
-      const dy = touch.clientY - startY;
+      // Prepend clones of last items (for infinite effect)
+      const lastItems = originals.slice(-cc);
+      lastItems.forEach(node => {
+        const clone = node.cloneNode(true);
+        clone.classList.add('clone');
+        track.insertBefore(clone, track.firstChild);
+      });
 
-      // Detect scroll direction
-      if (!isHorizontalSwipe) {
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
-          isHorizontalSwipe = true;
-        } else if (Math.abs(dy) > Math.abs(dx)) {
-          isTouching = false;
-          return;
+      // Append clones of first items (for infinite effect)
+      const firstItems = originals.slice(0, cc);
+      firstItems.forEach(node => {
+        const clone = node.cloneNode(true);
+        clone.classList.add('clone');
+        track.appendChild(clone);
+      });
+
+      // Start position: after the prepended clones
+      internalIndex = cc;
+      track.style.transition = 'none';
+      track.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+      track.getBoundingClientRect(); // force reflow
+      track.style.transition = 'transform 0.45s ease';
+
+      attachSlideClickListeners();
+      attachTransitionEnd();
+    }
+
+    function prevClick() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const n = srcList.length;
+      if (!n) return;
+
+      // If we are in the first clone zone, jump to the corresponding real items
+      if (internalIndex <= cloneCount) {
+        track.style.transition = 'none';
+        internalIndex += n;
+        track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+        track.getBoundingClientRect();
+        track.style.transition = 'transform 0.45s ease';
+      }
+
+      internalIndex--;
+      track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+    }
+
+    function nextClick() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const n = srcList.length;
+      if (!n) return;
+
+      const originalsEnd = cloneCount + n;
+
+      // If we are past the last real item (in the end-clone zone), jump back
+      if (internalIndex >= originalsEnd) {
+        track.style.transition = 'none';
+        internalIndex -= n;
+        track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+        track.getBoundingClientRect();
+        track.style.transition = 'transform 0.45s ease';
+      }
+
+      internalIndex++;
+      track.style.transform = `translateX(-${internalIndex * stepPx}px)`;
+    }
+
+    function attachButtonListeners() {
+      if (prevBtn) {
+        prevBtn.removeEventListener('click', prevClick);
+        prevBtn.addEventListener('click', prevClick);
+      }
+      if (nextBtn) {
+        nextBtn.removeEventListener('click', nextClick);
+        nextBtn.addEventListener('click', nextClick);
+      }
+    }
+
+    function handleResize() {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+
+      resizeTimeout = setTimeout(() => {
+        // Rebuild carousel on resize so measurements stay correct
+        buildCarousel();
+        attachButtonListeners();
+      }, 150);
+    }
+
+    function attachTouchEvents() {
+      let startX = 0;
+      let startY = 0;
+      let isTouching = false;
+      let isHorizontalSwipe = false;
+      const SWIPE_THRESHOLD = 30;
+
+      container.addEventListener('touchstart', e => {
+        if (e.touches.length !== 1) return;
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        isTouching = true;
+        isHorizontalSwipe = false;
+      }, { passive: true });
+
+      container.addEventListener('touchmove', e => {
+        if (!isTouching) return;
+        if (e.touches.length !== 1) return;
+
+        const touch = e.touches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        // Detect whether the user is trying to swipe horizontally or scroll vertically
+        if (!isHorizontalSwipe) {
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+            isHorizontalSwipe = true;
+          } else if (Math.abs(dy) > Math.abs(dx)) {
+            // User is scrolling vertically, abort swipe handling
+            isTouching = false;
+            return;
+          }
+        }
+
+        if (isHorizontalSwipe) {
+          // Prevent vertical scroll when we are in horizontal swipe mode
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      container.addEventListener('touchend', e => {
+        if (!isTouching) return;
+        isTouching = false;
+
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - startX;
+
+        if (Math.abs(dx) > SWIPE_THRESHOLD && !isTransitioning) {
+          if (dx < 0) {
+            nextClick();
+          } else {
+            prevClick();
+          }
+        }
+      });
+    }
+
+    function initCarousel() {
+      // Build list of image sources using the provided pattern
+      srcList = [];
+      for (let i = 1; i <= totalImages; i++) {
+        srcList.push(imgPathPattern(i));
+      }
+
+      // Preload images and only build the carousel once all are done
+      const imgs = [];
+      track.innerHTML = '';
+
+      srcList.forEach(src => {
+        const img = document.createElement('img');
+        img.className = 'carousel-img';
+        img.src       = src;
+        img.alt       = '';
+        img.loading   = 'lazy';
+        track.appendChild(img);
+        imgs.push(img);
+      });
+
+      let done = 0;
+      function oneDone() {
+        done++;
+        if (done >= imgs.length) {
+          setTimeout(() => {
+            buildCarousel();
+            attachButtonListeners();
+            attachTouchEvents();
+            window.addEventListener('resize', handleResize);
+          }, 30);
         }
       }
 
-      if (isHorizontalSwipe) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    CAROUSEL_CONTAINER.addEventListener('touchend', e => {
-      if (!isTouching) return;
-      isTouching = false;
-
-      const touch = e.changedTouches[0];
-      const dx = touch.clientX - startX;
-
-      if (Math.abs(dx) > SWIPE_THRESHOLD && !isTransitioning) {
-        if (dx < 0) {
-          nextClick();
+      imgs.forEach(img => {
+        if (img.complete) {
+          oneDone();
         } else {
-          prevClick();
+          img.addEventListener('load', oneDone,  { once: true });
+          img.addEventListener('error', oneDone, { once: true });
         }
-      }
-    });
-  }
-
-  function initCarousel() {
-    if (!TRACK) return;
-
-    srcList = [];
-    for (let i = 1; i <= TOTAL_IMG; i++) {
-      srcList.push(`images/img_${i}.jpg`);
+      });
     }
 
-    TRACK.innerHTML = '';
-    const imgs = [];
-
-    srcList.forEach(src => {
-      const img = document.createElement('img');
-      img.className = 'carousel-img';
-      img.src       = src;
-      img.alt       = '';
-      img.loading   = 'lazy';
-      TRACK.appendChild(img);
-      imgs.push(img);
-    });
-
-    let done = 0;
-    function oneDone() {
-      done++;
-      if (done >= imgs.length) {
-        setTimeout(() => {
-          buildCarousel();
-          attachButtonListeners();
-          attachTouchEvents();
-          window.addEventListener('resize', handleResize);
-        }, 30);
-      }
-    }
-
-    imgs.forEach(img => {
-      if (img.complete) {
-        oneDone();
-      } else {
-        img.addEventListener('load', oneDone,  { once: true });
-        img.addEventListener('error', oneDone, { once: true });
-      }
-    });
+    initCarousel();
   }
 
-  initCarousel();
+  // Image carousel
+  setupCarousel({
+    container: CAROUSEL_CONTAINER,
+    track: TRACK,
+    prevBtn: PREV_BUTTON,
+    nextBtn: NEXT_BUTTON,
+    totalImages: TOTAL_IMG,
+    imgPathPattern: i => `images/img_${i}.jpg`
+  });
+
+  // Food carousel
+  setupCarousel({
+    container: CAROUSEL_FOOD_CONTAINER,
+    track: TRACK_FOOD,
+    prevBtn: PREV_FOOD_BUTTON,
+    nextBtn: NEXT_FOOD_BUTTON,
+    totalImages: TOTAL_FOOD_IMG,
+    imgPathPattern: i => `images/food_${i}.png`
+  });
 
   /* ==========================================
      LIGHTBOX
@@ -743,6 +915,59 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================
      LANGUAGE / TRANSLATIONS
   ========================================== */
+
+  function renderFoodMenu(lang) {
+    if (!FOOD_MENU_CONTAINER) return;
+    const menu = TRANSLATIONS[lang]?.food;
+    if (!menu) return;
+
+    FOOD_MENU_CONTAINER.innerHTML = '';
+
+    menu.forEach(category => {
+      const card = document.createElement('div');
+      card.className = 'food-card';
+
+      const h3 = document.createElement('h3');
+      h3.className = 'food-category';
+      h3.textContent = category.category;
+      card.appendChild(h3);
+
+      const ul = document.createElement('ul');
+      ul.className = 'food-list';
+
+      category.items.forEach(item => {
+        const li   = document.createElement('li');
+        const line = document.createElement('div');
+        line.className = 'food-line';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'food-name';
+        nameSpan.textContent = item.name;
+        line.appendChild(nameSpan);
+
+        if (item.price) {
+          const priceSpan = document.createElement('span');
+          priceSpan.className = 'food-price';
+          priceSpan.textContent = `${item.price}`;
+          line.appendChild(priceSpan);
+        }
+
+        li.appendChild(line);
+
+        if (item.desc) {
+          const descDiv = document.createElement('div');
+          descDiv.className = 'food-desc';
+          descDiv.textContent = item.desc;
+          li.appendChild(descDiv);
+        }
+
+        ul.appendChild(li);
+      });
+
+      card.appendChild(ul);
+      FOOD_MENU_CONTAINER.appendChild(card);
+    });
+  }
 
   function renderDrinks(lang) {
     if (!DRINKS_CONTAINER) return;
@@ -910,6 +1135,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // About text
     if (ABOUT_TEXT) ABOUT_TEXT.innerHTML = TRANSLATIONS[lang].about;
 
+    // Takeaway text
+    if (TAKEAWAY_TEXT) TAKEAWAY_TEXT.innerHTML = TRANSLATIONS[lang].takeaway;
+
+    // Takeaway "Öffnungszeiten" Heading
+    if (TAKEAWAY_HOURS_HEADING) {
+      const title = TRANSLATIONS[lang].takeaway_hours_title;
+      if (title) TAKEAWAY_HOURS_HEADING.textContent = title;
+    }
+
     // Contact headings
     CONTACT_ITEMS.forEach((item, i) => {
       const label = TRANSLATIONS[lang].contact[i];
@@ -923,16 +1157,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (selectedDiv && option) selectedDiv.textContent = option.textContent;
     });
 
-    // Drink note
-    if (DRINK_NOTE) {
-      const note = TRANSLATIONS[lang].drink_note;
-      if (note) {
-        DRINK_NOTE.textContent   = note;
-        DRINK_NOTE.style.display = 'block';
-      } else {
-        DRINK_NOTE.textContent   = '';
-        DRINK_NOTE.style.display = 'none';
-      }
+    const note = TRANSLATIONS[lang].vat_note;
+
+    // Takeaway VAT note
+    if (VAT_NOTE_FOOD) {
+        VAT_NOTE_FOOD.textContent = note;
+        VAT_NOTE_FOOD.style.display = 'block';
+    }
+
+    // Drinks VAT note
+    if (VAT_NOTE_DRINKS) {
+        VAT_NOTE_DRINKS.textContent = note;
+        VAT_NOTE_DRINKS.style.display = 'block';
     }
 
     // Website note
@@ -947,7 +1183,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Render drinks UI
+    renderFoodMenu(lang);
     renderDrinks(lang);
     renderDrinkCategoryNav(lang);
     renderMobileDrinkMenu(lang);
@@ -1193,7 +1429,10 @@ document.addEventListener('DOMContentLoaded', () => {
     lastIsDesktopTwoCols = isDesktopNow;
 
     if (currentLang) {
+      renderFoodMenu(currentLang);
       renderDrinks(currentLang);
+      renderDrinkCategoryNav(currentLang);
+      renderMobileDrinkMenu(currentLang);
     }
   });
 });

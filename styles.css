@@ -337,7 +337,8 @@ section h2 {
   position: relative;
 }
 
-.carousel-container {
+.carousel-container,
+.carousel-container-food {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -345,7 +346,12 @@ section h2 {
   object-fit: contain;
 }
 
-.carousel-track {
+.carousel-container-food {
+  margin-top: 2rem;
+}
+
+.carousel-track,
+.carousel-track-food {
   display: flex;
   gap: 1rem;
 }
@@ -363,8 +369,8 @@ section h2 {
   transform: scale(1.05);
 }
 
-.prev,
-.next {
+.prev, .prev-food,
+.next, .next-food {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -379,11 +385,11 @@ section h2 {
   z-index: 10;
 }
 
-.prev {
+.prev, .prev-food {
   left: 0.25rem;
 }
 
-.next {
+.next, .next-food {
   right: 0.25rem;
 }
 
@@ -398,8 +404,8 @@ section h2 {
   pointer-events: none;
 }
 
-.prev:hover,
-.next:hover {
+.prev:hover, .prev-food:hover,
+.next:hover, .next-food:hover {
   background: rgba(0,0,0,0.7);
 }
 
@@ -426,6 +432,86 @@ section h2 {
   color: #fff;
   font-size: 2.5rem;
   cursor: pointer;
+}
+
+/* ===========================
+   Takeaway
+=========================== */
+
+#takeaway {
+  text-align: center;
+  position: relative;
+  color: var(--text);
+}
+
+.takeaway-text {
+  text-align: center;
+}
+
+#takeaway .takeaway-item h3 {
+  font-family: var(--font-head);
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  margin-top: 3rem;
+  font-size: 1.1875rem;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 3rem auto 0 auto;
+}
+
+.food-card {
+  background: var(--bg-alt);
+  border: 1px solid #222;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: left;
+}
+
+.food-category {
+  font-family: var(--font-head);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.05rem;
+  margin: 0 0 0.75rem;
+}
+
+.food-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.food-list li {
+  margin-bottom: 0.6rem;
+}
+
+.food-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.food-name {
+  font-weight: 500;
+}
+
+.food-price {
+  font-family: var(--font-head);
+  color: var(--accent);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.food-desc {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.15rem;
 }
 
 /* ===========================
@@ -515,7 +601,7 @@ section h2 {
   margin-bottom: 0.25rem;
 }
 
-.drink-note {
+.vat-note {
   margin-top: 1.5rem;
   text-align: center;
   color: var(--accent);
@@ -690,13 +776,13 @@ footer {
     display: flex;
     justify-content: center;
     position: sticky;
-    top: 5.8rem;       
-    z-index: 70; 
-    background: var(--bg); 
+    top: 5.8rem;
+    z-index: 70;
+    background: var(--bg);
     padding: 0.5rem 0;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   section {
@@ -730,6 +816,10 @@ footer {
  #drinks .drink-grid {
     grid-template-columns: 1fr; 
   }
+
+  #takeaway .food-grid {
+    grid-template-columns: 1fr; 
+  }
 }
 
 @media (max-width: 610px) {
@@ -750,7 +840,15 @@ footer {
     margin-top: 0;
   }
 
+  .food-card {
+    padding: 1rem;
+  }
+
   .drink-grid {
+    gap: 1rem;
+  }
+
+  .food-grid {
     gap: 1rem;
   }
 
@@ -791,6 +889,9 @@ footer {
 
 @media (max-width: 320px) {
   .drink-menu-selector-container {
-    top: 5rem;       
+    top: 5rem;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);    
   }
 }

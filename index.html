@@ -104,6 +104,7 @@
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#about" data-key="nav-about"></a>
       <a href="#pictures" data-key="nav-pictures"></a>
+      <a href="#takeaway" data-key="nav-takeaway"></a>
       <a href="#drinks" data-key="nav-drinks"></a>
     </nav>
 
@@ -129,6 +130,7 @@
       <nav class="mobile-nav" aria-label="Mobile navigation">
         <a href="#about" data-key="nav-about"></a>
         <a href="#pictures" data-key="nav-pictures"></a>
+        <a href="#takeaway" data-key="nav-takeaway"></a>
       </nav>
 
       <div class="drink-menu-selector">
@@ -204,6 +206,30 @@
       </div>
     </section>
 
+    <section id="takeaway">
+      <h2 data-key="takeaway-title"></h2>
+      <p class="takeaway-text"></p>
+      <div class="takeaway-item">
+        <h3></h3>
+        <p>Mo-Fr: 11:30 - 14:00</p>
+      </div>
+      <div id="food-menu" class="food-grid"></div>
+      <p id="vat-note-food" class="vat-note"></p>
+      <div class="carousel-container-food">
+        <span class="prev-food" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
+            <path d="M14 4l-6 8 6 8" />
+          </svg>
+        </span>
+        <div class="carousel-track-food" id="carousel-track-food"></div>
+        <span class="next-food" aria-label="Next image">
+          <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
+            <path d="M10 4l6 8-6 8" />
+          </svg>
+        </span>
+      </div>
+    </section>
+
     <section id="drinks">
       <h2 data-key="drinks-title"></h2>
 
@@ -223,7 +249,7 @@
       </div>
 
       <div id="drinks-menu" class="drink-grid"></div>
-      <p id="drink-note" class="drink-note"></p>
+      <p id="vat-note-drinks" class="vat-note"></p>
     </section>
   </main>
 
