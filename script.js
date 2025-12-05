@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const TRACK                     = document.querySelector('.carousel-track');
   const PREV_BUTTON               = document.querySelector('.prev');
   const NEXT_BUTTON               = document.querySelector('.next');
-  const TOTAL_IMG                 = 7;
+  const TOTAL_IMG                 = 14;
   const CAROUSEL_FOOD_CONTAINER   = document.querySelector('.carousel-container-food');
   const TRACK_FOOD                = document.querySelector('.carousel-track-food');
   const PREV_FOOD_BUTTON          = document.querySelector('.prev-food');
@@ -548,6 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const LIGHTBOX                  = document.getElementById('lightbox');
   const LIGHTBOX_IMG              = document.querySelector('.lightbox-img');
   const CLOSE_BTN                 = document.querySelector('.lightbox .close');
+  const LIGHTBOX_PREV             = document.querySelector('.lightbox-prev');
+  const LIGHTBOX_NEXT             = document.querySelector('.lightbox-next');
 
   const SECTION_TITLES            = document.querySelectorAll('h2[data-key]');
   const LOGO_LINK                 = document.querySelector('header .logo');
@@ -635,12 +637,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!LIGHTBOX || !LIGHTBOX_IMG) return;
 
       track.querySelectorAll('img').forEach((img, index) => {
-        img.onclick = () => {
-          // Open global lightbox
-          LIGHTBOX.style.display = 'flex';
-          LIGHTBOX_IMG.src       = img.src;
-          LIGHTBOX_IMG.alt       = `Rocket Bar picture ${index + 1}`;
-          document.body.style.overflow = 'hidden';
+        img.onclick = e => {
+          e.stopPropagation();
+          const srcAttr = img.getAttribute('src');
+          let imgIndex = srcList.indexOf(srcAttr);
+
+          if (imgIndex === -1) {
+            imgIndex = index % srcList.length;
+          }
+
+          openLightboxFromList(srcList, imgIndex);
         };
       });
     }
@@ -895,21 +901,72 @@ document.addEventListener('DOMContentLoaded', () => {
      LIGHTBOX
   ========================================== */
 
+  let lightboxSources = [];
+  let lightboxIndex   = 0;
+
+  function closeLightbox() {
+    if (!LIGHTBOX) return;
+    LIGHTBOX.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
   if (CLOSE_BTN) {
-    CLOSE_BTN.addEventListener('click', () => {
-      if (!LIGHTBOX) return;
-      LIGHTBOX.style.display = 'none';
-      document.body.style.overflow = '';
+    CLOSE_BTN.addEventListener('click', e => {
+      e.stopPropagation();
+      closeLightbox();
     });
   }
 
   if (LIGHTBOX) {
     LIGHTBOX.addEventListener('click', e => {
       if (e.target === LIGHTBOX) {
-        LIGHTBOX.style.display = 'none';
-        document.body.style.overflow = '';
+        closeLightbox();
       }
     });
+  }
+
+  if (LIGHTBOX_PREV) {
+    LIGHTBOX_PREV.addEventListener('click', e => {
+      e.stopPropagation();
+      showPrevLightbox();
+    });
+  }
+
+  if (LIGHTBOX_NEXT) {
+    LIGHTBOX_NEXT.addEventListener('click', e => {
+      e.stopPropagation();
+      showNextLightbox();
+    });
+  }
+
+  function showLightboxImage() {
+    if (!LIGHTBOX_IMG || !lightboxSources.length) return;
+    LIGHTBOX_IMG.src = lightboxSources[lightboxIndex];
+    LIGHTBOX_IMG.alt = `Rocket Bar picture ${lightboxIndex + 1}`;
+  }
+
+  function openLightboxFromList(sources, startIndex = 0) {
+    if (!LIGHTBOX) return;
+    if (!Array.isArray(sources) || !sources.length) return;
+
+    lightboxSources = sources.slice(); // Kopie
+    lightboxIndex   = Math.max(0, Math.min(startIndex, lightboxSources.length - 1));
+
+    LIGHTBOX.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    showLightboxImage();
+  }
+
+  function showNextLightbox() {
+    if (!lightboxSources.length) return;
+    lightboxIndex = (lightboxIndex + 1) % lightboxSources.length;
+    showLightboxImage();
+  }
+
+  function showPrevLightbox() {
+    if (!lightboxSources.length) return;
+    lightboxIndex = (lightboxIndex - 1 + lightboxSources.length) % lightboxSources.length;
+    showLightboxImage();
   }
 
   /* ==========================================
@@ -1118,11 +1175,12 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('language', lang);
 
     // Update all nav labels
-    document.querySelectorAll('nav').forEach(nav => {
-      const links = nav.querySelectorAll('a');
-      links.forEach((link, i) => {
-        if (TRANSLATIONS[lang].nav[i]) link.textContent = TRANSLATIONS[lang].nav[i];
-      });
+    document.querySelectorAll('a[data-key]').forEach(link => {
+      const key = link.dataset.key; // z.B. "nav-about"
+      const index = ['nav-about','nav-pictures','nav-takeaway','nav-drinks'].indexOf(key);
+      if (index >= 0) {
+        link.textContent = TRANSLATIONS[lang].nav[index];
+      }
     });
 
     // Update section titles
@@ -1281,9 +1339,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      closeMobileMenu();
+      if (LIGHTBOX && LIGHTBOX.style.display === 'flex') {
+        closeLightbox();
+      } else {
+        closeMobileMenu();
+      }
+    }
+
+    if (LIGHTBOX && LIGHTBOX.style.display === 'flex') {
+      if (e.key === 'ArrowRight') {
+        showNextLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showPrevLightbox();
+      }
     }
   });
+
+  // Swipe in der Lightbox
+  if (LIGHTBOX) {
+    let startX = 0;
+    let startY = 0;
+    let isTouching = false;
+    const SWIPE_THRESHOLD = 30;
+
+    LIGHTBOX.addEventListener('touchstart', e => {
+      if (e.touches.length !== 1) return;
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      isTouching = true;
+    }, { passive: true });
+
+    LIGHTBOX.addEventListener('touchend', e => {
+      if (!isTouching) return;
+      isTouching = false;
+
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+        if (dx < 0) {
+          showNextLightbox();
+        } else {
+          showPrevLightbox();
+        }
+      }
+    });
+  }
 
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {

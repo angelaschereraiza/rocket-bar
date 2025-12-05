@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Rocket Bar</title>
 
   <link rel="icon" href="/images/favicon.ico" sizes="any" />
 
   <!-- SEO -->
-  <meta name="description" content="Rocket Bar in Bern - Rock & Metal Bar beim Bahnhof Bern. Drinks, Shots und gute Musik in lockerer Atmosphäre. Genfergasse 10, 3011 Bern." />
-  <meta name="keywords" content="Rocket Bar Bern, Rock Bar Bern, Metal Bar Bern, Rock Kneipe Bern, Bar beim Bahnhof Bern, Cocktailbar Bern, Shots Bern, Rock Musik Bar Bern" />
+  <meta name="description" content="Rocket Bar in Bern - Rock & Metal Bar mit grosser Drink- und Shot-Auswahl sowie vietnamesischem Bánh Mì Take-Away von Saigon Pearl. Direkt beim Bahnhof, Genfergasse 10, 3011 Bern." />
+  <meta name="keywords" content="Rocket Bar Bern, Rock Bar Bern, Metal Bar Bern, Bánh Mì Bern, vietnamesisches Take Away Bern, Saigon Pearl Bern, Mittagessen Bern Bahnhof, Bar beim Bahnhof Bern, Cocktailbar Bern, Shots Bern, Rock Musik Bar Bern" />
   <meta name="robots" content="index,follow" />
   <meta http-equiv="content-language" content="de-CH" />
 
@@ -24,8 +23,10 @@
   <link rel="canonical" href="https://www.rocket-bar.ch/" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
-  <meta property="og:description" content="Rock & Metal Bar mit grosser Drink- und Shot-Auswahl direkt beim Bahnhof Bern. Besuche uns in der Genfergasse 10." />
+  <meta property="og:title"
+        content="Rocket Bar Bern | Rock & Metal Bar & Bánh Mì Take-Away beim Bahnhof" />
+  <meta property="og:description"
+        content="Rock & Metal Bar mit Drinks, Shots und vietnamesischem Bánh Mì Take-Away von Saigon Pearl - nur wenige Schritte vom Bahnhof Bern entfernt." />
   <meta property="og:image" content="https://www.rocket-bar.ch/images/logo.jpg" />
   <meta property="og:url" content="https://www.rocket-bar.ch/" />
   <meta property="og:type" content="website" />
@@ -33,9 +34,12 @@
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
-  <meta name="twitter:description" content="Drinks, Shots & Rock/Metal-Sound - Rocket Bar in der Genfergasse 10, 3011 Bern." />
-  <meta name="twitter:image" content="https://www.rocket-bar.ch/images/rocketbar-social.jpg" />
+  <meta name="twitter:title"
+        content="Rocket Bar Bern | Rock & Metal Bar & Bánh Mì Take-Away" />
+  <meta name="twitter:description"
+        content="Drinks, Shots & Bánh Mì Take-Away von Saigon Pearl - Rocket Bar in der Genfergasse 10, 3011 Bern." />
+  <meta name="twitter:image"
+        content="https://www.rocket-bar.ch/images/rocketbar-social.jpg" />
 
   <meta name="theme-color" content="#000000" />
 
@@ -62,7 +66,13 @@
       "longitude": 7.4391
     },
     "priceRange": "CHF",
-    "servesCuisine": "Drinks, Cocktails, Shots",
+    "servesCuisine": [
+      "Drinks",
+      "Cocktails",
+      "Shots",
+      "Vietnamese",
+      "Bánh Mì"
+    ],
     "sameAs": [
       "https://www.facebook.com/p/Rocket-Bar-61578631981520/",
       "https://www.instagram.com/rocket_bar_bern/"
@@ -85,8 +95,15 @@
         "dayOfWeek": "Saturday",
         "opens": "18:00",
         "closes": "03:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "11:30",
+        "closes": "14:00"
       }
-    ]
+    ],
+    "hasMenu": "https://www.rocket-bar.ch/#takeaway"
   }
   </script>
 
@@ -102,15 +119,15 @@
     </a>
 
     <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#about" data-key="nav-about"></a>
-      <a href="#pictures" data-key="nav-pictures"></a>
-      <a href="#takeaway" data-key="nav-takeaway"></a>
-      <a href="#drinks" data-key="nav-drinks"></a>
+      <a href="#about" data-key="nav-about">About</a>
+      <a href="#pictures" data-key="nav-pictures">Pictures</a>
+      <a href="#takeaway" data-key="nav-takeaway">Takeaway</a>
+      <a href="#drinks" data-key="nav-drinks">Drinks</a>
     </nav>
 
     <div class="language-selector-container">
       <div class="language-selector" aria-label="Select language">
-        <div class="selected">Deutsch</div>
+        <div class="selected">English</div>
         <ul class="options">
           <li data-value="de">Deutsch</li>
           <li data-value="fr">Français</li>
@@ -119,7 +136,7 @@
       </div>
     </div>
 
-    <button class="hamburger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+    <button type="button" class="hamburger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
       </span>
@@ -128,18 +145,18 @@
     <div id="mobile-menu" class="mobile-menu" hidden aria-hidden="true">
 
       <nav class="mobile-nav" aria-label="Mobile navigation">
-        <a href="#about" data-key="nav-about"></a>
-        <a href="#pictures" data-key="nav-pictures"></a>
-        <a href="#takeaway" data-key="nav-takeaway"></a>
+        <a href="#about" data-key="nav-about">About</a>
+        <a href="#pictures" data-key="nav-pictures">Pictures</a>
+        <a href="#takeaway" data-key="nav-takeaway">Takeaway</a>
       </nav>
 
       <div class="drink-menu-selector">
-        <div class="drink-menu-selected" data-key="nav-drinks"></div>
+        <div class="drink-menu-selected" data-key="nav-drinks">Drinks</div>
         <ul class="drink-menu-options"></ul>
       </div>
 
       <div class="language-selector" aria-label="Select language">
-        <div class="selected">Deutsch</div>
+        <div class="selected">English</div>
         <ul class="options">
           <li data-value="de">Deutsch</li>
           <li data-value="fr">Français</li>
@@ -151,8 +168,8 @@
 
   <main>
     <section id="about">
-      <h2 data-key="about-title"></h2>
-      <p class="about-text"></p>
+      <h2 data-key="about-title">About</h2>
+      <p class="about-text">Welcome to the Rocket Bar, where metal, rock and good drinks melt into one. Just a few steps from Bern’s main station, we offer an atmosphere that feels like home, with loud music, cold beer and blazing riffs.</p>
 
       <div class="contact-container">
         <div class="contact-item">
@@ -202,7 +219,20 @@
 
       <div id="lightbox" class="lightbox" aria-modal="true" role="dialog">
         <span class="close" aria-label="Close image">&times;</span>
+
+        <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
+            <path d="M14 4l-6 8 6 8" />
+          </svg>
+        </button>
+
         <img class="lightbox-img" src="" alt="Rocket Bar picture" />
+
+        <button type="button" class="lightbox-nav lightbox-next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
+            <path d="M10 4l6 8-6 8" />
+          </svg>
+        </button>
       </div>
     </section>
 

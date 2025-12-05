@@ -47,40 +47,6 @@ header {
 }
 
 /* ===========================
-   Navigation (Desktop)
-=========================== */
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-nav a {
-  color: var(--text);
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 500;
-  position: relative;
-}
-
-nav a::after {
-  content: '';
-  display: block;
-  height: 0.125rem;
-  background: var(--accent);
-  width: 0;
-  transition: width 0.3s;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-/* ===========================
    Language Selector
 =========================== */
 
@@ -149,6 +115,40 @@ nav a:hover::after {
 .language-selector.open .selected::after {
   transform: rotate(180deg);
   color: var(--accent);
+}
+
+/* ===========================
+   Navigation (Desktop)
+=========================== */
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  display: block;
+  height: 0.125rem;
+  background: var(--accent);
+  width: 0;
+  transition: width 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
 }
 
 /* ===========================
@@ -370,7 +370,8 @@ section h2 {
 }
 
 .prev, .prev-food,
-.next, .next-food {
+.next, .next-food,
+.lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -385,11 +386,11 @@ section h2 {
   z-index: 10;
 }
 
-.prev, .prev-food {
+.prev, .prev-food, .lightbox-prev {
   left: 0.25rem;
 }
 
-.next, .next-food {
+.next, .next-food, .lightbox-next {
   right: 0.25rem;
 }
 
@@ -405,7 +406,8 @@ section h2 {
 }
 
 .prev:hover, .prev-food:hover,
-.next:hover, .next-food:hover {
+.next:hover, .next-food:hover,
+.lightbox-nav:hover {
   background: rgba(0,0,0,0.7);
 }
 
@@ -432,6 +434,36 @@ section h2 {
   color: #fff;
   font-size: 2.5rem;
   cursor: pointer;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 2.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.lightbox-prev {
+  left: 1rem;
+}
+
+.lightbox-next {
+  right: 1rem;
+}
+
+.lightbox-nav:hover {
+  background: rgba(0,0,0,0.75);
 }
 
 /* ===========================
