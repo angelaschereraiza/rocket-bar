@@ -595,19 +595,21 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn,
     nextBtn,
     totalImages,
-    imgPathPattern
+    getThumbnailSrc,
+    getFullSrc
   }) {
     if (!track || !container || !totalImages) return;
 
-    let srcList         = [];
-    let visibleSlides   = 1;
-    let gapPx           = 0;
-    let slideWidth      = 0;
-    let stepPx          = 0;
-    let cloneCount      = 0;
-    let internalIndex   = 0;
-    let isTransitioning = false;
-    let resizeTimeout   = null;
+    let thumbSources     = [];
+    let fullSources      = [];
+    let visibleSlides    = 1;
+    let gapPx            = 0;
+    let slideWidth       = 0;
+    let stepPx           = 0;
+    let cloneCount       = 0;
+    let internalIndex    = 0;
+    let isTransitioning  = false;
+    let resizeTimeout    = null;
 
     function getTrackGap() {
       const cs  = getComputedStyle(track);
@@ -627,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const containerWidth = container.getBoundingClientRect().width || slideWidth;
       visibleSlides = Math.max(
         1,
-        Math.min(srcList.length, Math.round(containerWidth / stepPx))
+        Math.min(thumbSources.length, Math.round(containerWidth / stepPx))
       );
 
       cloneCount = visibleSlides;
@@ -636,17 +638,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function attachSlideClickListeners() {
       if (!LIGHTBOX || !LIGHTBOX_IMG) return;
 
-      track.querySelectorAll('img').forEach((img, index) => {
+      track.querySelectorAll('img').forEach(img => {
         img.onclick = e => {
           e.stopPropagation();
-          const srcAttr = img.getAttribute('src');
-          let imgIndex = srcList.indexOf(srcAttr);
 
-          if (imgIndex === -1) {
-            imgIndex = index % srcList.length;
-          }
+          // Read logical index from data-index (0..n-1)
+          const logicalIndex = Number(img.dataset.index) || 0;
 
-          openLightboxFromList(srcList, imgIndex);
+          // Open lightbox using fullSources and the logical index
+          openLightboxFromList(fullSources, logicalIndex);
         };
       });
     }
@@ -661,16 +661,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function buildCarousel() {
-      // Reset track
       track.innerHTML = '';
 
-      // Add original images
-      srcList.forEach(src => {
+      // Create original images with a data-index
+      thumbSources.forEach((src, index) => {
         const img = document.createElement('img');
         img.className = 'carousel-img';
         img.src       = src;
         img.alt       = '';
         img.loading   = 'lazy';
+
+        // Logical index of this slide (0..n-1)
+        img.dataset.index = String(index);
+
         track.appendChild(img);
       });
 
@@ -685,7 +688,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Prepend clones of last items (for infinite effect)
       const lastItems = originals.slice(-cc);
       lastItems.forEach(node => {
-        const clone = node.cloneNode(true);
+        const clone = node.cloneNode(true); // keeps data-index
         clone.classList.add('clone');
         track.insertBefore(clone, track.firstChild);
       });
@@ -693,7 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Append clones of first items (for infinite effect)
       const firstItems = originals.slice(0, cc);
       firstItems.forEach(node => {
-        const clone = node.cloneNode(true);
+        const clone = node.cloneNode(true); // keeps data-index
         clone.classList.add('clone');
         track.appendChild(clone);
       });
@@ -713,7 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isTransitioning) return;
       isTransitioning = true;
 
-      const n = srcList.length;
+      const n = thumbSources.length;
       if (!n) return;
 
       // If we are in the first clone zone, jump to the corresponding real items
@@ -733,7 +736,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isTransitioning) return;
       isTransitioning = true;
 
-      const n = srcList.length;
+      const n = thumbSources.length;
       if (!n) return;
 
       const originalsEnd = cloneCount + n;
@@ -821,27 +824,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const dx = touch.clientX - startX;
 
         if (Math.abs(dx) > SWIPE_THRESHOLD && !isTransitioning) {
-          if (dx < 0) {
-            nextClick();
-          } else {
-            prevClick();
-          }
+          if (dx < 0) nextClick();
+          else prevClick();
         }
       });
     }
 
     function initCarousel() {
       // Build list of image sources using the provided pattern
-      srcList = [];
+      thumbSources = [];
+      fullSources  = [];
+
       for (let i = 1; i <= totalImages; i++) {
-        srcList.push(imgPathPattern(i));
+        const thumb = getThumbnailSrc(i);
+        const full  = getFullSrc ? getFullSrc(i) : thumb;
+
+        thumbSources.push(thumb);
+        fullSources.push(full);
       }
 
       // Preload images and only build the carousel once all are done
       const imgs = [];
       track.innerHTML = '';
 
-      srcList.forEach(src => {
+      thumbSources.forEach(src => {
         const img = document.createElement('img');
         img.className = 'carousel-img';
         img.src       = src;
@@ -877,24 +883,26 @@ document.addEventListener('DOMContentLoaded', () => {
     initCarousel();
   }
 
-  // Image carousel
+  // Image carousel (Thumbnails + Fullsize)
   setupCarousel({
     container: CAROUSEL_CONTAINER,
     track: TRACK,
     prevBtn: PREV_BUTTON,
     nextBtn: NEXT_BUTTON,
     totalImages: TOTAL_IMG,
-    imgPathPattern: i => `images/img_${i}.jpg`
+    getThumbnailSrc: i => `images/img_${i}_thumb.webp`,
+    getFullSrc:      i => `images/img_${i}.webp`
   });
 
-  // Food carousel
+  // Food carousel (Thumbnails + Fullsize)
   setupCarousel({
     container: CAROUSEL_FOOD_CONTAINER,
     track: TRACK_FOOD,
     prevBtn: PREV_FOOD_BUTTON,
     nextBtn: NEXT_FOOD_BUTTON,
     totalImages: TOTAL_FOOD_IMG,
-    imgPathPattern: i => `images/food_${i}.png`
+    getThumbnailSrc: i => `images/food_${i}_thumb.webp`,
+    getFullSrc:      i => `images/food_${i}.webp`
   });
 
   /* ==========================================
