@@ -121,8 +121,8 @@
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#about" data-key="nav-about">About</a>
       <a href="#pictures" data-key="nav-pictures">Pictures</a>
-      <a href="#takeaway" data-key="nav-takeaway">Takeaway</a>
       <a href="#drinks" data-key="nav-drinks">Drinks</a>
+      <a href="#takeaway" data-key="nav-takeaway">Takeaway</a>
     </nav>
 
     <div class="language-selector-container">
@@ -147,13 +147,16 @@
       <nav class="mobile-nav" aria-label="Mobile navigation">
         <a href="#about" data-key="nav-about">About</a>
         <a href="#pictures" data-key="nav-pictures">Pictures</a>
-        <a href="#takeaway" data-key="nav-takeaway">Takeaway</a>
       </nav>
 
       <div class="drink-menu-selector">
         <div class="drink-menu-selected" data-key="nav-drinks">Drinks</div>
         <ul class="drink-menu-options"></ul>
       </div>
+
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="#takeaway" data-key="nav-takeaway">Takeaway</a>
+      </nav>
 
       <div class="language-selector" aria-label="Select language">
         <div class="selected">English</div>
@@ -236,6 +239,28 @@
       </div>
     </section>
 
+    <section id="drinks">
+      <h2 data-key="drinks-title"></h2>
+
+      <div id="drink-category-nav" class="drink-category-nav"></div>
+
+      <div class="drink-menu-selector-container">
+        <div class="drink-menu-selector">
+          <div class="drink-menu-selected" data-key="nav-drinks"></div>
+          <ul class="drink-menu-options"></ul>
+        </div>
+      </div>
+
+      <div class="shots-video">
+        <video controls autoplay muted loop>
+          <source src="images/shot.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div id="drinks-menu" class="drink-grid"></div>
+      <p id="vat-note-drinks" class="vat-note"></p>
+    </section>
+
     <section id="takeaway">
       <h2 data-key="takeaway-title"></h2>
       <p class="takeaway-text"></p>
@@ -258,28 +283,6 @@
           </svg>
         </span>
       </div>
-    </section>
-
-    <section id="drinks">
-      <h2 data-key="drinks-title"></h2>
-
-      <div id="drink-category-nav" class="drink-category-nav"></div>
-
-      <div class="drink-menu-selector-container">
-        <div class="drink-menu-selector">
-          <div class="drink-menu-selected" data-key="nav-drinks"></div>
-          <ul class="drink-menu-options"></ul>
-        </div>
-      </div>
-
-      <div class="shots-video">
-        <video controls autoplay muted loop>
-          <source src="images/shot.mp4" type="video/mp4" />
-        </video>
-      </div>
-
-      <div id="drinks-menu" class="drink-grid"></div>
-      <p id="vat-note-drinks" class="vat-note"></p>
     </section>
   </main>
 

@@ -94,7 +94,7 @@ const TRANSLATIONS = {
         category: 'Alkopop',
         items: [
           { name: 'Smirnoff Ice',              desc: '3.3 dl | 4% (GBR)',     price: '7.00' },
-          { name: 'White Claw Hard Seltzer',   desc: '3.3 dl | 4.5% (USA)',  price: '8.00' }
+          { name: 'White Claw Hard Seltzer',   desc: '3.3 dl | 4.5% (USA)',  price: '9.00' }
         ]
       },
       {
@@ -175,7 +175,8 @@ const TRANSLATIONS = {
         ]
       }
     ],
-    vat_note: 'Alle Preise in CHF inkl. 8.1% MWST',
+    vat_note: 'Alle Preise in CHF inkl. 8.1% MWST. ',
+    custom_note: 'Getränke können auch nach Wunsch bestellt werden.',
     website_note: 'Webseite von ',
   },
   fr: {
@@ -269,7 +270,7 @@ const TRANSLATIONS = {
         category: 'Alcopops',
         items: [
           { name: 'Smirnoff Ice',            desc: '3.3 dl | 4% (GBR)',   price: '7.00' },
-          { name: 'White Claw Hard Seltzer', desc: '3.3 dl | 4.5% (USA)', price: '8.00' }
+          { name: 'White Claw Hard Seltzer', desc: '3.3 dl | 4.5% (USA)', price: '9.00' }
         ]
       },
       {
@@ -350,7 +351,8 @@ const TRANSLATIONS = {
         ]
       }
     ],
-    vat_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse',
+    vat_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse. ',
+    custom_note: 'Les boissons peuvent aussi être commandées selon vos envies.',
     website_note: 'Site web de ',
   },
   en: {
@@ -444,7 +446,7 @@ const TRANSLATIONS = {
         category: 'Alcopops',
         items: [
           { name: 'Smirnoff Ice',            desc: '3.3 dl | 4% (GBR)',   price: '7.00' },
-          { name: 'White Claw Hard Seltzer', desc: '3.3 dl | 4.5% (USA)', price: '8.00' }
+          { name: 'White Claw Hard Seltzer', desc: '3.3 dl | 4.5% (USA)', price: '9.00' }
         ]
       },
       {
@@ -525,7 +527,8 @@ const TRANSLATIONS = {
         ]
       }
     ],
-    vat_note: 'All prices in CHF incl. 8.1% VAT',
+    vat_note: 'All prices in CHF incl. 8.1% VAT. ',
+    custom_note: 'Drinks can also be ordered to your preference.',
     website_note: 'Website by ',
   }
 };
@@ -1223,17 +1226,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (selectedDiv && option) selectedDiv.textContent = option.textContent;
     });
 
-    const note = TRANSLATIONS[lang].vat_note;
+    const vat_note = TRANSLATIONS[lang].vat_note;
+    const custom_note = TRANSLATIONS[lang].custom_note;
 
     // Takeaway VAT note
     if (VAT_NOTE_FOOD) {
-        VAT_NOTE_FOOD.textContent = note;
+        VAT_NOTE_FOOD.textContent = vat_note;
         VAT_NOTE_FOOD.style.display = 'block';
     }
 
     // Drinks VAT note
     if (VAT_NOTE_DRINKS) {
-        VAT_NOTE_DRINKS.textContent = note;
+        VAT_NOTE_DRINKS.textContent = vat_note + custom_note;
         VAT_NOTE_DRINKS.style.display = 'block';
     }
 
