@@ -554,15 +554,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const LIGHTBOX_PREV             = document.querySelector('.lightbox-prev');
   const LIGHTBOX_NEXT             = document.querySelector('.lightbox-next');
 
-  const SECTION_TITLES            = document.querySelectorAll('h2[data-key]');
+  const SECTION_TITLES            = document.querySelectorAll('h1[data-key]');
   const LOGO_LINK                 = document.querySelector('header .logo');
   const ABOUT_TEXT                = document.querySelector('.about-text');
   const TAKEAWAY_TEXT             = document.querySelector('.takeaway-text');
-  const CONTACT_ITEMS             = document.querySelectorAll('.contact-item h3');
+  const CONTACT_ITEMS             = document.querySelectorAll('.contact-item h2');
   const LANGUAGE_SELECTORS        = document.querySelectorAll('.language-selector');
   const WEBSITE_NOTE              = document.getElementById('website-note');
 
-  const TAKEAWAY_HOURS_HEADING    = document.querySelector('#takeaway .takeaway-item h3');
+  const TAKEAWAY_HOURS_HEADING    = document.querySelector('#takeaway .takeaway-item h2');
   const FOOD_MENU_CONTAINER       = document.getElementById('food-menu');
   const DRINKS_CONTAINER          = document.getElementById('drinks-menu');
   const DRINK_CATEGORY_NAV        = document.getElementById('drink-category-nav');
@@ -599,7 +599,8 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn,
     totalImages,
     getThumbnailSrc,
-    getFullSrc
+    getFullSrc,
+    getAlt
   }) {
     if (!track || !container || !totalImages) return;
 
@@ -671,10 +672,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'carousel-img';
         img.src       = src;
-        img.alt       = '';
+        img.alt = typeof getAlt === 'function' ? getAlt(index) : `Carousel image ${index + 1}`;
         img.loading   = 'lazy';
-
-        // Logical index of this slide (0..n-1)
         img.dataset.index = String(index);
 
         track.appendChild(img);
@@ -850,11 +849,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const imgs = [];
       track.innerHTML = '';
 
-      thumbSources.forEach(src => {
+      thumbSources.forEach((src, index) => {
         const img = document.createElement('img');
         img.className = 'carousel-img';
         img.src       = src;
-        img.alt       = '';
+        img.alt = typeof getAlt === 'function' ? getAlt(index) : `Carousel image ${index + 1}`;
         img.loading   = 'lazy';
         track.appendChild(img);
         imgs.push(img);
@@ -894,7 +893,8 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn: NEXT_BUTTON,
     totalImages: TOTAL_IMG,
     getThumbnailSrc: i => `images/img_${i}_thumb.webp`,
-    getFullSrc:      i => `images/img_${i}.webp`
+    getFullSrc:      i => `images/img_${i}.webp`,
+    getAlt:          i => `Rocket Bar picture ${i + 1}`
   });
 
   // Food carousel (Thumbnails + Fullsize)
@@ -905,7 +905,8 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn: NEXT_FOOD_BUTTON,
     totalImages: TOTAL_FOOD_IMG,
     getThumbnailSrc: i => `images/food_${i}_thumb.webp`,
-    getFullSrc:      i => `images/food_${i}.webp`
+    getFullSrc:      i => `images/food_${i}.webp`,
+    getAlt:          i => `Rocket Bar Takeaway picture ${i + 1}` 
   });
 
   /* ==========================================
@@ -995,10 +996,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.className = 'food-card';
 
-      const h3 = document.createElement('h3');
-      h3.className = 'food-category';
-      h3.textContent = category.category;
-      card.appendChild(h3);
+      const h2 = document.createElement('h2');
+      h2.className = 'food-category';
+      h2.textContent = category.category;
+      card.appendChild(h2);
 
       const ul = document.createElement('ul');
       ul.className = 'food-list';
@@ -1097,10 +1098,10 @@ document.addEventListener('DOMContentLoaded', () => {
     card.className = 'drink-card';
     card.dataset.categoryIndex = String(categoryIndex);
 
-    const h3 = document.createElement('h3');
-    h3.className = 'drink-category';
-    h3.textContent = category.category;
-    card.appendChild(h3);
+    const h2 = document.createElement('h2');
+    h2.className = 'drink-category';
+    h2.textContent = category.category;
+    card.appendChild(h2);
 
     if (category.note && partIndex === 0) {
       const note = document.createElement('div');
