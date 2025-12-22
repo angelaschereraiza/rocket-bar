@@ -178,6 +178,54 @@ const TRANSLATIONS = {
     vat_note: 'Alle Preise in CHF inkl. 8.1% MWST. ',
     custom_note: 'Getränke können auch nach Wunsch bestellt werden.',
     website_note: 'Webseite von ',
+    imprint: 'Impressum',
+    privacy: 'Datenschutzerklärung',
+    imprint_html: `
+      <h3>Unternehmen</h3>
+      <p>
+        Rocket Bar GmbH<br>
+        Genfergasse 10<br>
+        3011 Bern<br>
+        Schweiz
+      </p>
+
+      <h3>Kontakt</h3>
+      <p>
+        Telefon: <a href="tel:+41768170517">+41 76 817 05 17</a><br>
+        E-Mail: <a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a>
+      </p>
+
+      <h3>Handelsregister des Kantons Bern</h3>
+      <p>CHE-232.310.061</p>
+
+      <h3>Haftungshinweis</h3>
+      <p>
+        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links.
+        Für den Inhalt der verlinkten Seiten sind ausschliesslich deren Betreiber verantwortlich.
+      </p>
+    `,
+    privacy_html: `
+      <h3>Allgemeines</h3>
+      <p>
+        Gestützt auf Artikel 13 der schweizerischen Bundesverfassung und die datenschutzrechtlichen Bestimmungen des Bundes hat jede Person Anspruch auf Schutz ihrer Privatsphäre sowie auf Schutz vor Missbrauch ihrer persönlichen Daten. Die Rocket Bar GmbH hält diese Bestimmungen ein. Personendaten werden vertraulich behandelt und nicht an Dritte verkauft.
+      </p>
+
+      <h3>Server-Logfiles</h3>
+      <p>
+        Beim Aufruf der Website können technisch bedingt Daten (z.B. IP-Adresse, Datum/Uhrzeit, aufgerufene Seite, User-Agent)
+        in Server-Logfiles verarbeitet werden, um Betrieb und Sicherheit zu gewährleisten.
+      </p>
+
+      <h3>Kontaktaufnahme</h3>
+      <p>
+        Wenn du uns per E-Mail kontaktierst, verarbeiten wir die von dir übermittelten Daten zur Bearbeitung deiner Anfrage.
+      </p>
+
+      <h3>Externe Links / Social Media</h3>
+      <p>
+        Diese Website enthält Links zu externen Anbietern (z.B. Instagram, Facebook). Für die Datenbearbeitung nach dem Anklicken des Links ist der jeweilige Anbieter verantwortlich.
+      </p>
+    `
   },
   fr: {
     nav: ['À propos', 'Images', 'Takeaway', 'Boissons'],
@@ -354,6 +402,54 @@ const TRANSLATIONS = {
     vat_note: 'Tous les prix sont indiqués en CHF, TVA de 8,1 % incluse. ',
     custom_note: 'Les boissons peuvent aussi être commandées selon vos envies.',
     website_note: 'Site web de ',
+    imprint: 'Mentions légales',
+    privacy: 'Politique de confidentialité',
+    imprint_html: `
+      <h3>Entreprise</h3>
+      <p>
+        Rocket Bar Sàrl<br>
+        Genfergasse 10<br>
+        3011 Berne<br>
+        Suisse
+      </p>
+
+      <h3>Contact</h3>
+      <p>
+        Téléphone: <a href="tel:+41768170517">+41 76 817 05 17</a><br>
+        E-mail: <a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a>
+      </p>
+
+      <h3>Registre du commerce du canton de Berne</h3>
+      <p>CHE-232.310.061</p>
+
+      <h3>Responsabilité</h3>
+      <p>
+        Nous déclinons toute responsabilité concernant le contenu des liens externes. Les opérateurs des sites liés
+        sont seuls responsables de leurs contenus.
+      </p>
+    `,
+    privacy_html: `
+      <h3>Généralités</h3>
+      <p>
+        Conformément à l’article 13 de la Constitution fédérale suisse et aux dispositions fédérales en matière de protection des données, toute personne a droit au respect de sa vie privée ainsi qu’à la protection contre l’utilisation abusive de ses données personnelles. Rocket Bar Sàrl respecte ces dispositions. Les données personnelles sont traitées de manière confidentielle et ne sont pas vendues à des tiers.
+      </p>
+
+      <h3>Journaux du serveur</h3>
+      <p>
+        Pour des raisons techniques, des données (p.ex. adresse IP, date/heure, page consultée, user-agent) peuvent
+        être traitées afin d’assurer le fonctionnement et la sécurité.
+      </p>
+
+      <h3>Contact</h3>
+      <p>
+        Si vous nous contactez par e-mail, nous traitons les données transmises afin de répondre à votre demande.
+      </p>
+
+      <h3>Liens externes / Réseaux sociaux</h3>
+      <p>
+        Ce site contient des liens vers des prestataires externes (par ex. Instagram, Facebook). Le prestataire concerné est responsable du traitement des données après le clic sur le lien.
+      </p>
+    `
   },
   en: {
     nav: ['About', 'Pictures', 'Takeaway', 'Drinks'],
@@ -530,6 +626,52 @@ const TRANSLATIONS = {
     vat_note: 'All prices in CHF incl. 8.1% VAT. ',
     custom_note: 'Drinks can also be ordered to your preference.',
     website_note: 'Website by ',
+    imprint: 'Imprint',
+    privacy: 'Privacy Policy',
+    imprint_html: `
+      <h3>Company</h3>
+      <p>
+        Rocket Bar GmbH<br>
+        Genfergasse 10<br>
+        3011 Bern<br>
+        Switzerland
+      </p>
+
+      <h3>Contact</h3>
+      <p>
+        Phone: <a href="tel:+41768170517">+41 76 817 05 17</a><br>
+        Email: <a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a>
+      </p>
+
+      <h3>Commercial Register of the Canton of Bern</h3>
+      <p>CHE-232.310.061</p>
+
+      <h3>Disclaimer</h3>
+      <p>
+        We do not assume any liability for the content of external links. The operators of linked pages are solely responsible.
+      </p>
+    `,
+    privacy_html: `
+      <h3>General</h3>
+      <p>
+        Based on Article 13 of the Swiss Federal Constitution and the data protection provisions of the Swiss Confederation, every person has the right to privacy and to protection against misuse of their personal data. Rocket Bar GmbH complies with these provisions. Personal data is treated confidentially and is not sold to third parties.
+      </p>
+
+      <h3>Server logs</h3>
+      <p>
+        For technical reasons, data (e.g., IP address, date/time, requested page, user-agent) may be processed to ensure operation and security.
+      </p>
+
+      <h3>Contact</h3>
+      <p>
+        If you contact us by email, we process the data you provide to handle your request.
+      </p>
+
+      <h3>External links / Social media</h3>
+      <p>
+        This website contains links to external providers (e.g. Instagram, Facebook). The respective provider is responsible for data processing after clicking the link.
+      </p>
+    `    
   }
 };
 
@@ -573,22 +715,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const HAMBURGER                 = document.querySelector('.hamburger');
   const MOBILE_MENU               = document.getElementById('mobile-menu');
 
+  const LEGAL_MODAL               = document.getElementById('legal-modal');
+  const MODAL_TITLE               = document.getElementById('modal-title');
+  const MODAL_CONTENT             = document.getElementById('modal-content');
+  const FOOTER_LINKS              = document.querySelectorAll('.footer-link[data-doc]');
+
+
   /* ==========================================
-     BASIC CONFIG (LANGUAGE, YEAR)
-  ========================================== */
-
-  // Set current year in footer
-  const yearSpan = document.getElementById('year');
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
-
-  const browserLang = (navigator.language || 'de').slice(0, 2);
-  const storedLang  = localStorage.getItem('language');
-  let currentLang   = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'de');
-  localStorage.setItem('language', currentLang);
-
-    /* ==========================================
      CAROUSEL (Images & Food)
   ========================================== */
 
@@ -985,6 +1118,11 @@ document.addEventListener('DOMContentLoaded', () => {
      LANGUAGE / TRANSLATIONS
   ========================================== */
 
+  const browserLang = (navigator.language || 'de').slice(0, 2);
+  const storedLang  = localStorage.getItem('language');
+  let currentLang   = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'de');
+  localStorage.setItem('language', currentLang);
+
   function renderFoodMenu(lang) {
     if (!FOOD_MENU_CONTAINER) return;
     const menu = TRANSLATIONS[lang]?.food;
@@ -1254,6 +1392,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Footer: Imprint / Privacy
+    FOOTER_LINKS.forEach(link => {
+      const doc = link.dataset.doc;
+      if (doc === 'imprint') link.textContent = TRANSLATIONS[lang].imprint;
+      if (doc === 'privacy') link.textContent = TRANSLATIONS[lang].privacy;
+    });
+
     renderFoodMenu(lang);
     renderDrinks(lang);
     renderDrinkCategoryNav(lang);
@@ -1352,19 +1497,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+      if (LEGAL_MODAL && !LEGAL_MODAL.hidden) {
+        closeLegalModal();
+        return;
+      }
       if (LIGHTBOX && LIGHTBOX.style.display === 'flex') {
         closeLightbox();
-      } else {
-        closeMobileMenu();
+        return;
       }
+      closeMobileMenu();
+      return;
     }
 
     if (LIGHTBOX && LIGHTBOX.style.display === 'flex') {
-      if (e.key === 'ArrowRight') {
-        showNextLightbox();
-      } else if (e.key === 'ArrowLeft') {
-        showPrevLightbox();
-      }
+      if (e.key === 'ArrowRight') showNextLightbox();
+      else if (e.key === 'ArrowLeft') showPrevLightbox();
     }
   });
 
@@ -1549,6 +1696,55 @@ document.addEventListener('DOMContentLoaded', () => {
       renderDrinks(currentLang);
       renderDrinkCategoryNav(currentLang);
       renderMobileDrinkMenu(currentLang);
+    }
+  });
+
+  /* ==========================================
+     FOOTER
+  ========================================== */
+
+  // Set current year in footer
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+
+  // Imprint / Privacy
+  function openLegalModal(docKey) {
+    if (!LEGAL_MODAL || !MODAL_TITLE || !MODAL_CONTENT) return;
+
+    const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+
+    if (docKey === 'imprint') {
+      MODAL_TITLE.textContent = t.imprint;
+      MODAL_CONTENT.innerHTML = t.imprint_html;
+    } else if (docKey === 'privacy') {
+      MODAL_TITLE.textContent = t.privacy;
+      MODAL_CONTENT.innerHTML = t.privacy_html;
+    }
+
+    LEGAL_MODAL.hidden = false;
+    LEGAL_MODAL.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLegalModal() {
+    if (!LEGAL_MODAL) return;
+    LEGAL_MODAL.hidden = true;
+    LEGAL_MODAL.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  FOOTER_LINKS.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      openLegalModal(link.dataset.doc);
+    });
+  });
+
+  LEGAL_MODAL?.addEventListener('click', e => {
+    if (e.target?.dataset?.close === 'true') {
+      closeLegalModal();
     }
   });
 });

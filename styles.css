@@ -752,24 +752,149 @@ section h1 {
    Footer
 =========================== */
 
-footer {
-  text-align: center;
-  padding: 2rem;
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  text-align: left;
+  padding: 2rem 0;
   background: #0a0a0a;
   border-top: 1px solid #222;
   font-size: 0.875rem;
 }
 
-#website-note a {
+.site-footer p {
+  margin: 0;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: right;
+}
+
+#website-note a,
+.footer-link {
   color: var(--accent);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease, opacity 0.3s ease;
 }
 
-#website-note a:hover {
+#website-note a:hover,
+.footer-link:hover {
   filter: drop-shadow(0 0 4px var(--accent));
   opacity: 1;
+}
+
+/* ===========================
+   Modal (Popup)
+=========================== */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(56rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  background: var(--bg-alt);
+  border: 1px solid #222;
+  border-radius: 0.9rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 0.75rem 2rem rgba(0,0,0,0.45);
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-alt);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #222;
+}
+
+.modal-title {
+  margin: 0;                
+  flex: 1;
+  min-width: 0;            
+  text-align: start;
+  overflow-wrap: anywhere;  
+  word-break: break-word;   
+  hyphens: auto;    
+  font-family: var(--font-head);
+  color: var(--accent);       
+}
+
+.modal-content {
+  font-family: var(--font-body);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.modal-content h3 {
+  font-family: var(--font-head);
+  color: var(--accent);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.modal-content a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.modal-content a:hover {
+  filter: drop-shadow(0 0 4px var(--accent));
+}
+
+.modal-close {
+  margin-left: auto;   
+  display: block;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.2rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.25rem;
+  z-index: 5;       
+}
+
+.modal-close:hover {
+  color: var(--accent);
 }
 
 /* ===========================
@@ -916,6 +1041,17 @@ footer {
 
   .drink-category-nav::-webkit-scrollbar {
     display: none;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-right {
+    text-align: center;
+    align-items: center;
   }
 }
 
