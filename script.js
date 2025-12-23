@@ -198,10 +198,15 @@ const TRANSLATIONS = {
       <h3>Handelsregister des Kantons Bern</h3>
       <p>CHE-232.310.061</p>
 
-      <h3>Haftungshinweis</h3>
+      <h3>Webseite umgesetzt durch</h3>
       <p>
-        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links.
-        Für den Inhalt der verlinkten Seiten sind ausschliesslich deren Betreiber verantwortlich.
+        Aiza GmbH<br>
+        <a href="https://aiza.ch/" target="_blank" rel="noopener noreferrer">www.aiza.ch</a>
+      </p>
+
+      <h3>Haftungsausschluss</h3>
+      <p>
+        Die Rocket Bar GmbH schliesst uneingeschränkt jede Haftung für sämtliche Schäden aus, die sich aus der Benützung der Website www.rocket-bar.ch ergeben sollten. Links auf der Website www.rocket-bar.ch können zu Webseiten Dritter führen. Für deren Inhalt und Rechtmässigkeit kann die Rocket Bar GmbH keinerlei Verantwortung übernehmen.
       </p>
     `,
     privacy_html: `
@@ -407,7 +412,7 @@ const TRANSLATIONS = {
     imprint_html: `
       <h3>Entreprise</h3>
       <p>
-        Rocket Bar Sàrl<br>
+        Rocket Bar GmbH<br>
         Genfergasse 10<br>
         3011 Berne<br>
         Suisse
@@ -415,17 +420,22 @@ const TRANSLATIONS = {
 
       <h3>Contact</h3>
       <p>
-        Téléphone: <a href="tel:+41768170517">+41 76 817 05 17</a><br>
-        E-mail: <a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a>
+        Téléphone : <a href="tel:+41768170517">+41 76 817 05 17</a><br>
+        E-mail : <a href="mailto:rocketbar@gmx.ch">rocketbar@gmx.ch</a>
       </p>
 
       <h3>Registre du commerce du canton de Berne</h3>
       <p>CHE-232.310.061</p>
 
-      <h3>Responsabilité</h3>
+      <h3>Site web réalisé par</h3>
       <p>
-        Nous déclinons toute responsabilité concernant le contenu des liens externes. Les opérateurs des sites liés
-        sont seuls responsables de leurs contenus.
+        Aiza GmbH<br>
+        <a href="https://aiza.ch/" target="_blank" rel="noopener noreferrer">www.aiza.ch</a>
+      </p>
+
+      <h3>Clause de non-responsabilité</h3>
+      <p>
+        Rocket Bar GmbH décline toute responsabilité pour les dommages pouvant résulter de l’utilisation du site www.rocket-bar.ch. Les liens figurant sur le site www.rocket-bar.ch peuvent mener vers des sites web de tiers. Rocket Bar GmbH n’assume aucune responsabilité quant à leur contenu et leur légalité.
       </p>
     `,
     privacy_html: `
@@ -646,9 +656,15 @@ const TRANSLATIONS = {
       <h3>Commercial Register of the Canton of Bern</h3>
       <p>CHE-232.310.061</p>
 
+      <h3>Website implemented by</h3>
+      <p>
+        Aiza GmbH<br>
+        <a href="https://aiza.ch/" target="_blank" rel="noopener noreferrer">www.aiza.ch</a>
+      </p>
+
       <h3>Disclaimer</h3>
       <p>
-        We do not assume any liability for the content of external links. The operators of linked pages are solely responsible.
+        Rocket Bar GmbH excludes any liability for damages arising from the use of the website www.rocket-bar.ch. Links on the website www.rocket-bar.ch may lead to third-party websites. Rocket Bar GmbH assumes no responsibility for their content or legality.
       </p>
     `,
     privacy_html: `
