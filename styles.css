@@ -235,13 +235,13 @@ nav a:hover::after {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+  margin-top: 4.5rem;
 }
 
 .mobile-nav {
   display: flex;
   flex-direction: column;
   gap: 1.125rem;
-  margin-top: 1rem;
   text-align: center;
 }
 
