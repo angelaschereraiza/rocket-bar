@@ -223,7 +223,7 @@ const TRANSLATIONS = {
 
       <h3>Kontaktaufnahme</h3>
       <p>
-        Wenn du uns per E-Mail kontaktierst, verarbeiten wir die von dir übermittelten Daten zur Bearbeitung deiner Anfrage.
+        Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten zur Bearbeitung Ihrer Anfrage.
       </p>
 
       <h3>Externe Links / Social Media</h3>
@@ -711,6 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const CLOSE_BTN                 = document.querySelector('.lightbox .close');
   const LIGHTBOX_PREV             = document.querySelector('.lightbox-prev');
   const LIGHTBOX_NEXT             = document.querySelector('.lightbox-next');
+  const LIGHTBOX_HISTORY_STATE    = 'lightbox-open';
 
   const SECTION_TITLES            = document.querySelectorAll('h1[data-key]');
   const LOGO_LINK                 = document.querySelector('header .logo');
@@ -741,15 +742,17 @@ document.addEventListener('DOMContentLoaded', () => {
      CAROUSEL (Images & Food)
   ========================================== */
 
+  let syncActiveCarouselToIndex = null;
+
   function setupCarousel({
-    container,
-    track,
-    prevBtn,
-    nextBtn,
-    totalImages,
-    getThumbnailSrc,
-    getFullSrc,
-    getAlt
+  container,
+  track,
+  prevBtn,
+  nextBtn,
+  totalImages,
+  getThumbnailSrc,
+  getFullSrc,
+  getAlt
   }) {
     if (!track || !container || !totalImages) return;
 
@@ -788,6 +791,20 @@ document.addEventListener('DOMContentLoaded', () => {
       cloneCount = visibleSlides;
     }
 
+    function jumpToLogicalIndex(logicalIndex) {
+      const n = thumbSources.length;
+      if (!n) return;
+
+      const li = Math.max(0, Math.min(logicalIndex, n - 1));
+
+      internalIndex = cloneCount + li;
+
+      track.style.transition = 'none';
+      track.style.transform  = `translateX(-${internalIndex * stepPx}px)`;
+      track.getBoundingClientRect(); 
+      track.style.transition = 'transform 0.45s ease';
+    }
+
     function attachSlideClickListeners() {
       if (!LIGHTBOX || !LIGHTBOX_IMG) return;
 
@@ -797,6 +814,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // Read logical index from data-index (0..n-1)
           const logicalIndex = Number(img.dataset.index) || 0;
+
+          syncActiveCarouselToIndex = jumpToLogicalIndex;
+
+          jumpToLogicalIndex(logicalIndex);
 
           // Open lightbox using fullSources and the logical index
           openLightboxFromList(fullSources, logicalIndex);
@@ -1022,9 +1043,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       imgs.forEach(img => {
-        if (img.complete) {
-          oneDone();
-        } else {
+        if (img.complete) oneDone();
+        else {
           img.addEventListener('load', oneDone,  { once: true });
           img.addEventListener('error', oneDone, { once: true });
         }
@@ -1065,10 +1085,35 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxSources = [];
   let lightboxIndex   = 0;
 
-  function closeLightbox() {
+  // Tracks whether we have pushed a history state for the currently open lightbox
+  let lightboxHistoryArmed = false;
+
+  // Prevents handling the popstate that we trigger ourselves via history.back()
+  let ignoreNextPopstate = false;
+
+  function isLightboxOpen() {
+    return LIGHTBOX && LIGHTBOX.style.display === 'flex';
+  }
+
+  function closeLightbox({ viaPopstate = false } = {}) {
     if (!LIGHTBOX) return;
+
+    // Close UI
     LIGHTBOX.style.display = 'none';
     document.body.style.overflow = '';
+    syncActiveCarouselToIndex = null;
+
+    // If user closes via UI (not via browser back), remove our pushed history entry
+    // without creating a close->back->popstate->close loop
+    if (lightboxHistoryArmed && !viaPopstate) {
+      lightboxHistoryArmed = false;
+      ignoreNextPopstate = true;
+      history.back(); // triggers popstate; we will ignore the next one
+      return;
+    }
+
+    // If we got here via popstate, just reset flags
+    lightboxHistoryArmed = false;
   }
 
   if (CLOSE_BTN) {
@@ -1080,9 +1125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (LIGHTBOX) {
     LIGHTBOX.addEventListener('click', e => {
-      if (e.target === LIGHTBOX) {
-        closeLightbox();
-      }
+      if (e.target === LIGHTBOX) closeLightbox();
     });
   }
 
@@ -1110,25 +1153,57 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!LIGHTBOX) return;
     if (!Array.isArray(sources) || !sources.length) return;
 
-    lightboxSources = sources.slice(); // Kopie
+    lightboxSources = sources.slice();
     lightboxIndex   = Math.max(0, Math.min(startIndex, lightboxSources.length - 1));
-
-    LIGHTBOX.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
     showLightboxImage();
+
+    setTimeout(() => {
+      LIGHTBOX.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }, 100);
+
+    // Push a history state exactly once per open
+    if (!lightboxHistoryArmed) {
+      history.pushState({ modal: LIGHTBOX_HISTORY_STATE }, '', location.href);
+      lightboxHistoryArmed = true;
+    }
   }
 
   function showNextLightbox() {
     if (!lightboxSources.length) return;
     lightboxIndex = (lightboxIndex + 1) % lightboxSources.length;
     showLightboxImage();
+
+    // Keep the thumbnail carousel in sync with the lightbox index
+    if (typeof syncActiveCarouselToIndex === 'function') {
+      syncActiveCarouselToIndex(lightboxIndex);
+    }
   }
 
   function showPrevLightbox() {
     if (!lightboxSources.length) return;
     lightboxIndex = (lightboxIndex - 1 + lightboxSources.length) % lightboxSources.length;
     showLightboxImage();
+
+    // Keep the thumbnail carousel in sync with the lightbox index
+    if (typeof syncActiveCarouselToIndex === 'function') {
+      syncActiveCarouselToIndex(lightboxIndex);
+    }
   }
+
+  // Browser back button should close the lightbox instead of navigating away
+  window.addEventListener('popstate', () => {
+    // Ignore the popstate event we caused ourselves via history.back()
+    if (ignoreNextPopstate) {
+      ignoreNextPopstate = false;
+      return;
+    }
+
+    // If the lightbox is open (or still "armed"), close it
+    if (isLightboxOpen() || lightboxHistoryArmed) {
+      closeLightbox({ viaPopstate: true });
+    }
+  });
 
   /* ==========================================
      LANGUAGE / TRANSLATIONS
