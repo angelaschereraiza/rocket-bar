@@ -1209,9 +1209,9 @@ document.addEventListener('DOMContentLoaded', () => {
      LANGUAGE / TRANSLATIONS
   ========================================== */
 
-  const browserLang = (navigator.language || 'de').slice(0, 2);
+  const browserLang = (navigator.language || 'en').slice(0, 2);
   const storedLang  = localStorage.getItem('language');
-  let currentLang   = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'de');
+  let currentLang   = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'en');
   localStorage.setItem('language', currentLang);
 
   function renderFoodMenu(lang) {
