@@ -1801,7 +1801,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Imprint / Privacy
-  function openLegalModal(docKey) {
+  const LEGAL_HISTORY_STATE = 'legal-open';
+  let legalHistoryArmed = false;
+  let ignoreNextLegalPopstate = false;
+
+  function isLegalModalOpen() {
+    return LEGAL_MODAL && !LEGAL_MODAL.hidden;
+  }
+
+  function openLegalModal(docKey, { fromPopstate = false } = {}) {
     if (!LEGAL_MODAL || !MODAL_TITLE || !MODAL_CONTENT) return;
 
     const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
@@ -1817,13 +1825,30 @@ document.addEventListener('DOMContentLoaded', () => {
     LEGAL_MODAL.hidden = false;
     LEGAL_MODAL.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    // Push history entry exactly once per open (so back closes modal)
+    if (!legalHistoryArmed && !fromPopstate) {
+      history.pushState({ modal: LEGAL_HISTORY_STATE, doc: docKey }, '', location.href);
+      legalHistoryArmed = true;
+    }
   }
 
-  function closeLegalModal() {
+  function closeLegalModal({ viaPopstate = false } = {}) {
     if (!LEGAL_MODAL) return;
+
     LEGAL_MODAL.hidden = true;
     LEGAL_MODAL.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
+    // If user closes via UI (not via browser back), remove our pushed history entry
+    if (legalHistoryArmed && !viaPopstate) {
+      legalHistoryArmed = false;
+      ignoreNextLegalPopstate = true;
+      history.back(); 
+      return;
+    }
+
+    legalHistoryArmed = false;
   }
 
   FOOTER_LINKS.forEach(link => {
@@ -1836,6 +1861,18 @@ document.addEventListener('DOMContentLoaded', () => {
   LEGAL_MODAL?.addEventListener('click', e => {
     if (e.target?.dataset?.close === 'true') {
       closeLegalModal();
+    }
+  });
+
+  // Browser back should close legal modal instead of navigating away
+  window.addEventListener('popstate', () => {
+    if (ignoreNextLegalPopstate) {
+      ignoreNextLegalPopstate = false;
+      return;
+    }
+
+    if (isLegalModalOpen() || legalHistoryArmed) {
+      closeLegalModal({ viaPopstate: true });
     }
   });
 });
