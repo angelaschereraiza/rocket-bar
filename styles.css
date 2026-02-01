@@ -55,10 +55,10 @@ body {
 .skip-link:focus-visible {
   left: 0.75rem;
   transform: translateY(0);
-  outline: none;
-
-  background: var(--accent);
-  color: var(--bg);
+  opacity: 1;
+  pointer-events: auto;
+  outline: var(--accent);
+  color: var(--text);
 
   box-shadow:
     0 0 0 3px rgba(214, 40, 40, 0.35),
@@ -69,6 +69,7 @@ body {
   background: var(--accent);
   color: var(--bg);
 }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -1107,6 +1108,11 @@ section h2 {
 }
 
 @media (max-width: 320px) {
+  .skip-link {
+    width: auto;
+    text-align: center;
+  }
+
   .drink-menu-selector-container {
     top: 5rem;
     width: 100vw;
