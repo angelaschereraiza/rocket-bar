@@ -5,72 +5,28 @@ const SUPPORTED_LANGS = ['de', 'fr', 'en'];
 const SEO_META = {
   de: {
     lang: 'de-CH',
-    title: 'Rocket Bar Bern - Rock & Metal Bar mit Bánh Mì Take-Away',
-    description: 'Rocket Bar in Bern - Rock & Metal Bar mit grosser Drink- und Shot-Auswahl sowie vietnamesischem Bánh Mì Take-Away von Saigon Pearl. Direkt beim Bahnhof, Genfergasse 10, 3011 Bern.'
+    title: 'Rocket Bar Bern - Rock & Metal Bar',
+    description: 'Rocket Bar in Bern - Rock & Metal Bar mit grosser Drink- und Shot-Auswahl. Direkt beim Bahnhof, Genfergasse 10, 3011 Bern.'
   },
   fr: {
     lang: 'fr-CH',
-    title: 'Rocket Bar Berne - Bar Rock & Metal avec Bánh Mì à emporter',
-    description: 'Rocket Bar à Berne - Bar Rock & Metal, grande sélection de drinks & shots, et Bánh Mì vietnamien à emporter de Saigon Pearl. Près de la gare, Genfergasse 10, 3011 Berne.'
+    title: 'Rocket Bar Berne - Bar Rock & Metal',
+    description: 'Rocket Bar à Berne - Bar Rock & Metal, grande sélection de drinks & shots. Près de la gare, Genfergasse 10, 3011 Berne.'
   },
   en: {
     lang: 'en',
-    title: 'Rocket Bar Bern - Rock & Metal Bar with Bánh Mì Takeaway',
-    description: 'Rocket Bar in Bern - Rock & Metal bar with a great selection of drinks & shots plus Vietnamese Bánh Mì takeaway by Saigon Pearl. Near Bern main station, Genfergasse 10, 3011 Bern.'
+    title: 'Rocket Bar Bern - Rock & Metal Bar',
+    description: 'Rocket Bar in Bern - Rock & Metal bar with a great selection of drinks & shots. Near Bern main station, Genfergasse 10, 3011 Bern.'
   }
 };
 
 const TRANSLATIONS = {
   de: {
     skip: 'Zum Hauptinhalt springen',
-    nav: ['Über uns', 'Bilder', 'Take-Away', 'Getränke'],
-    titles: { pictures: 'Bilder', takeaway: 'Take-Away', drinks: 'Unsere Drinks' },
+    nav: ['Über uns', 'Bilder', 'Getränke'],
+    titles: { pictures: 'Bilder', drinks: 'Unsere Drinks' },
     about: 'Willkommen in der Rocket Bar, wo Metal, Rock und gute Drinks verschmelzen. Nur wenige Schritte vom Berner Hauptbahnhof entfernt, bieten wir eine Atmosphäre, in der du dich wie zu Hause fühlst, mit lauter Musik, kaltem Bier und heissen Riffs.',
-    contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],
-    takeaway: 'Exklusiv in der Rocket Bar: Die besten Bành-Mì´s der Stadt im vietnamesischen Mittagsrestaurant und als Take-Away von Saigon Pearl.',
-    takeaway_hours_title: 'Öffnungszeiten',
-    food: [
-      {
-        category: 'Bánh Mì',
-        items: [
-          {
-            name: 'Bánh Mì Rind',
-            desc: 'Rindfleisch in Knoblauch-Marinade, Pickles, Gurke, Koriander',
-            price: '14.50'
-          },
-          {
-            name: 'Bánh Mì Poulet',
-            desc: 'Poulet in Zitronengras-Marinade, Pickles, Gurke, Koriander',
-            price: '14.00'
-          },
-          {
-            name: 'Bánh Mì «Char Siu»',
-            desc: 'Hausgemachter Schweinebauch «Char Siu», Pickles, Gurke, Koriander',
-            price: '14.50'
-          },
-          {
-            name: 'Bánh Mì Vegan',
-            desc: 'Tofu, Avocadocreme, Pickles, Gurke, Koriander',
-            price: '14.00'
-          }
-        ]
-      },
-      {
-        category: 'Bowls & Suppe',
-        items: [
-          {
-            name: '«Char Siu» Reisteller',
-            desc: 'Schweinebauch «Char Siu» mit Reis & Pickles',
-            price: '18.00'
-          },
-          {
-            name: 'Phở Bò',
-            desc: 'Vietnamesische Rindfleisch-Nudelsuppe mit Reisnudeln, Kräutern & Sprossen',
-            price: '20.00'
-          }
-        ]
-      }
-    ],
+    contact: ['Adresse', 'Öffnungszeiten', 'Telefon & E-Mail', 'Folge uns'],   
     drinks: [
       {
         category: 'Lager & Spezialbier (Flasche)',
@@ -137,7 +93,8 @@ const TRANSLATIONS = {
           { name: 'Gin Tonic', desc: 'Gin | Tonic', price: '14.00' },
           { name: 'Gin Lemon', desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
           { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull', price: '15.00' },
-          { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' }
+          { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' },
+          { name: 'Skinny Bitch', desc: 'Vodka | Wasser | Frischer Limettensaft', price: '14.00' }
         ]
       },
       {
@@ -253,54 +210,10 @@ const TRANSLATIONS = {
   },
   fr: {
     skip: 'Aller au contenu principal',
-    nav: ['À propos', 'Images', 'Takeaway', 'Boissons'],
-    titles: { pictures: 'Images', takeaway: 'Takeaway', drinks: 'Nos Boissons' },
+    nav: ['À propos', 'Images', 'Boissons'],
+    titles: { pictures: 'Images', drinks: 'Nos Boissons' },
     about: 'Bienvenue au Rocket Bar, où le metal, le rock et de bons drinks se fondent en un tout. À quelques pas de la gare centrale de Berne, nous t’offrons une atmosphère où tu te sens comme chez toi, avec de la musique forte, de la bière bien fraîche et des riffs brûlants.',
     contact: ['Adresse', 'Horaires', 'Téléphone & E-mail', 'Suivez-nous'],
-    takeaway: 'Exclusivement à la Rocket Bar : Les meilleurs Bánh Mì de la ville dans le restaurant vietnamien du midi et en take-away de Saigon Pearl.',
-    takeaway_hours_title: 'Horaires',
-    food: [
-      {
-        category: 'Bánh Mì',
-        items: [
-          {
-            name: 'Bánh Mì boeuf',
-            desc: 'Boeuf mariné à l’ail, pickles, concombre, coriandre',
-            price: '14.50'
-          },
-          {
-            name: 'Bánh Mì poulet',
-            desc: 'Poulet mariné à la citronnelle, pickles, concombre, coriandre',
-            price: '14.00'
-          },
-          {
-            name: 'Bánh Mì «Char Siu»',
-            desc: 'Poitrine de porc grillée «Char Siu», pickles, concombre, coriandre',
-            price: '14.50'
-          },
-          {
-            name: 'Bánh Mì vegan',
-            desc: 'Tofu, crème d’avocat, pickles, concombre, coriandre',
-            price: '14.00'
-          }
-        ]
-      },
-      {
-        category: 'Bowls & soupe',
-        items: [
-          {
-            name: 'Assiette de riz «Char Siu»',
-            desc: 'Porc «Char Siu» maison avec riz & pickles',
-            price: '18.00'
-          },
-          {
-            name: 'Phở Bò',
-            desc: 'Soupe vietnamienne de nouilles au boeuf avec nouilles de riz, herbes & pousses de soja',
-            price: '20.00'
-          }
-        ]
-      }
-    ],
     drinks: [
       {
         category: 'Bière blonde et bière spéciale (bouteille)',
@@ -367,7 +280,8 @@ const TRANSLATIONS = {
           { name: 'Gin Tonic', desc: 'Gin | Tonic', price: '14.00' },
           { name: 'Gin Lemon', desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
           { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull', price: '15.00' },
-          { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' }
+          { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' },
+          { name: 'Skinny Bitch', desc: 'Vodka | Eau | Jus de citron vert frais', price: '14.00' }
         ]
       },
       {
@@ -483,30 +397,10 @@ const TRANSLATIONS = {
   },
   en: {
     skip: 'Skip to main content',
-    nav: ['About', 'Pictures', 'Takeaway', 'Drinks'],
-    titles: { pictures: 'Pictures', takeaway: 'Takeaway', drinks: 'Our Drinks' },
+    nav: ['About', 'Pictures', 'Drinks'],
+    titles: { pictures: 'Pictures', drinks: 'Our Drinks' },
     about: 'Welcome to the Rocket Bar, where metal, rock and good drinks melt into one. Just a few steps from Bern’s main station, we offer an atmosphere that feels like home, with loud music, cold beer and blazing riffs.',
     contact: ['Address', 'Opening Hours', 'Phone & Email', 'Follow us'],
-    takeaway: 'Exclusive at the Rocket Bar: The best Bánh Mì in town from the Vietnamese lunch restaurant and as take-away from Saigon Pearl.',
-    takeaway_hours_title: 'Opening Hours',
-    food: [
-      {
-        category: 'Bánh Mì',
-        items: [
-          { name: 'Bánh Mì Beef', desc: 'Beef in garlic marinade, pickles, cucumber, coriander', price: '14.50' },
-          { name: 'Bánh Mì Chicken', desc: 'Chicken in lemongrass marinade, pickles, cucumber, coriander', price: '14.00' },
-          { name: 'Bánh Mì «Char Siu»', desc: 'Homemade pork belly «Char Siu», pickles, cucumber, coriander', price: '14.50' },
-          { name: 'Bánh Mì Vegan', desc: 'Tofu, avocado cream, pickles, cucumber, coriander', price: '14.00' }
-        ]
-      },
-      {
-        category: 'Bowls & Soup',
-        items: [
-          { name: '«Char Siu» Rice Plate', desc: 'Pork belly «Char Siu» with rice & pickles', price: '18.00' },
-          { name: 'Phở Bò', desc: 'Vietnamese beef noodle soup with rice noodles, herbs & bean sprouts', price: '20.00' }
-        ]
-      }
-    ],
     drinks: [
       {
         category: 'Lager & Speciality Beer (Bottle)',
@@ -573,7 +467,8 @@ const TRANSLATIONS = {
           { name: 'Gin Tonic', desc: 'Gin | Tonic', price: '14.00' },
           { name: 'Gin Lemon', desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
           { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull', price: '15.00' },
-          { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' }
+          { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' },
+          { name: 'Skinny Bitch', desc: 'Vodka | Water | Fresh Lime Juice', price: '14.00' }
         ]
       },
       {
@@ -704,12 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const NEXT_BUTTON = document.querySelector('.next');
   const TOTAL_IMG = 14;
 
-  const CAROUSEL_FOOD_CONTAINER = document.querySelector('.carousel-container-food');
-  const TRACK_FOOD = document.querySelector('.carousel-track-food');
-  const PREV_FOOD_BUTTON = document.querySelector('.prev-food');
-  const NEXT_FOOD_BUTTON = document.querySelector('.next-food');
-  const TOTAL_FOOD_IMG = 4;
-
   const LIGHTBOX = document.getElementById('lightbox');
   const LIGHTBOX_IMG = document.querySelector('.lightbox-img');
   const CLOSE_BTN = document.querySelector('.lightbox .close');
@@ -720,17 +609,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const SECTION_TITLES = document.querySelectorAll('[data-key$="-title"]');
   const LOGO_LINK = document.querySelector('header .logo');
   const ABOUT_TEXT = document.querySelector('.about-text');
-  const TAKEAWAY_TEXT = document.querySelector('.takeaway-text');
   const CONTACT_ITEMS = document.querySelectorAll('.contact-item h2');
   const LANGUAGE_SELECTORS = document.querySelectorAll('.language-selector');
   const WEBSITE_NOTE = document.getElementById('website-note');
 
-  const TAKEAWAY_HOURS_HEADING = document.querySelector('#takeaway .takeaway-item h3');
-  const FOOD_MENU_CONTAINER = document.getElementById('food-menu');
   const DRINKS_CONTAINER = document.getElementById('drinks-menu');
   const DRINK_CATEGORY_NAV = document.getElementById('drink-category-nav');
   const DRINK_MENU_SELECTORS = document.querySelectorAll('.drink-menu-selector');
-  const VAT_NOTE_FOOD = document.getElementById('vat-note-food');
   const VAT_NOTE_DRINKS = document.getElementById('vat-note-drinks');
 
   const HAMBURGER = document.querySelector('.hamburger');
@@ -742,7 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const FOOTER_LINKS = document.querySelectorAll('.footer-link[data-doc]');
 
   /* ==========================================
-     CAROUSEL (Images & Food)
+     CAROUSEL (Images)
   ========================================== */
 
   let syncActiveCarouselToIndex = null;
@@ -1047,18 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getThumbnailSrc: i => `images/img_${i}_thumb.webp`,
     getFullSrc: i => `images/img_${i}.webp`,
     getAlt: i => `Rocket Bar picture ${i + 1}`
-  });
-
-  setupCarousel({
-    container: CAROUSEL_FOOD_CONTAINER,
-    track: TRACK_FOOD,
-    prevBtn: PREV_FOOD_BUTTON,
-    nextBtn: NEXT_FOOD_BUTTON,
-    totalImages: TOTAL_FOOD_IMG,
-    getThumbnailSrc: i => `images/food_${i}_thumb.webp`,
-    getFullSrc: i => `images/food_${i}.webp`,
-    getAlt: i => `Rocket Bar Takeaway picture ${i + 1}`
-  });
+  });  
 
   /* ==========================================
      LIGHTBOX
@@ -1200,59 +1074,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ogDesc) ogDesc.setAttribute('content', seo.description);
     if (twTitle) twTitle.setAttribute('content', seo.title);
     if (twDesc) twDesc.setAttribute('content', seo.description);
-  }
-
-  function renderFoodMenu(lang) {
-    if (!FOOD_MENU_CONTAINER) return;
-    const menu = TRANSLATIONS[lang]?.food;
-    if (!menu) return;
-
-    FOOD_MENU_CONTAINER.innerHTML = '';
-
-    menu.forEach(category => {
-      const card = document.createElement('div');
-      card.className = 'food-card';
-
-      const h2 = document.createElement('h3');
-      h2.className = 'food-category';
-      h2.textContent = category.category;
-      card.appendChild(h2);
-
-      const ul = document.createElement('ul');
-      ul.className = 'food-list';
-
-      category.items.forEach(item => {
-        const li = document.createElement('li');
-        const line = document.createElement('div');
-        line.className = 'food-line';
-
-        const nameSpan = document.createElement('span');
-        nameSpan.className = 'food-name';
-        nameSpan.textContent = item.name;
-        line.appendChild(nameSpan);
-
-        if (item.price) {
-          const priceSpan = document.createElement('span');
-          priceSpan.className = 'food-price';
-          priceSpan.textContent = `${item.price}`;
-          line.appendChild(priceSpan);
-        }
-
-        li.appendChild(line);
-
-        if (item.desc) {
-          const descDiv = document.createElement('div');
-          descDiv.className = 'food-desc';
-          descDiv.textContent = item.desc;
-          li.appendChild(descDiv);
-        }
-
-        ul.appendChild(li);
-      });
-
-      card.appendChild(ul);
-      FOOD_MENU_CONTAINER.appendChild(card);
-    });
   }
 
   function renderDrinks(lang) {
@@ -1413,7 +1234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const navIndex = ['nav-about', 'nav-pictures', 'nav-takeaway', 'nav-drinks'].indexOf(key);
+      const navIndex = ['nav-about', 'nav-pictures', 'nav-drinks'].indexOf(key);
       if (navIndex >= 0) {
         el.textContent = TRANSLATIONS[lang].nav[navIndex];
       }
@@ -1426,12 +1247,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (ABOUT_TEXT) ABOUT_TEXT.innerHTML = TRANSLATIONS[lang].about;
-    if (TAKEAWAY_TEXT) TAKEAWAY_TEXT.innerHTML = TRANSLATIONS[lang].takeaway;
-
-    if (TAKEAWAY_HOURS_HEADING) {
-      const title = TRANSLATIONS[lang].takeaway_hours_title;
-      if (title) TAKEAWAY_HOURS_HEADING.textContent = title;
-    }
 
     CONTACT_ITEMS.forEach((item, i) => {
       const label = TRANSLATIONS[lang].contact[i];
@@ -1446,11 +1261,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const vat_note = TRANSLATIONS[lang].vat_note;
     const custom_note = TRANSLATIONS[lang].custom_note;
-
-    if (VAT_NOTE_FOOD) {
-      VAT_NOTE_FOOD.textContent = vat_note;
-      VAT_NOTE_FOOD.style.display = 'block';
-    }
 
     if (VAT_NOTE_DRINKS) {
       VAT_NOTE_DRINKS.textContent = vat_note + custom_note;
@@ -1475,7 +1285,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (doc === 'privacy') link.textContent = TRANSLATIONS[lang].privacy;
     });
 
-    renderFoodMenu(lang);
     renderDrinks(lang);
     renderDrinkCategoryNav(lang);
     renderMobileDrinkMenu(lang);
@@ -1769,7 +1578,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lastIsDesktopTwoCols = isDesktopNow;
 
     if (currentLang) {
-      renderFoodMenu(currentLang);
       renderDrinks(currentLang);
       renderDrinkCategoryNav(currentLang);
       renderMobileDrinkMenu(currentLang);

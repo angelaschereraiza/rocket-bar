@@ -4,7 +4,7 @@ set -euo pipefail
 TARGET_WIDTH=427 
 TARGET_HEIGHT=320 
 
-for f in img_*.webp food_*.webp; do
+for f in img_*.webp; do
   [ -f "$f" ] || continue
 
   out="${f%.webp}_thumb.webp"

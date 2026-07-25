@@ -13,6 +13,6 @@ Built from scratch using **semantic HTML**, **CSS**, and **vanilla JavaScript**,
 - Multilingual (DE / FR / EN)
 - Responsive layout (desktop & mobile)
 - Image carousel with lightbox
-- Dynamic drinks & food menus
+- Dynamic drinks
 - SEO & structured data (Schema.org)
 
