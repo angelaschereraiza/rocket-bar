@@ -1022,3 +1022,34 @@ section h2 {
     margin-right: calc(50% - 50vw);    
   }
 }
+/* Accessibility and reduced motion */
+.prev,
+.next,
+.lightbox .close {
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+.lightbox .close {
+  background: transparent;
+  line-height: 1;
+}
+
+a:focus-visible,
+button:focus-visible,
+.language-selector .selected:focus-visible,
+.drink-menu-selected:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

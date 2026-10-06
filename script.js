@@ -726,6 +726,8 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = src;
         img.alt = typeof getAlt === 'function' ? getAlt(index) : `Carousel image ${index + 1}`;
         img.loading = 'lazy';
+        img.width = 427;
+        img.height = 320;
         img.dataset.index = String(index);
         track.appendChild(img);
       });
@@ -894,6 +896,8 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = src;
         img.alt = typeof getAlt === 'function' ? getAlt(index) : `Carousel image ${index + 1}`;
         img.loading = 'lazy';
+        img.width = 427;
+        img.height = 320;
         track.appendChild(img);
         imgs.push(img);
       });
@@ -1053,9 +1057,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================================== */
 
   const browserLang = (navigator.language || 'en').slice(0, 2);
-  const storedLang = localStorage.getItem('language');
+  let storedLang = null;
+  try { storedLang = localStorage.getItem('language'); } catch (_) {}
   let currentLang = storedLang || (SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'en');
-  localStorage.setItem('language', currentLang);
+  try { localStorage.setItem('language', currentLang); } catch (_) {}
 
   function applySeoForLanguage(lang) {
     const seo = SEO_META[lang] || SEO_META.en;
@@ -1222,7 +1227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setLanguage(lang) {
     if (!TRANSLATIONS[lang]) lang = 'en';
     currentLang = lang;
-    localStorage.setItem('language', lang);
+    try { localStorage.setItem('language', lang); } catch (_) {}
 
     applySeoForLanguage(lang);
 
@@ -1598,6 +1603,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const LEGAL_HISTORY_STATE = 'legal-open';
   let legalHistoryArmed = false;
   let ignoreNextLegalPopstate = false;
+  let legalPreviousFocus = null;
 
   function isLegalModalOpen() {
     return LEGAL_MODAL && !LEGAL_MODAL.hidden;
@@ -1616,9 +1622,11 @@ document.addEventListener('DOMContentLoaded', () => {
       MODAL_CONTENT.innerHTML = t.privacy_html;
     }
 
+    legalPreviousFocus = document.activeElement;
     LEGAL_MODAL.hidden = false;
     LEGAL_MODAL.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    LEGAL_MODAL.querySelector('.modal-close')?.focus();
 
     // Push history entry exactly once per open (so back closes modal)
     if (!legalHistoryArmed && !fromPopstate) {
@@ -1633,6 +1641,8 @@ document.addEventListener('DOMContentLoaded', () => {
     LEGAL_MODAL.hidden = true;
     LEGAL_MODAL.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (legalPreviousFocus instanceof HTMLElement) legalPreviousFocus.focus();
+    legalPreviousFocus = null;
 
     // If user closes via UI (not via browser back), remove our pushed history entry
     if (legalHistoryArmed && !viaPopstate) {
@@ -1651,6 +1661,9 @@ document.addEventListener('DOMContentLoaded', () => {
       openLegalModal(link.dataset.doc);
     });
   });
+
+  const initialLegalDoc = location.hash === '#impressum' ? 'imprint' : location.hash === '#datenschutz' ? 'privacy' : null;
+  if (initialLegalDoc) openLegalModal(initialLegalDoc, { fromPopstate: true });
 
   LEGAL_MODAL?.addEventListener('click', e => {
     if (e.target?.dataset?.close === 'true') {

@@ -6,16 +6,10 @@
   <title>Rocket Bar Bern - Rock & Metal Bar</title>  
 
   <link rel="icon" href="/images/favicon.ico" sizes="any" />
-  <link rel="alternate" hreflang="de-CH" href="https://www.rocket-bar.ch/" />
-  <link rel="alternate" hreflang="fr-CH" href="https://www.rocket-bar.ch/" />
-  <link rel="alternate" hreflang="en" href="https://www.rocket-bar.ch/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.rocket-bar.ch/" />
 
   <!-- SEO -->
   <meta name="description" content="Rocket Bar in Bern - Rock & Metal Bar mit grosser Drink- und Shot-Auswahl. Direkt beim Bahnhof, Genfergasse 10, 3011 Bern." />
-    <meta name="keywords" content="Rocket Bar Bern, Rock Bar Bern, Metal Bar Bern, Bar beim Bahnhof Bern, Cocktailbar Bern, Shots Bern, Rock Musik Bar Bern" />
   <meta name="robots" content="index,follow" />
-  <meta http-equiv="content-language" content="de-CH" />
   <meta name="theme-color" content="#000000" />
 
   <!-- Geo / Local business -->
@@ -25,24 +19,24 @@
   <meta name="ICBM" content="46.9480,7.4391" />
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://www.rocket-bar.ch/" />
+  <link rel="canonical" href="https://rocket-bar.ch/" />
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Rocket Bar Bern" />
   <meta property="og:title" content="Rocket Bar Bern | Rock & Metal Bar beim Bahnhof" />
   <meta property="og:description" content="Rock & Metal Bar mit Drinks, Shots - nur wenige Schritte vom Bahnhof Bern entfernt." />
-  <meta property="og:image" content="https://www.rocket-bar.ch/images/logo.webp" />
-  <meta property="og:url" content="https://www.rocket-bar.ch/" />
+  <meta property="og:image" content="https://rocket-bar.ch/images/logo.webp" />
+  <meta property="og:url" content="https://rocket-bar.ch/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="de_CH" />
   <meta property="og:locale:alternate" content="fr_CH" />
   <meta property="og:locale:alternate" content="en_US" />
 
   <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Rocket Bar Bern | Rock & Metal Bar" />
   <meta name="twitter:description" content="Drinks, Shots - Rocket Bar in der Genfergasse 10, 3011 Bern." />
-  <meta name="twitter:image" content="https://www.rocket-bar.ch/images/rocketbar-social.jpg" />
+  <meta name="twitter:image" content="https://rocket-bar.ch/images/logo.webp" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,20 +49,20 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "@id": "https://www.rocket-bar.ch/#website",
-      "url": "https://www.rocket-bar.ch/",
+      "@id": "https://rocket-bar.ch/#website",
+      "url": "https://rocket-bar.ch/",
       "name": "Rocket Bar Bern",
       "inLanguage": ["de-CH","fr-CH","en"]
     },
     {
       "@context": "https://schema.org",
       "@type": "BarOrPub",
-      "@id": "https://www.rocket-bar.ch/#bar",
+      "@id": "https://rocket-bar.ch/#bar",
       "name": "Rocket Bar",
       "image": [
-        "https://www.rocket-bar.ch/images/logo.webp"
+        "https://rocket-bar.ch/images/logo.webp"
       ],
-      "url": "https://www.rocket-bar.ch/",
+      "url": "https://rocket-bar.ch/",
       "hasMap": "https://share.google/7c7wnSCuOfWHBunr6",
       "telephone": "+41 76 817 05 17",
       "email": "rocketbar@gmx.ch",
@@ -112,7 +106,7 @@
         "https://www.local.ch/en/d/bern/3011/rocket-bar-gmbh-ww2d26RMCI-jIzWNk-7X-Q",
         "https://www.facebook.com/p/Rocket-Bar-61578631981520/",
         "https://www.instagram.com/rocket_bar_bern/"
-      ],
+      ]
     }
   ]
   </script>
@@ -199,10 +193,10 @@
         <div class="contact-item social-links">
           <h2></h2>
           <a href="https://www.facebook.com/p/Rocket-Bar-61578631981520/" target="_blank" rel="noopener" aria-label="Facebook">
-            <img src="images/facebook.svg" alt="Facebook" class="social-icon" />
+            <img src="images/facebook.svg" alt="" class="social-icon" aria-hidden="true" />
           </a>
           <a href="https://www.instagram.com/rocket_bar_bern/" target="_blank" rel="noopener" aria-label="Instagram">
-            <img src="images/instagram.svg" alt="Instagram" class="social-icon" />
+            <img src="images/instagram.svg" alt="" class="social-icon" aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -212,23 +206,23 @@
       <h2 data-key="pictures-title"></h2>
 
       <div class="carousel-container">
-        <span class="prev" aria-label="Previous image">
+        <button type="button" class="prev" aria-label="Previous image">
           <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
             <path d="M14 4l-6 8 6 8" />
           </svg>
-        </span>
+        </button>
 
         <div class="carousel-track" id="carousel-track"></div>
 
-        <span class="next" aria-label="Next image">
+        <button type="button" class="next" aria-label="Next image">
           <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
             <path d="M10 4l6 8-6 8" />
           </svg>
-        </span>
+        </button>
       </div>
 
       <div id="lightbox" class="lightbox" aria-modal="true" role="dialog">
-        <span class="close" aria-label="Close image">&times;</span>
+        <button type="button" class="close" aria-label="Close image">&times;</button>
 
         <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image">
           <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true">
@@ -259,7 +253,7 @@
       </div>
 
       <div class="shots-video">
-        <video controls autoplay muted loop>
+        <video controls autoplay muted loop playsinline preload="metadata">
           <source src="images/shot.mp4" type="video/mp4" />
         </video>
       </div>
