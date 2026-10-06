@@ -298,7 +298,7 @@ nav a:hover::after {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
-  margin-top: 4.5rem;
+  margin-top: 6rem;
 }
 
 .mobile-nav {
