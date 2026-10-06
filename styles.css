@@ -849,7 +849,7 @@ section h2 {
 .modal-content h3 {
   font-family: var(--font-head);
   color: var(--accent);
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   font-size: 0.95rem;
