@@ -59,10 +59,10 @@ const TRANSLATIONS = {
         category: 'Bier vom Fass',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Valaisanne Lager', desc: '4.8% (CHE)', price: '5.00 / 7.00' },
+          { name: 'Valaisanne Lager', desc: '4.8% (CHE)', price: '5.00 / 8.00' },
           { name: 'Valaisanne White IPA', desc: '6.0% (CHE)', price: '7.00 / 9.00' },
-          { name: "Smithwick's Irish Ale", desc: '3.8% (IRL)', price: '6.00 / 9.00' },
-          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.00' }
+          { name: "Smithwick's Irish Ale", desc: '3.8% (IRL)', price: '6.00 / 9.50' },
+          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.50' }
         ]
       },
       {
@@ -75,8 +75,8 @@ const TRANSLATIONS = {
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Zuckersirup', price: '20.00' },
-          { name: 'Blueberry', desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '20.00' },
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Zuckersirup', price: '18.00' },
+          { name: 'Blueberry', desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '18.00' },
           { name: 'Negroni', desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
           { name: 'Nebula', desc: 'Berentzen | Rum | Cointreau | Bols Blue', price: '17.00' },
           { name: 'Basil Smash', desc: 'Gin | Basil | Sweet & Sour', price: '16.00' },
@@ -94,15 +94,16 @@ const TRANSLATIONS = {
           { name: 'Gin Lemon', desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
           { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull', price: '15.00' },
           { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' },
-          { name: 'Skinny Bitch', desc: 'Vodka | Wasser | Frischer Limettensaft', price: '14.00' }
+          { name: 'Skinny Bitch', desc: 'Vodka | Wasser | Frischer Limettensaft', price: '14.00' },
+          { name: 'Vodka Splash', desc: 'Vodka | Wasser | Minze | Frischer Limettensaft', price: '15.00' }
         ]
       },
       {
         category: 'Spritz',
         items: [
-          { name: 'Aperol Spritz', desc: 'Aperol | Prosecco', price: '12.00' },
-          { name: 'Campari Spritz', desc: 'Campari | Prosecco', price: '12.00' },
-          { name: 'Ingwer Spritz', desc: 'Ingwerer | Prosecco', price: '12.00' }
+          { name: 'Aperol Spritz', desc: 'Aperol | Prosecco', price: '13.00' },
+          { name: 'Campari Spritz', desc: 'Campari | Prosecco', price: '13.00' },
+          { name: 'Ingwer Spritz', desc: 'Ingwerer | Prosecco', price: '13.00' }
         ]
       },
       {
@@ -246,10 +247,10 @@ const TRANSLATIONS = {
         category: 'Bière pression',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Valaisanne Lager', desc: '4.8% (CHE)', price: '5.00 / 7.00' },
+          { name: 'Valaisanne Lager', desc: '4.8% (CHE)', price: '5.00 / 8.00' },
           { name: 'Valaisanne White IPA', desc: '6.0% (CHE)', price: '7.00 / 9.00' },
-          { name: "Smithwick's Irish Ale", desc: '3.8% (IRL)', price: '6.00 / 9.00' },
-          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.00' }
+          { name: "Smithwick's Irish Ale", desc: '3.8% (IRL)', price: '6.00 / 9.50' },
+          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.50' }
         ]
       },
       {
@@ -262,8 +263,8 @@ const TRANSLATIONS = {
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sirop de sucre', price: '20.00' },
-          { name: 'Blueberry', desc: 'Tequila | Cointreau | Myrtille | Basilic | Sweet & Sour', price: '20.00' },
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sirop de sucre', price: '18.00' },
+          { name: 'Blueberry', desc: 'Tequila | Cointreau | Myrtille | Basilic | Sweet & Sour', price: '18.00' },
           { name: 'Negroni', desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
           { name: 'Nebula', desc: 'Berentzen | Rhum | Cointreau | Bols Blue', price: '17.00' },
           { name: 'Basil Smash', desc: 'Gin | Basilic | Sweet & Sour', price: '16.00' },
@@ -281,15 +282,16 @@ const TRANSLATIONS = {
           { name: 'Gin Lemon', desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
           { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull', price: '15.00' },
           { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' },
-          { name: 'Skinny Bitch', desc: 'Vodka | Eau | Jus de citron vert frais', price: '14.00' }
+          { name: 'Skinny Bitch', desc: 'Vodka | Eau | Jus de citron vert frais', price: '14.00' },
+          { name: 'Vodka Splash', desc: 'Vodka | Eau | Menthe | Jus de citron vert frais', price: '15.00' }
         ]
       },
       {
         category: 'Spritz',
         items: [
-          { name: 'Aperol Spritz', desc: 'Aperol | Prosecco', price: '12.00' },
-          { name: 'Campari Spritz', desc: 'Campari | Prosecco', price: '12.00' },
-          { name: 'Spritz au gingembre', desc: 'Ingwerer | Prosecco', price: '12.00' }
+          { name: 'Aperol Spritz', desc: 'Aperol | Prosecco', price: '13.00' },
+          { name: 'Campari Spritz', desc: 'Campari | Prosecco', price: '13.00' },
+          { name: 'Spritz au gingembre', desc: 'Ingwerer | Prosecco', price: '13.00' }
         ]
       },
       {
@@ -433,10 +435,10 @@ const TRANSLATIONS = {
         category: 'Beer on Tap',
         note: '3 dl / 5 dl',
         items: [
-          { name: 'Valaisanne Lager', desc: '4.8% (CHE)', price: '5.00 / 7.00' },
+          { name: 'Valaisanne Lager', desc: '4.8% (CHE)', price: '5.00 / 8.00' },
           { name: 'Valaisanne White IPA', desc: '6.0% (CHE)', price: '7.00 / 9.00' },
-          { name: "Smithwick's Irish Ale", desc: '3.8% (IRL)', price: '6.00 / 9.00' },
-          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.00' }
+          { name: "Smithwick's Irish Ale", desc: '3.8% (IRL)', price: '6.00 / 9.50' },
+          { name: 'Guinness Irish Draught', desc: '4.2% (IRL)', price: '6.00 / 9.50' }
         ]
       },
       {
@@ -449,8 +451,8 @@ const TRANSLATIONS = {
       {
         category: 'Cocktails',
         items: [
-          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup', price: '20.00' },
-          { name: 'Blueberry', desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '20.00' },
+          { name: 'Espresso Martini', desc: 'Vodka | Kahlua | Sugar Syrup', price: '18.00' },
+          { name: 'Blueberry', desc: 'Tequila | Cointreau | Blueberry | Basil | Sweet & Sour', price: '18.00' },
           { name: 'Negroni', desc: 'Gin | Campari | Martini Rosso', price: '16.00' },
           { name: 'Nebula', desc: 'Berentzen | Rum | Cointreau | Bols Blue', price: '17.00' },
           { name: 'Basil Smash', desc: 'Gin | Basil | Sweet & Sour', price: '16.00' },
@@ -468,15 +470,16 @@ const TRANSLATIONS = {
           { name: 'Gin Lemon', desc: 'Gin | Bitter Lemon Soda', price: '14.00' },
           { name: 'Vodka Red Bull', desc: 'Vodka | Red Bull', price: '15.00' },
           { name: 'Turbo Mate', desc: 'Vodka | El Tony Mate', price: '14.00' },
-          { name: 'Skinny Bitch', desc: 'Vodka | Water | Fresh Lime Juice', price: '14.00' }
+          { name: 'Skinny Bitch', desc: 'Vodka | Water | Fresh Lime Juice', price: '14.00' },
+          { name: 'Vodka Splash', desc: 'Vodka | Water | Mint | Fresh Lime Juice', price: '15.00' }
         ]
       },
       {
         category: 'Spritz',
         items: [
-          { name: 'Aperol Spritz', desc: 'Aperol | Prosecco', price: '12.00' },
-          { name: 'Campari Spritz', desc: 'Campari | Prosecco', price: '12.00' },
-          { name: 'Ginger Spritz', desc: 'Ingwerer | Prosecco', price: '12.00' }
+          { name: 'Aperol Spritz', desc: 'Aperol | Prosecco', price: '13.00' },
+          { name: 'Campari Spritz', desc: 'Campari | Prosecco', price: '13.00' },
+          { name: 'Ginger Spritz', desc: 'Ingwerer | Prosecco', price: '13.00' }
         ]
       },
       {
